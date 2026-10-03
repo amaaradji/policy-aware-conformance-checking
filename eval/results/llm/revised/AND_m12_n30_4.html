@@ -1,0 +1,33 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 2 contains an unexpected activity labeled 'Unexpected Activity' not present in the BPMN model.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 5: Activity 'Notify Team' with resource 'System A' (NonShareableLimited) violated the Activity Policy by performing a 'failed' to 'activated' transition that is not authorized for Pivot activities.</li>
+    <li>Trace 6: Activity 'Assign Priority' with resource 'Database C' (NonShareableUnlimited) violated the Binding Policy due to an absent binding policy during execution.</li>
+    <li>Trace 10: Activity 'Assign Priority' with resource 'Database C' (NonShareableUnlimited) violated the Binding Policy due to an absent binding policy during execution.</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>Trace 5: Although the activity sequence matches the model, the 'Notify Team' activity performed an unauthorized lifecycle transition, breaching the activity policy.</li>
+    <li>Trace 6 and Trace 10: Both traces follow the correct sequence but lack a binding policy for 'Assign Priority' with 'Database C', resulting in binding policy violations.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations are independent of sequence deviations, as traces with perfect conformance still exhibit policy breaches.</li>
+    <li>Binding policy violations are the most common, occurring in both Trace 6 and Trace 10 for the same activity-resource pair.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Model Change: Update the BPMN model to explicitly handle or restrict the occurrence of 'Unexpected Activity' in Trace 2.</li>
+    <li>Activity Policy Fix: Enforce lifecycle constraints for Pivot activities to prevent unauthorized 'failed' to 'activated' transitions in 'Notify Team'.</li>
+    <li>Resource Policy Fix: Review and configure resource access patterns for 'System A' and 'Database C' to ensure proper state transitions and usage limits are respected.</li>
+    <li>Binding Policy Fix: Define and enforce binding policies for all activity-resource pairs, especially for 'Assign Priority' with 'Database C', to prevent absent bindings during execution.</li>
+  </ul>
+</div>

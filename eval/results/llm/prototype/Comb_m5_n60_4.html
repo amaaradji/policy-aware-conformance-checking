@@ -1,0 +1,43 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 2: 'Approve Loan' occurs after 'Notify Applicant' (out-of-order).</li>
+    <li>Trace 6: Contains 'Unexpected Activity' not present in the BPMN model (extra activity).</li>
+    <li>Trace 7: Contains 'Unexpected Activity' not present in the BPMN model (extra activity).</li>
+    <li>Trace 9: Missing 'Approve Loan' or 'Reject Loan' activity (missing activity).</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 1: Activity policy violation in 'Verify Income' using 'Income Verification Service'—unauthorized lifecycle transition.</li>
+    <li>Trace 2: Binding policy violations in 'Approve Loan' with 'Loan Approval System'—resource state changes occurred while activity was already done.</li>
+    <li>Trace 3: Resource policy violation in 'Approve Loan' with 'Loan Approval System'—resource policy was absent.</li>
+    <li>Trace 6: Binding policy violation in 'Verify Income'—attempted to use 'Approval Board' instead of the bound 'Income Verification Service'.</li>
+    <li>Trace 7: Resource policy violations in 'Reject Loan' with 'Rejection Letter Template'—resource was overused and withdrawn without authorization.</li>
+    <li>Trace 8: Resource policy violation in 'Verify Income' with 'Income Verification Service'—resource policy was absent.</li>
+    <li>Trace 10: Activity policy violations in 'Verify Income' with 'Income Verification Service'—unauthorized transitions to 'compensated' and then to 'done'.</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>Trace 1: Although the activity sequence matches the model, 'Verify Income' performed an unauthorized lifecycle transition, violating the activity policy.</li>
+    <li>Trace 3: The process followed the correct sequence, but 'Approve Loan' used 'Loan Approval System' without an enforced resource policy.</li>
+    <li>Trace 8: The activity order is correct, but 'Verify Income' used 'Income Verification Service' without a resource policy in place.</li>
+    <li>Trace 10: All activities are in the correct order, but 'Verify Income' made unauthorized transitions to 'compensated' and 'done' states.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations occur both in traces with and without control-flow deviations, indicating they are independent of sequence errors.</li>
+    <li>Resource policy violations are the most common, affecting multiple traces regardless of activity order.</li>
+    <li>Binding and activity policy violations are also present but less frequent than resource policy issues.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Update the BPMN model to explicitly restrict the order of 'Approve Loan' and 'Notify Applicant', and disallow unmodeled activities such as 'Unexpected Activity'.</li>
+    <li>Implement stricter lifecycle state checks for 'Verify Income', ensuring only authorized transitions (e.g., no direct activation to unknown or compensated states).</li>
+    <li>Enforce resource policy definitions and runtime checks for all resources, especially for 'Income Verification Service' and 'Rejection Letter Template', to prevent absent policies and unauthorized overuse or withdrawal.</li>
+    <li>Strengthen binding enforcement so that only the correct, pre-assigned resource can be consumed by an activity in the 'Activated' state, and prevent resource state changes after the activity is done.</li>
+  </ul>
+</div>

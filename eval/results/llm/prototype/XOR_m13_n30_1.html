@@ -1,0 +1,36 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 1: Missing 'Close Ticket' activity compared to the model.</li>
+    <li>Trace 3: Contains 'Unexpected Activity' not present in the model.</li>
+    <li>Trace 4: Contains 'Unexpected Activity' not present in the model.</li>
+    <li>Trace 6: 'Replace Hardware' occurs before 'Request Support', which is out of order.</li>
+    <li>Trace 9: Contains 'Unexpected Activity' not present in the model.</li>
+    <li>Trace 10: Ends with 'Unexpected Activity' not present in the model.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 9: [BINDING POLICY] - Activity 'Request Support' with resource 'Resource H' (ShareableLimitedBR): Resource was consumed while the activity was already done.</li>
+    <li>Trace 9: [ACTIVITY POLICY] - Activity 'Request Support' with resource 'Resource H' (ShareableLimitedBR): Activity transitioned from 'done' to 'activated', which is not allowed for Pivot activities.</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>There are no traces with conformance = 1.00 and compliance &lt; 1.00; all perfectly conforming traces are also fully compliant.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations are not strictly dependent on sequence deviations, as Trace 9 shows both sequence and policy issues, but other traces with sequence deviations do not have policy violations.</li>
+    <li>The most common violation type in this dataset is the activity policy violation, specifically improper lifecycle transitions for Pivot activities.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Update the process model to explicitly prohibit 'Unexpected Activity' and enforce correct activity order, especially ensuring 'Request Support' precedes technical interventions.</li>
+    <li>Implement stricter lifecycle state checks for Pivot activities to prevent unauthorized transitions such as 'done' to 'activated'.</li>
+    <li>Configure resource management logic to enforce correct consumption patterns and prevent resource usage after terminal states like 'Done'.</li>
+    <li>Enforce binding rules so that only activities in the 'Activated' state can consume resources, rejecting any resource assignment attempts from non-activated activities.</li>
+  </ul>
+</div>

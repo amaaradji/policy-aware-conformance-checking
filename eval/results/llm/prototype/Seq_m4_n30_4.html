@@ -1,0 +1,35 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 1 and Trace 8 have conformance &lt; 1.00 due to missing the 'Add to Cart' activity in the sequence.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 2: [BINDING POLICY] - 'Add to Cart' used resource 'Finance Clerk' instead of the bound 'Shopping Cart Service'.</li>
+    <li>Trace 5: [BINDING POLICY] - 'Add to Cart' with 'Shopping Cart Service' had an invalid resource state transition (unlocked-&gt;done while activity done).</li>
+    <li>Trace 7: [ACTIVITY POLICY] - 'Add to Cart' with 'Shopping Cart Service' lacked an activity policy definition.</li>
+    <li>Trace 8: [ACTIVITY POLICY] - 'Checkout' with 'Payment Gateway' had unauthorized state transitions (notactivated-&gt;unknown and unknown-&gt;activated).</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>Trace 2: The activity sequence is correct, but 'Add to Cart' used an incorrect resource, violating the binding policy.</li>
+    <li>Trace 5: The activity sequence is correct, but 'Add to Cart' had an invalid resource state transition, violating the binding policy.</li>
+    <li>Trace 7: The activity sequence is correct, but 'Add to Cart' lacked a defined activity policy, violating the activity policy rules.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations are not strictly dependent on sequence deviations; several traces with perfect conformance still have compliance issues due to policy violations.</li>
+    <li>Binding policy violations are the most common, occurring in Traces 2 and 5, followed by activity policy violations in Traces 7 and 8.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Model Change: Update the process model to enforce the mandatory inclusion of 'Add to Cart' between 'Search Products' and 'Checkout'.</li>
+    <li>Activity Policy Fix: Define and enforce the full lifecycle state machine for all Compensatable activities, especially for 'Add to Cart' and 'Checkout'.</li>
+    <li>Resource Policy Fix: Ensure 'Shopping Cart Service' and similar resources are configured to prevent invalid state transitions and enforce exclusive access and proper withdrawal after use.</li>
+    <li>Binding Policy Fix: Implement strict checks so that only the correct, bound resource is assigned to each activity, and only when the activity is in the 'Activated' state.</li>
+  </ul>
+</div>

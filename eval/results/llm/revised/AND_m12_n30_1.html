@@ -1,0 +1,34 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 2 contains an unexpected activity: 'Unexpected Activity', which is not part of the BPMN model.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 5: Activity 'Notify Team' with resource 'System A' (NonShareableLimited) violated the activity policy by performing a 'failed->activated' transition that is not authorized for Pivot activities.</li>
+    <li>Trace 6: Activity 'Assign Priority' with resource 'Database C' (NonShareableUnlimited) violated the binding policy due to an absent binding policy during consumption.</li>
+    <li>Trace 10: Activity 'Assign Priority' with resource 'Database C' (NonShareableUnlimited) violated the binding policy due to an absent binding policy during consumption.</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>Trace 5: Although the sequence matches the model, the activity 'Notify Team' violated its activity policy by taking an unauthorized lifecycle transition with 'System A'.</li>
+    <li>Trace 6 and Trace 10: Both traces follow the model sequence exactly, but 'Assign Priority' used 'Database C' without an active binding policy, breaching assignment rules.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations are independent of sequence deviations, as traces with perfect conformance still exhibit policy breaches.</li>
+    <li>Binding policy violations are the most common, occurring in Trace 6 and Trace 10 for 'Assign Priority' with 'Database C'.</li>
+    <li>Activity policy violations are less frequent, with only one instance in Trace 5 for 'Notify Team' and 'System A'.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Update the BPMN model to explicitly exclude or handle 'Unexpected Activity' to prevent control-flow deviations.</li>
+    <li>Revise lifecycle handling for 'Notify Team' to ensure Pivot activities cannot transition from 'failed' to 'activated' unless authorized by the activity policy.</li>
+    <li>Configure 'System A' and 'Database C' to enforce resource access patterns, ensuring state transitions and usage caps comply with their respective resource policies.</li>
+    <li>Implement mandatory binding policies for all activity-resource assignments, especially for 'Assign Priority' with 'Database C', to prevent absent binding policy violations.</li>
+  </ul>
+</div>

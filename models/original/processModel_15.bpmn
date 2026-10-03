@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_15" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.43.1">
+  <bpmn:process id="Process_Onboarding" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+      </bpmn:startEvent>
+    <bpmn:task id="Activity_Collect" name="Collect Customer Info">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+      </bpmn:task>
+    <bpmn:parallelGateway id="Gateway_AND_Split">
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+      <bpmn:outgoing>Flow_ID</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Credit</bpmn:outgoing>
+      </bpmn:parallelGateway>
+    <bpmn:task id="Activity_Verify" name="Verify ID">
+      <bpmn:incoming>Flow_ID</bpmn:incoming>
+      <bpmn:outgoing>Flow_Join</bpmn:outgoing>
+      </bpmn:task>
+    <bpmn:task id="Activity_Check" name="Check Credit Score">
+      <bpmn:incoming>Flow_Credit</bpmn:incoming>
+      <bpmn:outgoing>Flow_Join</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0zlzgsa</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:parallelGateway id="Gateway_AND_Join">
+      <bpmn:incoming>Flow_Join</bpmn:incoming>
+      <bpmn:incoming>Flow_0zlzgsa</bpmn:incoming>
+      <bpmn:outgoing>Flow_3</bpmn:outgoing>
+      </bpmn:parallelGateway>
+    <bpmn:exclusiveGateway id="Gateway_Decision" name="Risk Level?">
+      <bpmn:incoming>Flow_3</bpmn:incoming>
+      <bpmn:outgoing>Flow_AutoApprove</bpmn:outgoing>
+      <bpmn:outgoing>Flow_ManualReview</bpmn:outgoing>
+      </bpmn:exclusiveGateway>
+    <bpmn:task id="Activity_AutoApprove" name="Auto Approve">
+      <bpmn:incoming>Flow_AutoApprove</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ne7b03</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_ManualReview" name="Manual Review">
+      <bpmn:incoming>Flow_ManualReview</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ki9jp9</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_Activate" name="Activate Account">
+      <bpmn:incoming>Flow_1bvjdal</bpmn:incoming>
+      <bpmn:outgoing>Flow_4</bpmn:outgoing>
+      </bpmn:task>
+    <bpmn:endEvent id="EndEvent_1">
+      <bpmn:incoming>Flow_4</bpmn:incoming>
+      </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="StartEvent_1" targetRef="Activity_Collect"/>
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="Activity_Collect" targetRef="Gateway_AND_Split"/>
+    <bpmn:sequenceFlow id="Flow_ID" sourceRef="Gateway_AND_Split" targetRef="Activity_Verify"/>
+    <bpmn:sequenceFlow id="Flow_Credit" sourceRef="Gateway_AND_Split" targetRef="Activity_Check"/>
+    <bpmn:sequenceFlow id="Flow_Join" sourceRef="Activity_Verify" targetRef="Gateway_AND_Join"/>
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="Gateway_AND_Join" targetRef="Gateway_Decision"/>
+    <bpmn:sequenceFlow id="Flow_AutoApprove" sourceRef="Gateway_Decision" targetRef="Activity_AutoApprove"/>
+    <bpmn:sequenceFlow id="Flow_ManualReview" sourceRef="Gateway_Decision" targetRef="Activity_ManualReview"/>
+    <bpmn:sequenceFlow id="Flow_4" sourceRef="Activity_Activate" targetRef="EndEvent_1"/>
+    <bpmn:exclusiveGateway id="Gateway_00569pf" name="auto/manual">
+      <bpmn:incoming>Flow_1ne7b03</bpmn:incoming>
+      <bpmn:incoming>Flow_1ki9jp9</bpmn:incoming>
+      <bpmn:outgoing>Flow_1bvjdal</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_1ne7b03" sourceRef="Activity_AutoApprove" targetRef="Gateway_00569pf"/>
+    <bpmn:sequenceFlow id="Flow_1ki9jp9" sourceRef="Activity_ManualReview" targetRef="Gateway_00569pf"/>
+    <bpmn:sequenceFlow id="Flow_1bvjdal" sourceRef="Gateway_00569pf" targetRef="Activity_Activate"/>
+    <bpmn:sequenceFlow id="Flow_0zlzgsa" sourceRef="Activity_Check" targetRef="Gateway_AND_Join"/>
+    </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_Onboarding">
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="160" y="102" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Collect_di" bpmnElement="Activity_Collect">
+        <dc:Bounds x="250" y="80" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_AND_Split_di" bpmnElement="Gateway_AND_Split">
+        <dc:Bounds x="400" y="95" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Verify_di" bpmnElement="Activity_Verify">
+        <dc:Bounds x="500" y="40" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Check_di" bpmnElement="Activity_Check">
+        <dc:Bounds x="500" y="150" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_AND_Join_di" bpmnElement="Gateway_AND_Join">
+        <dc:Bounds x="660" y="95" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Decision_di" bpmnElement="Gateway_Decision" isMarkerVisible="true">
+        <dc:Bounds x="780" y="95" width="50" height="50"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="821" y="133" width="57" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_AutoApprove_di" bpmnElement="Activity_AutoApprove">
+        <dc:Bounds x="880" y="40" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_ManualReview_di" bpmnElement="Activity_ManualReview">
+        <dc:Bounds x="880" y="150" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1h4juo9" bpmnElement="Gateway_00569pf" isMarkerVisible="true">
+        <dc:Bounds x="1045" y="95" width="50" height="50"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="973" y="113" width="62" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Activate_di" bpmnElement="Activity_Activate">
+        <dc:Bounds x="1160" y="80" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1_di" bpmnElement="EndEvent_1">
+        <dc:Bounds x="1322" y="102" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_4_di" bpmnElement="Flow_4">
+        <di:waypoint x="1260" y="120"/>
+        <di:waypoint x="1322" y="120"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ne7b03_di" bpmnElement="Flow_1ne7b03">
+        <di:waypoint x="980" y="70"/>
+        <di:waypoint x="1070" y="70"/>
+        <di:waypoint x="1070" y="95"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ki9jp9_di" bpmnElement="Flow_1ki9jp9">
+        <di:waypoint x="980" y="190"/>
+        <di:waypoint x="1070" y="190"/>
+        <di:waypoint x="1070" y="145"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1bvjdal_di" bpmnElement="Flow_1bvjdal">
+        <di:waypoint x="1095" y="120"/>
+        <di:waypoint x="1160" y="120"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_AutoApprove_di" bpmnElement="Flow_AutoApprove">
+        <di:waypoint x="805" y="95"/>
+        <di:waypoint x="805" y="60"/>
+        <di:waypoint x="880" y="60"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ManualReview_di" bpmnElement="Flow_ManualReview">
+        <di:waypoint x="805" y="145"/>
+        <di:waypoint x="805" y="190"/>
+        <di:waypoint x="880" y="190"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <di:waypoint x="710" y="120"/>
+        <di:waypoint x="780" y="120"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ID_di" bpmnElement="Flow_ID">
+        <di:waypoint x="425" y="95"/>
+        <di:waypoint x="425" y="70"/>
+        <di:waypoint x="500" y="70"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Credit_di" bpmnElement="Flow_Credit">
+        <di:waypoint x="425" y="145"/>
+        <di:waypoint x="425" y="190"/>
+        <di:waypoint x="500" y="190"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Join_di" bpmnElement="Flow_Join">
+        <di:waypoint x="600" y="70"/>
+        <di:waypoint x="685" y="70"/>
+        <di:waypoint x="685" y="95"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0zlzgsa_di" bpmnElement="Flow_0zlzgsa">
+        <di:waypoint x="600" y="190"/>
+        <di:waypoint x="685" y="190"/>
+        <di:waypoint x="685" y="145"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="350" y="120"/>
+        <di:waypoint x="400" y="120"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="196" y="120"/>
+        <di:waypoint x="250" y="120"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

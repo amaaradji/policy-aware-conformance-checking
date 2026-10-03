@@ -1,0 +1,32 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 2 is missing the 'Risk Assessment' activity.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 1: Activity Policy violation in 'Credit Check' with resource 'Credit Bureau API'—the activity was retried more times than allowed (count exceeded 3).</li>
+    <li>Trace 1: Resource Policy violation in 'Credit Check' with resource 'Credit Bureau API'—the resource was consumed longer than the allowed 5 minutes (observed 9 minutes).</li>
+    <li>Trace 1: Binding Policy violations in 'Credit Check' with resource 'Credit Bureau API' and in 'Risk Assessment' with resource 'Risk Analyst'—consumption exceeded allowed time and resource state changed while the activity was already done.</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>Trace 1 followed the correct activity sequence but violated activity, resource, and binding policies during 'Credit Check' and 'Risk Assessment', including exceeding retry limits and resource usage durations.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations are independent of sequence deviations, as Trace 1 is perfectly aligned in control-flow but has multiple policy violations.</li>
+    <li>Activity, resource, and binding policy violations all occur, but binding policy violations are the most frequent in Trace 1.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Model Change: Update the process model to allow for cases where 'Risk Assessment' may be skipped if justified by business rules, or enforce its mandatory execution in all traces.</li>
+    <li>Activity Policy Fix: Implement stricter retry logic in 'Credit Check' to ensure the activity cannot be reactivated more than three times.</li>
+    <li>Resource Policy Fix: Enforce a hard timeout on 'Credit Bureau API' consumption to automatically release the resource after 5 minutes.</li>
+    <li>Binding Policy Fix: Ensure that resources are only released or change state after the associated activity has fully completed, and monitor consumption durations to stay within binding limits.</li>
+  </ul>
+</div>

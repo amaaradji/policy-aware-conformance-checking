@@ -1,0 +1,71 @@
+{
+  "inputs": {
+    "report": "Trace 1: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 2: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 3: Conformance: 0.909, Compliance: 1.000, Total: 0.936\nTrace 4: Conformance: 0.909, Compliance: 1.000, Total: 0.936\nTrace 5: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 6: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 7: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 8: Conformance: 1.000, Compliance: 0.990, Total: 0.997\nTrace 9: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 10: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nOverall score: 0.9870",
+    "sequences": "Trace 1: Submit Loan Application -> Verify Income -> Check Credit Score -> Reject Loan -> Notify Applicant\nTrace 2: Submit Loan Application -> Check Credit Score -> Verify Income -> Reject Loan -> Notify Applicant\nTrace 3: Submit Loan Application -> Verify Income -> Unexpected Activity -> Check Credit Score -> Reject Loan -> Notify Applicant\nTrace 4: Submit Loan Application -> Verify Income -> Check Credit Score -> Reject Loan -> Unexpected Activity -> Notify Applicant\nTrace 5: Submit Loan Application -> Check Credit Score -> Verify Income -> Approve Loan -> Notify Applicant\nTrace 6: Submit Loan Application -> Check Credit Score -> Verify Income -> Approve Loan -> Notify Applicant\nTrace 7: Submit Loan Application -> Verify Income -> Check Credit Score -> Reject Loan -> Notify Applicant\nTrace 8: Submit Loan Application -> Verify Income -> Check Credit Score -> Reject Loan -> Notify Applicant\nTrace 9: Submit Loan Application -> Verify Income -> Check Credit Score -> Reject Loan -> Notify Applicant\nTrace 10: Submit Loan Application -> Verify Income -> Check Credit Score -> Reject Loan -> Notify Applicant",
+    "violations": "Trace 8:\n  - [ACTIVITY POLICY] activity 'Verify Income' (Retriable), resource 'Income Verification Service' (ShareableLimited), event 11: failed->done not authorized",
+    "activities": "Submit Loan Application, Check Credit Score, Verify Income, Approve Loan, Reject Loan, Notify Applicant",
+    "deviations": "Trace 3: unexpected 'Unexpected Activity'\nTrace 4: unexpected 'Unexpected Activity'"
+  },
+  "f": [
+    1.0,
+    1.0,
+    0.9090909090909091,
+    0.9090909090909091,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "v": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.9901960784313726,
+    1.0,
+    1.0
+  ],
+  "pacc": [
+    1.0,
+    1.0,
+    0.9363636363636364,
+    0.9363636363636364,
+    1.0,
+    1.0,
+    1.0,
+    0.9970588235294118,
+    1.0,
+    1.0
+  ],
+  "reasons": [
+    {
+      "event": 10,
+      "activity": "Verify Income",
+      "a": "failed->done not authorized",
+      "r": "",
+      "b": "",
+      "trace": 7
+    }
+  ],
+  "deviations": [
+    [],
+    [],
+    [
+      "Unexpected Activity"
+    ],
+    [
+      "Unexpected Activity"
+    ],
+    [],
+    [],
+    [],
+    [],
+    [],
+    []
+  ]
+}

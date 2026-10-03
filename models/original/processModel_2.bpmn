@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_2" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.43.1">
+  <bpmn:process id="Process_OrderParallel" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Activity_PlaceOrder" name="Place Order">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:parallelGateway id="Gateway_AND_Split" name="Split">
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+      <bpmn:outgoing>Flow_Ship</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Email</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:task id="Activity_Ship" name="Ship Items">
+      <bpmn:incoming>Flow_Ship</bpmn:incoming>
+      <bpmn:outgoing>Flow_Join1</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_Email" name="Send Email Confirmation">
+      <bpmn:incoming>Flow_Email</bpmn:incoming>
+      <bpmn:outgoing>Flow_Join2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:parallelGateway id="Gateway_AND_Join" name="Join">
+      <bpmn:incoming>Flow_Join1</bpmn:incoming>
+      <bpmn:incoming>Flow_Join2</bpmn:incoming>
+      <bpmn:outgoing>Flow_3</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:task id="Activity_Complete" name="Complete Order">
+      <bpmn:incoming>Flow_3</bpmn:incoming>
+      <bpmn:outgoing>Flow_4</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="EndEvent_1">
+      <bpmn:incoming>Flow_4</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="StartEvent_1" targetRef="Activity_PlaceOrder" />
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="Activity_PlaceOrder" targetRef="Gateway_AND_Split" />
+    <bpmn:sequenceFlow id="Flow_Ship" sourceRef="Gateway_AND_Split" targetRef="Activity_Ship" />
+    <bpmn:sequenceFlow id="Flow_Email" sourceRef="Gateway_AND_Split" targetRef="Activity_Email" />
+    <bpmn:sequenceFlow id="Flow_Join1" sourceRef="Activity_Ship" targetRef="Gateway_AND_Join" />
+    <bpmn:sequenceFlow id="Flow_Join2" sourceRef="Activity_Email" targetRef="Gateway_AND_Join" />
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="Gateway_AND_Join" targetRef="Activity_Complete" />
+    <bpmn:sequenceFlow id="Flow_4" sourceRef="Activity_Complete" targetRef="EndEvent_1" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_OrderParallel">
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="160" y="172" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_PlaceOrder_di" bpmnElement="Activity_PlaceOrder">
+        <dc:Bounds x="250" y="150" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_AND_Split_di" bpmnElement="Gateway_AND_Split">
+        <dc:Bounds x="400" y="165" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="459.5" y="183" width="23" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Ship_di" bpmnElement="Activity_Ship">
+        <dc:Bounds x="500" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Email_di" bpmnElement="Activity_Email">
+        <dc:Bounds x="500" y="220" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_AND_Join_di" bpmnElement="Gateway_AND_Join">
+        <dc:Bounds x="650" y="165" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="618.5" y="183" width="21" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Complete_di" bpmnElement="Activity_Complete">
+        <dc:Bounds x="760" y="150" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1_di" bpmnElement="EndEvent_1">
+        <dc:Bounds x="920" y="172" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="196" y="190" />
+        <di:waypoint x="250" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="350" y="190" />
+        <di:waypoint x="400" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Ship_di" bpmnElement="Flow_Ship">
+        <di:waypoint x="425" y="165" />
+        <di:waypoint x="425" y="120" />
+        <di:waypoint x="500" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Email_di" bpmnElement="Flow_Email">
+        <di:waypoint x="425" y="215" />
+        <di:waypoint x="425" y="260" />
+        <di:waypoint x="500" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Join1_di" bpmnElement="Flow_Join1">
+        <di:waypoint x="600" y="120" />
+        <di:waypoint x="675" y="120" />
+        <di:waypoint x="675" y="165" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Join2_di" bpmnElement="Flow_Join2">
+        <di:waypoint x="600" y="260" />
+        <di:waypoint x="675" y="260" />
+        <di:waypoint x="675" y="215" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <di:waypoint x="700" y="190" />
+        <di:waypoint x="760" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_4_di" bpmnElement="Flow_4">
+        <di:waypoint x="860" y="190" />
+        <di:waypoint x="920" y="190" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

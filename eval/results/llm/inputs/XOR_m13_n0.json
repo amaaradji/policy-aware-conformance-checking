@@ -1,0 +1,58 @@
+{
+  "inputs": {
+    "report": "Trace 1: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 2: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 3: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 4: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 5: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 6: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 7: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 8: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 9: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 10: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nOverall score: 1.0000",
+    "sequences": "Trace 1: Request Support -> Replace Hardware -> Close Ticket\nTrace 2: Request Support -> Update Software -> Close Ticket\nTrace 3: Request Support -> Replace Hardware -> Close Ticket\nTrace 4: Request Support -> Fix Hardware -> Close Ticket\nTrace 5: Request Support -> Install Software -> Close Ticket\nTrace 6: Request Support -> Update Software -> Close Ticket\nTrace 7: Request Support -> Replace Hardware -> Close Ticket\nTrace 8: Request Support -> Replace Hardware -> Close Ticket\nTrace 9: Request Support -> Replace Hardware -> Close Ticket\nTrace 10: Request Support -> Replace Hardware -> Close Ticket",
+    "violations": "No violations found.",
+    "activities": "Request Support, Fix Hardware, Replace Hardware, Install Software, Update Software, Close Ticket",
+    "deviations": "No control-flow deviations."
+  },
+  "f": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "v": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "pacc": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "reasons": [],
+  "deviations": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    []
+  ]
+}

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.43.1">
+  <bpmn:process id="Process_Shipping" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Activity_Receive" name="Receive Order">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="Gateway_XOR_Split" name="Shipping Type?">
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+      <bpmn:outgoing>Flow_Express</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Standard</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="Activity_Express" name="Process Express Order">
+      <bpmn:incoming>Flow_Express</bpmn:incoming>
+      <bpmn:outgoing>Flow_Express_To_Join</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_Standard" name="Process Standard Order">
+      <bpmn:incoming>Flow_Standard</bpmn:incoming>
+      <bpmn:outgoing>Flow_Standard_To_Join</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="Gateway_XOR_Join">
+      <bpmn:incoming>Flow_Express_To_Join</bpmn:incoming>
+      <bpmn:incoming>Flow_Standard_To_Join</bpmn:incoming>
+      <bpmn:outgoing>Flow_To_AND</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:parallelGateway id="Gateway_AND_Split">
+      <bpmn:incoming>Flow_To_AND</bpmn:incoming>
+      <bpmn:outgoing>Flow_Pack</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Label</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:task id="Activity_Pack" name="Pack Items">
+      <bpmn:incoming>Flow_Pack</bpmn:incoming>
+      <bpmn:outgoing>Flow_Pack_To_Join</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_Label" name="Print Shipping Label">
+      <bpmn:incoming>Flow_Label</bpmn:incoming>
+      <bpmn:outgoing>Flow_Label_To_Join</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:parallelGateway id="Gateway_AND_Join">
+      <bpmn:incoming>Flow_Pack_To_Join</bpmn:incoming>
+      <bpmn:incoming>Flow_Label_To_Join</bpmn:incoming>
+      <bpmn:outgoing>Flow_Ship</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:task id="Activity_Ship" name="Ship Order">
+      <bpmn:incoming>Flow_Ship</bpmn:incoming>
+      <bpmn:outgoing>Flow_End</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="EndEvent_1">
+      <bpmn:incoming>Flow_End</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="StartEvent_1" targetRef="Activity_Receive" />
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="Activity_Receive" targetRef="Gateway_XOR_Split" />
+    <bpmn:sequenceFlow id="Flow_Express" sourceRef="Gateway_XOR_Split" targetRef="Activity_Express" />
+    <bpmn:sequenceFlow id="Flow_Standard" sourceRef="Gateway_XOR_Split" targetRef="Activity_Standard" />
+    <bpmn:sequenceFlow id="Flow_Express_To_Join" sourceRef="Activity_Express" targetRef="Gateway_XOR_Join" />
+    <bpmn:sequenceFlow id="Flow_Standard_To_Join" sourceRef="Activity_Standard" targetRef="Gateway_XOR_Join" />
+    <bpmn:sequenceFlow id="Flow_To_AND" sourceRef="Gateway_XOR_Join" targetRef="Gateway_AND_Split" />
+    <bpmn:sequenceFlow id="Flow_Pack" sourceRef="Gateway_AND_Split" targetRef="Activity_Pack" />
+    <bpmn:sequenceFlow id="Flow_Label" sourceRef="Gateway_AND_Split" targetRef="Activity_Label" />
+    <bpmn:sequenceFlow id="Flow_Pack_To_Join" sourceRef="Activity_Pack" targetRef="Gateway_AND_Join" />
+    <bpmn:sequenceFlow id="Flow_Label_To_Join" sourceRef="Activity_Label" targetRef="Gateway_AND_Join" />
+    <bpmn:sequenceFlow id="Flow_Ship" sourceRef="Gateway_AND_Join" targetRef="Activity_Ship" />
+    <bpmn:sequenceFlow id="Flow_End" sourceRef="Activity_Ship" targetRef="EndEvent_1" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_Shipping">
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="160" y="150" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Receive_di" bpmnElement="Activity_Receive">
+        <dc:Bounds x="260" y="130" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_XOR_Split_di" bpmnElement="Gateway_XOR_Split" isMarkerVisible="true">
+        <dc:Bounds x="410" y="145" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="470" y="163" width="76" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Express_di" bpmnElement="Activity_Express">
+        <dc:Bounds x="510" y="80" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Standard_di" bpmnElement="Activity_Standard">
+        <dc:Bounds x="510" y="220" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_XOR_Join_di" bpmnElement="Gateway_XOR_Join" isMarkerVisible="true">
+        <dc:Bounds x="680" y="145" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_AND_Split_di" bpmnElement="Gateway_AND_Split">
+        <dc:Bounds x="810" y="145" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Pack_di" bpmnElement="Activity_Pack">
+        <dc:Bounds x="940" y="80" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Label_di" bpmnElement="Activity_Label">
+        <dc:Bounds x="940" y="220" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_AND_Join_di" bpmnElement="Gateway_AND_Join">
+        <dc:Bounds x="1100" y="145" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Ship_di" bpmnElement="Activity_Ship">
+        <dc:Bounds x="1210" y="130" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1_di" bpmnElement="EndEvent_1">
+        <dc:Bounds x="1360" y="150" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="196" y="168" />
+        <di:waypoint x="260" y="168" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="360" y="168" />
+        <di:waypoint x="410" y="168" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Express_di" bpmnElement="Flow_Express">
+        <di:waypoint x="435" y="145" />
+        <di:waypoint x="435" y="120" />
+        <di:waypoint x="510" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Standard_di" bpmnElement="Flow_Standard">
+        <di:waypoint x="435" y="195" />
+        <di:waypoint x="435" y="260" />
+        <di:waypoint x="510" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Express_To_Join_di" bpmnElement="Flow_Express_To_Join">
+        <di:waypoint x="630" y="110" />
+        <di:waypoint x="705" y="110" />
+        <di:waypoint x="705" y="145" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Standard_To_Join_di" bpmnElement="Flow_Standard_To_Join">
+        <di:waypoint x="630" y="260" />
+        <di:waypoint x="705" y="260" />
+        <di:waypoint x="705" y="195" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_To_AND_di" bpmnElement="Flow_To_AND">
+        <di:waypoint x="730" y="170" />
+        <di:waypoint x="810" y="170" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Pack_di" bpmnElement="Flow_Pack">
+        <di:waypoint x="835" y="145" />
+        <di:waypoint x="835" y="106" />
+        <di:waypoint x="940" y="106" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Label_di" bpmnElement="Flow_Label">
+        <di:waypoint x="835" y="195" />
+        <di:waypoint x="835" y="260" />
+        <di:waypoint x="940" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Pack_To_Join_di" bpmnElement="Flow_Pack_To_Join">
+        <di:waypoint x="1060" y="120" />
+        <di:waypoint x="1125" y="120" />
+        <di:waypoint x="1125" y="145" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Label_To_Join_di" bpmnElement="Flow_Label_To_Join">
+        <di:waypoint x="1060" y="260" />
+        <di:waypoint x="1125" y="260" />
+        <di:waypoint x="1125" y="195" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Ship_di" bpmnElement="Flow_Ship">
+        <di:waypoint x="1150" y="170" />
+        <di:waypoint x="1210" y="170" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_End_di" bpmnElement="Flow_End">
+        <di:waypoint x="1330" y="170" />
+        <di:waypoint x="1360" y="170" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

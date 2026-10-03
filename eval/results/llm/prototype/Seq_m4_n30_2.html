@@ -1,0 +1,36 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 1: Missing 'Add to Cart' activity before 'Checkout'.</li>
+    <li>Trace 8: Missing 'Search Products' activity before 'Add to Cart'.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 2: [Binding Policy] - 'Add to Cart' used resource 'Finance Clerk' instead of the bound 'Shopping Cart Service'.</li>
+    <li>Trace 5: [Binding Policy] - 'Add to Cart' with 'Shopping Cart Service' had resource unlocked and set to done while activity was done, violating binding rules.</li>
+    <li>Trace 7: [Activity Policy] - 'Add to Cart' with 'Shopping Cart Service' lacked required activity policy definition.</li>
+    <li>Trace 8: [Activity Policy] - 'Checkout' with 'Payment Gateway' had unauthorized state transitions: notactivated→unknown and unknown→activated.</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>Trace 2: The activity sequence is correct, but 'Add to Cart' used an incorrect resource, violating the binding policy.</li>
+    <li>Trace 5: The activity sequence is correct, but resource state transitions for 'Shopping Cart Service' did not comply with binding policy requirements.</li>
+    <li>Trace 7: The activity sequence is correct, but 'Add to Cart' lacked a defined activity policy, violating lifecycle requirements.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations can occur independently of control-flow deviations, as seen in traces with perfect conformance but policy breaches.</li>
+    <li>Binding policy violations are the most common, followed by activity policy violations; no resource policy violations were reported.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Update the BPMN model to enforce mandatory inclusion of 'Add to Cart' and 'Search Products' before 'Checkout'.</li>
+    <li>Define and implement explicit lifecycle state machines for all Compensatable activities, ensuring only authorized transitions occur.</li>
+    <li>Review resource usage logic to ensure resources like 'Shopping Cart Service' are not unlocked or reused after reaching the 'Done' state.</li>
+    <li>Enforce strict activity-resource binding so that only the correct, pre-assigned resource is used by each activity during execution.</li>
+  </ul>
+</div>

@@ -1,0 +1,56 @@
+{
+  "@context": [
+    "http://www.w3.org/ns/odrl.jsonld",
+    {
+      "rdf":   "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+      "rdfs":  "http://www.w3.org/2000/01/rdf-schema#",
+      "xsd":   "http://www.w3.org/2001/XMLSchema#",
+      "dc":    "http://purl.org/dc/terms/",
+      "ex":    "http://example.com/ns#",
+      "output": {
+        "@id":   "http://example.com/ns#output",
+        "@type": "@id"
+      }
+    }
+  ],
+
+  "@graph": [
+    {
+      "@type": "Request",
+      "@id":   "http://example.com/IPLRiAi:002",
+      "profile": { "@id": "http://example.com/activityProfile:ShareableLimited" },
+
+      "permission": [
+        {
+          "@id":    "http://example.com/rules/IPliairule",
+          "target": { "@id": "http://example.com/resources/R_sli/states/Consumed/" },
+          "assignee": {
+            "@type": "PartyCollection",
+            "@id":   "http://example.com/Groupi/Activities/states/Activated"
+          },
+          "output": { "@id": "http://example.com/resources/R_sli/states/Done/" },
+          "action": [
+            {
+              "rdf:value": { "@id": "odrl:use" },
+              "refinement": [
+                {
+                  "leftOperand":  { "@id": "odrl:elapsedTime" },
+                  "operator":     { "@id": "odrl:lteq" },
+                  "rightOperand": { "@value": "PXM", "@type": "xsd:duration" },
+                  "rdfs:label":   "CurrentUse",
+                  "rdfs:comment": "Elapsed consumption time must not exceed X minutes"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "@type":       "dc:Text",
+      "@id":         "http://example.com/activity/Ai/states/Activated",
+      "odrl:partOf": { "@id": "http://example.com/Groupi/Activities/states/Activated" }
+    }
+  ]
+}

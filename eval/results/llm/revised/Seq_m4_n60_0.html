@@ -1,0 +1,41 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 2: Contains unexpected activity 'Unexpected Activity'.</li>
+    <li>Trace 4: Activity 'Checkout' occurs out of order.</li>
+    <li>Trace 6: Missing activity 'Add to Cart'.</li>
+    <li>Trace 8: Activity 'Add to Cart' occurs out of order.</li>
+    <li>Trace 10: Activity 'Add to Cart' occurs out of order.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 1: Activity policy violation—'Search Products' (Product Catalog Database): unauthorized notactivated→failed transition.</li>
+    <li>Trace 2: Resource policy violation—'Login to Account' (User Authentication Service): resource policy is absent.</li>
+    <li>Trace 4: Binding policy violation—'Add to Cart' (Shopping Cart Service): used resource 'Accounting System' instead of bound 'Shopping Cart Service'.</li>
+    <li>Trace 7: Binding policy violation—'Add to Cart' (Shopping Cart Service): used resource 'Accounting System' instead of bound 'Shopping Cart Service'.</li>
+    <li>Trace 9: Binding policy violation—'Login to Account' (User Authentication Service): used resource 'Accounting System' instead of bound 'User Authentication Service'.</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>Trace 1: The activity 'Search Products' performed a notactivated→failed transition, which is not authorized by its activity policy.</li>
+    <li>Trace 9: The activity 'Login to Account' used resource 'Accounting System' instead of the bound 'User Authentication Service', violating the binding policy.</li>
+    <li>Trace 7: The activity 'Add to Cart' used resource 'Accounting System' instead of the bound 'Shopping Cart Service', violating the binding policy.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations can occur independently of control-flow deviations, as seen in traces with perfect conformance but binding or activity policy issues.</li>
+    <li>Binding policy violations are the most common, affecting traces 4, 7, and 9.</li>
+    <li>Control-flow and policy violations do not always overlap, indicating separate root causes.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Model Change: Update the BPMN model to allow 'Add to Cart' and 'Checkout' to occur in either order if business rules permit, or enforce strict sequencing if not.</li>
+    <li>Activity Policy Fix: Review and correct lifecycle handling for 'Search Products' to ensure only authorized transitions (e.g., notactivated→activated or failed) are possible, and retriable logic is properly implemented.</li>
+    <li>Resource Policy Fix: Define and enforce a resource policy for 'User Authentication Service' to ensure all access patterns and state transitions are explicitly governed.</li>
+    <li>Binding Policy Fix: Enforce strict activity-resource assignment so that activities only use their bound resources (e.g., 'Add to Cart' must use 'Shopping Cart Service', not 'Accounting System').</li>
+  </ul>
+</div>

@@ -1,0 +1,103 @@
+{
+  "inputs": {
+    "report": "Trace 1: Conformance: 0.857, Compliance: 1.000, Total: 0.900\nTrace 2: Conformance: 1.000, Compliance: 0.986, Total: 0.996\nTrace 3: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 4: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 5: Conformance: 1.000, Compliance: 0.990, Total: 0.997\nTrace 6: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 7: Conformance: 1.000, Compliance: 0.989, Total: 0.997\nTrace 8: Conformance: 0.857, Compliance: 0.971, Total: 0.891\nTrace 9: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 10: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nOverall score: 0.9781",
+    "sequences": "Trace 1: Login to Account -> Search Products -> Checkout\nTrace 2: Login to Account -> Search Products -> Add to Cart -> Checkout\nTrace 3: Login to Account -> Search Products -> Add to Cart -> Checkout\nTrace 4: Login to Account -> Search Products -> Add to Cart -> Checkout\nTrace 5: Login to Account -> Search Products -> Add to Cart -> Checkout\nTrace 6: Login to Account -> Search Products -> Add to Cart -> Checkout\nTrace 7: Login to Account -> Search Products -> Add to Cart -> Checkout\nTrace 8: Login to Account -> Add to Cart -> Checkout\nTrace 9: Login to Account -> Search Products -> Add to Cart -> Checkout\nTrace 10: Login to Account -> Search Products -> Add to Cart -> Checkout",
+    "violations": "Trace 2:\n  - [BINDING POLICY] activity 'Add to Cart' (Compensatable), resource 'Shopping Cart Service' (NonShareableLimitedBR), event 11: resource 'Finance Clerk' is not the bound 'Shopping Cart Service'\nTrace 5:\n  - [BINDING POLICY] activity 'Add to Cart' (Compensatable), resource 'Shopping Cart Service' (NonShareableLimitedBR), event 26: resource unlocked->done while activity done\nTrace 7:\n  - [ACTIVITY POLICY] activity 'Add to Cart' (Compensatable), resource 'Shopping Cart Service' (NonShareableLimitedBR), event 18: activity policy absent\nTrace 8:\n  - [ACTIVITY POLICY] activity 'Checkout' (Compensatable), resource 'Payment Gateway' (ShareableUnlimited), event 20: notactivated->unknown not authorized\n  - [ACTIVITY POLICY] activity 'Checkout' (Compensatable), resource 'Payment Gateway' (ShareableUnlimited), event 21: unknown->activated not authorized",
+    "activities": "Login to Account, Search Products, Add to Cart, Checkout",
+    "deviations": "Trace 1: missing 'Add to Cart'\nTrace 8: missing 'Search Products'"
+  },
+  "f": [
+    0.8571428571428572,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.8571428571428572,
+    1.0,
+    1.0
+  ],
+  "v": [
+    1.0,
+    0.9855072463768116,
+    1.0,
+    1.0,
+    0.9901960784313726,
+    1.0,
+    0.9885057471264368,
+    0.9710144927536232,
+    1.0,
+    1.0
+  ],
+  "pacc": [
+    0.9,
+    0.9956521739130435,
+    1.0,
+    1.0,
+    0.9970588235294118,
+    1.0,
+    0.996551724137931,
+    0.8913043478260869,
+    1.0,
+    1.0
+  ],
+  "reasons": [
+    {
+      "event": 10,
+      "activity": "Add to Cart",
+      "a": "",
+      "r": "",
+      "b": "resource 'Finance Clerk' is not the bound 'Shopping Cart Service'",
+      "trace": 1
+    },
+    {
+      "event": 25,
+      "activity": "Add to Cart",
+      "a": "",
+      "r": "",
+      "b": "resource unlocked->done while activity done",
+      "trace": 4
+    },
+    {
+      "event": 17,
+      "activity": "Add to Cart",
+      "a": "activity policy absent",
+      "r": "",
+      "b": "",
+      "trace": 6
+    },
+    {
+      "event": 19,
+      "activity": "Checkout",
+      "a": "notactivated->unknown not authorized",
+      "r": "",
+      "b": "",
+      "trace": 7
+    },
+    {
+      "event": 20,
+      "activity": "Checkout",
+      "a": "unknown->activated not authorized",
+      "r": "",
+      "b": "",
+      "trace": 7
+    }
+  ],
+  "deviations": [
+    [
+      "Add to Cart"
+    ],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "Search Products"
+    ],
+    [],
+    []
+  ]
+}

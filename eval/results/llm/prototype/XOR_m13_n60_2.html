@@ -1,0 +1,39 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 1: Contains 'Unexpected Activity' before 'Request Support', which is not in the BPMN model.</li>
+    <li>Trace 3: Starts with 'Install Software' instead of 'Request Support', missing initial activity as per model.</li>
+    <li>Trace 4: Missing 'Request Support' before 'Install Software', and lacks intermediate activities.</li>
+    <li>Trace 5: Includes 'Unexpected Activity' after 'Fix Hardware', which is not modeled.</li>
+    <li>Trace 8: Ends after 'Replace Hardware', missing 'Close Ticket'.</li>
+    <li>Trace 9: Starts with 'Fix Hardware' before 'Request Support', which is out of order.</li>
+    <li>Trace 10: Ends after 'Replace Hardware', missing 'Close Ticket'.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 1: [RESOURCE POLICY] - Activity 'Close Ticket' used resource 'Worker E' (NonShareableUnlimited) without enforcing the resource policy.</li>
+    <li>Trace 3: [RESOURCE POLICY] - Activity 'Request Support' used resource 'Resource H' (ShareableLimitedBR) without enforcing the resource policy.</li>
+    <li>Trace 9: [RESOURCE POLICY] - Activity 'Close Ticket' used resource 'Worker E' (NonShareableUnlimited) without enforcing the resource policy.</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>No traces have conformance = 1.00 and compliance &lt; 1.00; all perfectly conforming traces are also fully compliant.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations are not strictly dependent on sequence deviations, as traces with both correct and incorrect activity orders exhibit resource policy violations.</li>
+    <li>Resource policy violations are the only type observed in this dataset, making them the most common violation type.</li>
+    <li>No activity or binding policy violations were reported, indicating resource handling is the primary compliance issue.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Update the BPMN model to explicitly prohibit 'Unexpected Activity' and enforce correct activity order, ensuring all required activities are present.</li>
+    <li>Implement stricter lifecycle state checks for all activities to guarantee transitions follow the defined state machine.</li>
+    <li>Enforce exclusive access and correct state transitions for NonShareableUnlimited resources like 'Worker E', and ensure usage caps are respected for limited resources such as 'Resource H'.</li>
+    <li>Restrict resource consumption to only those activities in the 'Activated' state to comply with binding policy rules.</li>
+  </ul>
+</div>

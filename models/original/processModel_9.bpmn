@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_9" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.43.1">
+  <bpmn:process id="Process_ExpenseReimburse" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Activity_Submit" name="Submit Expense Report">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="Gateway_Approve" name="Valid Expense?">
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+      <bpmn:outgoing>Flow_Approved</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Rejected</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="Activity_Approve" name="Approve &amp; Reimburse">
+      <bpmn:incoming>Flow_Approved</bpmn:incoming>
+      <bpmn:outgoing>Flow_0tvkg0i</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_Reject" name="Reject Expense">
+      <bpmn:incoming>Flow_Rejected</bpmn:incoming>
+      <bpmn:outgoing>Flow_1fkwrfq</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_Notify" name="Notify Employee">
+      <bpmn:incoming>Flow_038r927</bpmn:incoming>
+      <bpmn:outgoing>Flow_3</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="EndEvent_1">
+      <bpmn:incoming>Flow_3</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="StartEvent_1" targetRef="Activity_Submit" />
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="Activity_Submit" targetRef="Gateway_Approve" />
+    <bpmn:sequenceFlow id="Flow_Approved" sourceRef="Gateway_Approve" targetRef="Activity_Approve" />
+    <bpmn:sequenceFlow id="Flow_Rejected" sourceRef="Gateway_Approve" targetRef="Activity_Reject" />
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="Activity_Notify" targetRef="EndEvent_1" />
+    <bpmn:exclusiveGateway id="Gateway_1sslolh" name="Valid Expense?">
+      <bpmn:incoming>Flow_0tvkg0i</bpmn:incoming>
+      <bpmn:incoming>Flow_1fkwrfq</bpmn:incoming>
+      <bpmn:outgoing>Flow_038r927</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_0tvkg0i" sourceRef="Activity_Approve" targetRef="Gateway_1sslolh" />
+    <bpmn:sequenceFlow id="Flow_1fkwrfq" sourceRef="Activity_Reject" targetRef="Gateway_1sslolh" />
+    <bpmn:sequenceFlow id="Flow_038r927" sourceRef="Gateway_1sslolh" targetRef="Activity_Notify" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_ExpenseReimburse">
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="160" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Submit_di" bpmnElement="Activity_Submit">
+        <dc:Bounds x="260" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Approve_di" bpmnElement="Gateway_Approve" isMarkerVisible="true">
+        <dc:Bounds x="410" y="95" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="469.5" y="113" width="75" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Approve_di" bpmnElement="Activity_Approve">
+        <dc:Bounds x="510" y="40" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Reject_di" bpmnElement="Activity_Reject">
+        <dc:Bounds x="510" y="150" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0txvkyn" bpmnElement="Gateway_1sslolh" isMarkerVisible="true">
+        <dc:Bounds x="675" y="95" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="589.5" y="113" width="75" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Notify_di" bpmnElement="Activity_Notify">
+        <dc:Bounds x="800" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1_di" bpmnElement="EndEvent_1">
+        <dc:Bounds x="962" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="196" y="120" />
+        <di:waypoint x="260" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="360" y="120" />
+        <di:waypoint x="410" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Approved_di" bpmnElement="Flow_Approved">
+        <di:waypoint x="435" y="95" />
+        <di:waypoint x="435" y="60" />
+        <di:waypoint x="510" y="60" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Rejected_di" bpmnElement="Flow_Rejected">
+        <di:waypoint x="435" y="145" />
+        <di:waypoint x="435" y="190" />
+        <di:waypoint x="510" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0tvkg0i_di" bpmnElement="Flow_0tvkg0i">
+        <di:waypoint x="610" y="60" />
+        <di:waypoint x="700" y="60" />
+        <di:waypoint x="700" y="95" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1fkwrfq_di" bpmnElement="Flow_1fkwrfq">
+        <di:waypoint x="610" y="190" />
+        <di:waypoint x="700" y="190" />
+        <di:waypoint x="700" y="145" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_038r927_di" bpmnElement="Flow_038r927">
+        <di:waypoint x="725" y="120" />
+        <di:waypoint x="800" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <di:waypoint x="900" y="120" />
+        <di:waypoint x="962" y="120" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

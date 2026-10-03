@@ -1,0 +1,31 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 3: Contains an extra 'Unexpected Activity' between 'Verify Income' and 'Check Credit Score'.</li>
+    <li>Trace 4: Contains an extra 'Unexpected Activity' between 'Reject Loan' and 'Notify Applicant'.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 8: [ACTIVITY POLICY] - Activity 'Verify Income' with resource 'Income Verification Service' violated the retriable lifecycle by transitioning from 'failed' to 'done', which is not authorized.</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>Trace 8: Although the activity sequence matches the model, the 'Verify Income' activity violated its retriable lifecycle policy by performing an unauthorized state transition from 'failed' to 'done'.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations are independent of control-flow deviations, as seen in Trace 8, which is sequence-perfect but has a lifecycle violation.</li>
+    <li>Activity policy violations are the only type observed in this dataset, specifically related to improper lifecycle transitions.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Model Change: Update the BPMN model to explicitly disallow or handle 'Unexpected Activity' after 'Verify Income' and after 'Reject Loan' to prevent extra activities.</li>
+    <li>Activity Policy Fix: Enforce strict lifecycle transitions for retriable activities, ensuring 'failed' cannot transition directly to 'done' without an authorized retry.</li>
+    <li>Resource Policy Fix: Review and configure the 'Income Verification Service' to track and enforce correct usage patterns, preventing unauthorized state transitions during activity execution.</li>
+    <li>Binding Policy Fix: Implement validation to ensure only activities in the 'Activated' state can consume resources, blocking any resource assignment outside this state.</li>
+  </ul>
+</div>

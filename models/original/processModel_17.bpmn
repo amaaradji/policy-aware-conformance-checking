@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_17" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.43.1">
+  <bpmn:process id="Process_QualityCheck" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+      </bpmn:startEvent>
+    <bpmn:task id="Activity_Inspect" name="Inspect Product">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+      </bpmn:task>
+    <bpmn:exclusiveGateway id="Gateway_Decision" name="Pass Quality?">
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+      <bpmn:outgoing>Flow_Pass</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Fail</bpmn:outgoing>
+      </bpmn:exclusiveGateway>
+    <bpmn:task id="Activity_Ship" name="Ship Product">
+      <bpmn:incoming>Flow_Pass</bpmn:incoming>
+      <bpmn:outgoing>Flow_0j7lqvt</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_Rework" name="Rework Product">
+      <bpmn:incoming>Flow_Fail</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ofqcd5</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="EndEvent_1">
+      <bpmn:incoming>Flow_0h301q9</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="StartEvent_1" targetRef="Activity_Inspect"/>
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="Activity_Inspect" targetRef="Gateway_Decision"/>
+    <bpmn:sequenceFlow id="Flow_Pass" sourceRef="Gateway_Decision" targetRef="Activity_Ship"/>
+    <bpmn:sequenceFlow id="Flow_Fail" sourceRef="Gateway_Decision" targetRef="Activity_Rework"/>
+    <bpmn:exclusiveGateway id="Gateway_0izvmxj" name="ship/rework">
+      <bpmn:incoming>Flow_0j7lqvt</bpmn:incoming>
+      <bpmn:incoming>Flow_1ofqcd5</bpmn:incoming>
+      <bpmn:outgoing>Flow_0h301q9</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_0j7lqvt" sourceRef="Activity_Ship" targetRef="Gateway_0izvmxj"/>
+    <bpmn:sequenceFlow id="Flow_1ofqcd5" sourceRef="Activity_Rework" targetRef="Gateway_0izvmxj"/>
+    <bpmn:sequenceFlow id="Flow_0h301q9" sourceRef="Gateway_0izvmxj" targetRef="EndEvent_1"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_QualityCheck">
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="160" y="162" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Inspect_di" bpmnElement="Activity_Inspect">
+        <dc:Bounds x="260" y="140" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Decision_di" bpmnElement="Gateway_Decision" isMarkerVisible="true">
+        <dc:Bounds x="410" y="155" width="50" height="50"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="456" y="193" width="68" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1_di" bpmnElement="EndEvent_1">
+        <dc:Bounds x="802" y="162" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1q0arpv" bpmnElement="Gateway_0izvmxj" isMarkerVisible="true">
+        <dc:Bounds x="665" y="155" width="50" height="50"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="597.5" y="173" width="57" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Ship_di" bpmnElement="Activity_Ship">
+        <dc:Bounds x="510" y="80" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Rework_di" bpmnElement="Activity_Rework">
+        <dc:Bounds x="510" y="220" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="196" y="180"/>
+        <di:waypoint x="260" y="180"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="360" y="180"/>
+        <di:waypoint x="410" y="180"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Fail_di" bpmnElement="Flow_Fail">
+        <di:waypoint x="435" y="205"/>
+        <di:waypoint x="435" y="260"/>
+        <di:waypoint x="510" y="260"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Pass_di" bpmnElement="Flow_Pass">
+        <di:waypoint x="435" y="155"/>
+        <di:waypoint x="435" y="120"/>
+        <di:waypoint x="510" y="120"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0j7lqvt_di" bpmnElement="Flow_0j7lqvt">
+        <di:waypoint x="610" y="120"/>
+        <di:waypoint x="690" y="120"/>
+        <di:waypoint x="690" y="155"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ofqcd5_di" bpmnElement="Flow_1ofqcd5">
+        <di:waypoint x="610" y="260"/>
+        <di:waypoint x="690" y="260"/>
+        <di:waypoint x="690" y="205"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0h301q9_di" bpmnElement="Flow_0h301q9">
+        <di:waypoint x="715" y="180"/>
+        <di:waypoint x="802" y="180"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

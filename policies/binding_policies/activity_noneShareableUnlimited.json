@@ -1,0 +1,41 @@
+{
+  "@context": [
+    "http://www.w3.org/ns/odrl.jsonld",
+    {
+      "rdf":   "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+      "rdfs":  "http://www.w3.org/2000/01/rdf-schema#",
+      "xsd":   "http://www.w3.org/2001/XMLSchema#",
+      "ex":    "http://example.com/ns#",
+      "output": {
+        "@id":   "http://example.com/ns#output",
+        "@type": "@id"
+      }
+    }
+  ],
+  "@type": "Request",
+  "@id":   "http://example.com/IPsRiAi:003",
+  "profile": { "@id": "http://example.com/activityProfile:NonShareableUnlimited" },
+
+  "permission": [
+    {
+      "@id":      "http://example.com/rules/IPnsulirule",
+      "target":   { "@id": "http://example.com/resources/nsR_uli/states/Consumed/" },
+      "assignee": { "@id": "http://example.com/activity/Ai/states/Activated" },
+      "output":   { "@id": "http://example.com/resources/nsR_uli/states/Done/" },
+      "action":   { "@id": "odrl:use" },
+      "duty": [
+        {
+          "action": { "@id": "odrl:use" },
+          "rdfs:comment": "Ensure exclusive (non-shared) access during consumption",
+          "constraint": [
+            {
+              "leftOperand":  { "@id": "odrl:event" },
+              "operator":     { "@id": "odrl:lt" },
+              "rightOperand": { "@id": "odrl:policyUsage" }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 1: Missing activity 'Add to Cart'.</li>
+    <li>Trace 8: Missing activity 'Search Products'.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 2: [Binding Policy] - Activity 'Add to Cart' used resource 'Finance Clerk' instead of the bound 'Shopping Cart Service'.</li>
+    <li>Trace 5: [Binding Policy] - Activity 'Add to Cart' completed while resource 'Shopping Cart Service' was unlocked, violating binding state rules.</li>
+    <li>Trace 7: [Activity Policy] - Activity 'Add to Cart' had no activity policy defined for 'Shopping Cart Service'.</li>
+    <li>Trace 8: [Activity Policy] - Activity 'Checkout' with resource 'Payment Gateway' performed unauthorized transitions: 'notactivated->unknown' and 'unknown->activated'.</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>Trace 2: The main violation is a binding policy breach where 'Add to Cart' used an incorrect resource, despite following the correct activity sequence.</li>
+    <li>Trace 5: The main violation is a binding policy breach where 'Add to Cart' completed while its resource was not properly locked, even though the sequence was correct.</li>
+    <li>Trace 7: The main violation is an activity policy breach due to the absence of a defined activity policy for 'Add to Cart', with correct activity sequence.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations occur independently of sequence deviations, as several traces with perfect conformance still show policy breaches.</li>
+    <li>Binding policy violations are the most common, affecting multiple traces where resource assignment or state handling failed.</li>
+    <li>Activity policy violations are also present, particularly when lifecycle transitions are unauthorized or undefined.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Update the BPMN model to enforce mandatory inclusion of 'Add to Cart' and 'Search Products' in all traces to prevent missing activities.</li>
+    <li>Define and implement explicit activity policies for all Compensatable activities, ensuring only authorized lifecycle transitions are allowed.</li>
+    <li>Configure resource 'Shopping Cart Service' to require locking before activity completion and prevent unlocking while the activity is still running.</li>
+    <li>Enforce strict binding rules so that activities only use their assigned resources and ensure resource state transitions align with activity states.</li>
+  </ul>
+</div>

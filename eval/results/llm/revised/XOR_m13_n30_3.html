@@ -1,0 +1,36 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 1: Missing 'Close Ticket'.</li>
+    <li>Trace 3: Unexpected 'Unexpected Activity'.</li>
+    <li>Trace 4: Unexpected 'Unexpected Activity'.</li>
+    <li>Trace 6: 'Request Support' occurred out of order.</li>
+    <li>Trace 9: Unexpected 'Unexpected Activity'.</li>
+    <li>Trace 10: Unexpected 'Unexpected Activity'.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 9: [BINDING POLICY] violation for activity 'Request Support' with resource 'Resource H'—resource was consumed while the activity was already done.</li>
+    <li>Trace 9: [ACTIVITY POLICY] violation for activity 'Request Support' with resource 'Resource H'—unauthorized transition from done to activated.</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>No traces have conformance = 1.00 and compliance &lt; 1.00; all perfectly conformant traces are also fully compliant.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations are not strictly tied to control-flow deviations, as Trace 9 exhibits both sequence and policy issues, while other traces with control-flow issues do not have policy violations.</li>
+    <li>Binding policy and activity policy violations are observed, with binding policy violations being the most common in the provided summary.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Model change: Update the process model to explicitly handle 'Unexpected Activity' and enforce the correct order for 'Request Support' and 'Close Ticket'.</li>
+    <li>Activity policy fix: Restrict re-activation of 'Request Support' after it reaches the 'done' state by enforcing lifecycle constraints in the workflow engine.</li>
+    <li>Resource policy fix: Ensure resources like 'Resource H' cannot transition to 'consumed' state unless the associated activity is in the 'Activated' state.</li>
+    <li>Binding policy fix: Implement validation to prevent resource consumption events when the activity is not active, and ensure resource assignment rules are strictly followed during activity execution.</li>
+  </ul>
+</div>

@@ -1,0 +1,13 @@
+venv/
+__pycache__/
+*.pyc
+.venv
+
+*log.xes
+*.xes
+# credentials
+.env
+*.env
+
+# the use-case event/policy log is part of the evaluation package
+!models/usecase/usecase_log.xes

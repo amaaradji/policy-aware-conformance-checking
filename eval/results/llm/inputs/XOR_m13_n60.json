@@ -1,0 +1,97 @@
+{
+  "inputs": {
+    "report": "Trace 1: Conformance: 0.857, Compliance: 0.989, Total: 0.897\nTrace 2: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 3: Conformance: 0.667, Compliance: 0.991, Total: 0.764\nTrace 4: Conformance: 0.800, Compliance: 1.000, Total: 0.860\nTrace 5: Conformance: 0.857, Compliance: 1.000, Total: 0.900\nTrace 6: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 7: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 8: Conformance: 0.800, Compliance: 1.000, Total: 0.860\nTrace 9: Conformance: 0.667, Compliance: 0.985, Total: 0.762\nTrace 10: Conformance: 0.800, Compliance: 1.000, Total: 0.860\nOverall score: 0.8903",
+    "sequences": "Trace 1: Unexpected Activity -> Request Support -> Fix Hardware -> Close Ticket\nTrace 2: Request Support -> Replace Hardware -> Close Ticket\nTrace 3: Install Software -> Request Support -> Close Ticket\nTrace 4: Install Software -> Close Ticket\nTrace 5: Request Support -> Fix Hardware -> Unexpected Activity -> Close Ticket\nTrace 6: Request Support -> Install Software -> Close Ticket\nTrace 7: Request Support -> Update Software -> Close Ticket\nTrace 8: Request Support -> Replace Hardware\nTrace 9: Fix Hardware -> Request Support -> Close Ticket\nTrace 10: Request Support -> Replace Hardware",
+    "violations": "Trace 1:\n  - [RESOURCE POLICY] activity 'Close Ticket' (Pivot), resource 'Worker E' (NonShareableUnlimited), event 28: resource policy absent\nTrace 3:\n  - [RESOURCE POLICY] activity 'Request Support' (Pivot), resource 'Resource H' (ShareableLimitedBR), event 23: resource policy absent\nTrace 9:\n  - [RESOURCE POLICY] activity 'Close Ticket' (Pivot), resource 'Worker E' (NonShareableUnlimited), event 19: resource policy absent",
+    "activities": "Request Support, Fix Hardware, Replace Hardware, Install Software, Update Software, Close Ticket",
+    "deviations": "Trace 1: unexpected 'Unexpected Activity'\nTrace 3: 'Request Support' out of order\nTrace 4: missing 'Request Support'\nTrace 5: unexpected 'Unexpected Activity'\nTrace 8: missing 'Close Ticket'\nTrace 9: 'Request Support' out of order\nTrace 10: missing 'Close Ticket'"
+  },
+  "f": [
+    0.8571428571428572,
+    1.0,
+    0.6666666666666667,
+    0.8,
+    0.8571428571428572,
+    1.0,
+    1.0,
+    0.8,
+    0.6666666666666667,
+    0.8
+  ],
+  "v": [
+    0.989247311827957,
+    1.0,
+    0.9907407407407407,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.9848484848484849,
+    1.0
+  ],
+  "pacc": [
+    0.896774193548387,
+    1.0,
+    0.763888888888889,
+    0.86,
+    0.9,
+    1.0,
+    1.0,
+    0.86,
+    0.7621212121212122,
+    0.86
+  ],
+  "reasons": [
+    {
+      "event": 27,
+      "activity": "Close Ticket",
+      "a": "",
+      "r": "resource policy absent",
+      "b": "",
+      "trace": 0
+    },
+    {
+      "event": 22,
+      "activity": "Request Support",
+      "a": "",
+      "r": "resource policy absent",
+      "b": "",
+      "trace": 2
+    },
+    {
+      "event": 18,
+      "activity": "Close Ticket",
+      "a": "",
+      "r": "resource policy absent",
+      "b": "",
+      "trace": 8
+    }
+  ],
+  "deviations": [
+    [
+      "Unexpected Activity"
+    ],
+    [],
+    [
+      "Request Support"
+    ],
+    [
+      "Request Support"
+    ],
+    [
+      "Unexpected Activity"
+    ],
+    [],
+    [],
+    [
+      "Close Ticket"
+    ],
+    [
+      "Request Support"
+    ],
+    [
+      "Close Ticket"
+    ]
+  ]
+}

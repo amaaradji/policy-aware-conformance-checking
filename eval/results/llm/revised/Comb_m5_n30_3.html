@@ -1,0 +1,31 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 3: Contains unexpected activity 'Unexpected Activity'.</li>
+    <li>Trace 4: Contains unexpected activity 'Unexpected Activity'.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 8: [ACTIVITY POLICY] violation in 'Verify Income' with resource 'Income Verification Service'—transition from failed to done is not authorized for Retriable activities.</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>Trace 8: Although the activity sequence matches the model, the 'Verify Income' activity used an unauthorized lifecycle transition (failed to done) with the 'Income Verification Service'.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations and sequence deviations occur independently, as seen in Trace 8 (policy violation without sequence deviation) and Traces 3 and 4 (sequence deviations without policy violations).</li>
+    <li>Activity policy violations are the most common, as only this type appears in the summary provided.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Model change: Update the BPMN model to explicitly handle or restrict the occurrence of 'Unexpected Activity' in the process flow.</li>
+    <li>Activity policy fix: Enforce correct lifecycle transitions for Retriable activities by preventing transitions directly from failed to done in 'Verify Income'.</li>
+    <li>Resource policy fix: Review and adjust the 'Income Verification Service' resource configuration to ensure it only allows authorized state transitions during consumption.</li>
+    <li>Binding policy fix: Implement stricter checks to ensure activities only use their bound resources and that resource state changes align with activity activation periods.</li>
+  </ul>
+</div>

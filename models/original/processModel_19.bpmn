@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_19" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.43.1">
+  <bpmn:process id="Process_DocSignoff" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+      </bpmn:startEvent>
+    <bpmn:task id="Activity_Prepare" name="Prepare Document">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+      </bpmn:task>
+    <bpmn:parallelGateway id="Gateway_AND_Split">
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+      <bpmn:outgoing>Flow_Legal</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Tech</bpmn:outgoing>
+      </bpmn:parallelGateway>
+    <bpmn:task id="Activity_Legal" name="Legal Review">
+      <bpmn:incoming>Flow_Legal</bpmn:incoming>
+      <bpmn:outgoing>Flow_Join</bpmn:outgoing>
+      </bpmn:task>
+    <bpmn:task id="Activity_Tech" name="Technical Review">
+      <bpmn:incoming>Flow_Tech</bpmn:incoming>
+      <bpmn:outgoing>Flow_Join</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0yphjfu</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:parallelGateway id="Gateway_AND_Join">
+      <bpmn:incoming>Flow_Join</bpmn:incoming>
+      <bpmn:incoming>Flow_0yphjfu</bpmn:incoming>
+      <bpmn:outgoing>Flow_3</bpmn:outgoing>
+      </bpmn:parallelGateway>
+    <bpmn:task id="Activity_Finalize" name="Finalize Document">
+      <bpmn:incoming>Flow_3</bpmn:incoming>
+      <bpmn:outgoing>Flow_4</bpmn:outgoing>
+      </bpmn:task>
+    <bpmn:endEvent id="EndEvent_1">
+      <bpmn:incoming>Flow_4</bpmn:incoming>
+      </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="StartEvent_1" targetRef="Activity_Prepare"/>
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="Activity_Prepare" targetRef="Gateway_AND_Split"/>
+    <bpmn:sequenceFlow id="Flow_Legal" sourceRef="Gateway_AND_Split" targetRef="Activity_Legal"/>
+    <bpmn:sequenceFlow id="Flow_Tech" sourceRef="Gateway_AND_Split" targetRef="Activity_Tech"/>
+    <bpmn:sequenceFlow id="Flow_Join" sourceRef="Activity_Legal" targetRef="Gateway_AND_Join"/>
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="Gateway_AND_Join" targetRef="Activity_Finalize"/>
+    <bpmn:sequenceFlow id="Flow_4" sourceRef="Activity_Finalize" targetRef="EndEvent_1"/>
+    <bpmn:sequenceFlow id="Flow_0yphjfu" sourceRef="Activity_Tech" targetRef="Gateway_AND_Join"/>
+    </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_DocSignoff">
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="160" y="102" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Prepare_di" bpmnElement="Activity_Prepare">
+        <dc:Bounds x="250" y="80" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_AND_Split_di" bpmnElement="Gateway_AND_Split">
+        <dc:Bounds x="400" y="95" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Legal_di" bpmnElement="Activity_Legal">
+        <dc:Bounds x="500" y="40" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Tech_di" bpmnElement="Activity_Tech">
+        <dc:Bounds x="500" y="150" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_AND_Join_di" bpmnElement="Gateway_AND_Join">
+        <dc:Bounds x="660" y="95" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Finalize_di" bpmnElement="Activity_Finalize">
+        <dc:Bounds x="760" y="80" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1_di" bpmnElement="EndEvent_1">
+        <dc:Bounds x="920" y="102" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_4_di" bpmnElement="Flow_4">
+        <di:waypoint x="860" y="120"/>
+        <di:waypoint x="920" y="120"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="196" y="120"/>
+        <di:waypoint x="250" y="120"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="350" y="120"/>
+        <di:waypoint x="400" y="120"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Join_di" bpmnElement="Flow_Join">
+        <di:waypoint x="600" y="70"/>
+        <di:waypoint x="685" y="70"/>
+        <di:waypoint x="685" y="95"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Legal_di" bpmnElement="Flow_Legal">
+        <di:waypoint x="425" y="95"/>
+        <di:waypoint x="425" y="70"/>
+        <di:waypoint x="500" y="70"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Tech_di" bpmnElement="Flow_Tech">
+        <di:waypoint x="425" y="145"/>
+        <di:waypoint x="425" y="190"/>
+        <di:waypoint x="500" y="190"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0yphjfu_di" bpmnElement="Flow_0yphjfu">
+        <di:waypoint x="600" y="190"/>
+        <di:waypoint x="685" y="190"/>
+        <di:waypoint x="685" y="145"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <di:waypoint x="710" y="120"/>
+        <di:waypoint x="760" y="120"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

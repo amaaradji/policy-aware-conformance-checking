@@ -1,0 +1,36 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 1: Missing 'Close Ticket'.</li>
+    <li>Trace 3: Unexpected 'Unexpected Activity'.</li>
+    <li>Trace 4: Unexpected 'Unexpected Activity'.</li>
+    <li>Trace 6: 'Request Support' is out of order.</li>
+    <li>Trace 9: Unexpected 'Unexpected Activity'.</li>
+    <li>Trace 10: Unexpected 'Unexpected Activity'.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 9: [BINDING POLICY] - Activity 'Request Support' used resource 'Resource H' (ShareableLimitedBR) after the activity was done, violating the binding policy by changing resource state while not activated.</li>
+    <li>Trace 9: [ACTIVITY POLICY] - Activity 'Request Support' with resource 'Resource H' (ShareableLimitedBR) performed a done→activated transition, which is not authorized for Pivot activities.</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>No traces have perfect conformance (1.00) with compliance less than 1.00; all traces with conformance = 1.00 also have compliance = 1.00.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations are not always tied to control-flow deviations; for example, Trace 9 has both, but other traces with control-flow issues do not show policy violations.</li>
+    <li>Binding policy and activity policy violations are observed in Trace 9, with binding policy violations being the most frequent among the detected policy issues.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Model Change: Update the process model to explicitly handle and constrain 'Unexpected Activity' and enforce the correct order for 'Request Support' and 'Close Ticket'.</li>
+    <li>Activity Policy Fix: Restrict 'Request Support' (Pivot) so that once it reaches 'done', it cannot transition back to 'activated' under any circumstance.</li>
+    <li>Resource Policy Fix: Ensure that 'Resource H' (ShareableLimitedBR) cannot be consumed or have its state changed while the associated activity is not in the 'Activated' state.</li>
+    <li>Binding Policy Fix: Enforce that resource state transitions for 'Request Support' only occur during the activity's 'Activated' phase, and prevent resource usage after the activity is marked as 'done'.</li>
+  </ul>
+</div>

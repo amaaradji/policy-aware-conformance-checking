@@ -1,0 +1,35 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 1: Contains 'Unexpected Activity' before 'Request Support', which is not in the BPMN model.</li>
+    <li>Trace 3: Missing 'Fix Hardware', 'Replace Hardware', or 'Update Software' between 'Install Software' and 'Close Ticket'.</li>
+    <li>Trace 4: Missing 'Request Support' before 'Install Software', and lacks hardware-related activities.</li>
+    <li>Trace 5: Contains 'Unexpected Activity' after 'Fix Hardware', which is not in the BPMN model.</li>
+    <li>Trace 8: Missing 'Close Ticket' after 'Replace Hardware'.</li>
+    <li>Trace 9: Starts with 'Fix Hardware' before 'Request Support', which is out of order.</li>
+    <li>Trace 10: Missing 'Close Ticket' after 'Replace Hardware'.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 1: Resource policy violation—activity 'Close Ticket' used resource 'Worker E' (NonShareableUnlimited) without enforcing exclusive access or proper resource state.</li>
+    <li>Trace 3: Resource policy violation—activity 'Request Support' used resource 'Resource H' (ShareableLimitedBR) without enforcing usage cap or correct sharing rules.</li>
+    <li>Trace 9: Resource policy violation—activity 'Close Ticket' used resource 'Worker E' (NonShareableUnlimited) without enforcing exclusive access or proper resource state.</li>
+  </ul>
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>No traces have conformance = 1.00 and compliance &lt; 1.00; all perfectly conforming traces are also fully compliant.</li>
+  </ul>
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations are independent of sequence deviations, as some traces with control-flow issues do not have policy violations and vice versa.</li>
+    <li>Resource policy violations are the most common, affecting multiple traces regardless of their activity sequence correctness.</li>
+  </ul>
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Model Change: Update the BPMN model to explicitly disallow 'Unexpected Activity' and enforce mandatory 'Close Ticket' after hardware/software actions.</li>
+    <li>Activity Policy Fix: Implement stricter lifecycle checks to ensure activities follow their required state transitions without skipping or repeating states.</li>
+    <li>Resource Policy Fix: Configure 'Worker E' and 'Resource H' to enforce exclusive access, respect usage caps, and prevent reuse after reaching terminal states.</li>
+    <li>Binding Policy Fix: Enforce that only activities in the 'Activated' state can consume resources, rejecting assignments from other states.</li>
+  </ul>
+</div>

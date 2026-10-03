@@ -1,0 +1,69 @@
+{
+  "@context": [
+    "http://www.w3.org/ns/odrl.jsonld",
+    {
+      "ex":     "http://example.com/ns#",
+      "xsd":    "http://www.w3.org/2001/XMLSchema#",
+      "rdfs":   "http://www.w3.org/2000/01/rdf-schema#",
+      "schema": "https://schema.org/",
+      "output": {
+        "@id":   "http://example.com/ns#output",
+        "@type": "@id"
+      },
+      "consequence": {
+        "@id":        "http://www.w3.org/ns/odrl/2/consequence",
+        "@type":      "@id",
+        "@container": "@set"
+      }
+    }
+  ],
+  "@graph": [
+    {
+      "@type": "Offer",
+      "@id":   "http://example.com/RP_li/consumePolicy:001",
+      "profile": { "@id": "http://example.com/resourceProfile:ShareableLimited" },
+      "permission": [
+        {
+          "@id":    "http://example.com/rules/shareableLimitedRcc1rule",
+          "target":   { "@id": "http://example.com/resources/R_sli/states/NotConsumed/" },
+          "assigner": { "@id": "http://example.com/resources/R_sliOwner" },
+          "action": [
+            { "@id": "odrl:use" },
+            { "@id": "odrl:concurrentUse" }
+          ],
+          "output": { "@id": "http://example.com/resources/R_sli/states/Consumed/" },
+          "duty": [
+            {
+              "target": { "@id": "http://example.com/resources/R_sli/states/Consumed/" },
+              "action": { "@id": "odrl:use" },
+              "output": { "@id": "http://example.com/resources/R_sli/states/Done/" },
+              "constraint": [
+                {
+                  "leftOperand":  { "@id": "odrl:event" },
+                  "operator":     { "@id": "odrl:gt" },
+                  "rightOperand": { "@id": "odrl:policyUsage" }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "obligation": [
+        {
+          "target":   { "@id": "http://example.com/resources/R_sli/states/Done/" },
+          "assigner": { "@id": "http://example.com/resources/R_sliOwner" },
+          "action":   { "@id": "odrl:use" },
+          "output":   { "@id": "http://example.com/resources/R_sli/states/Withdrawn/" }
+        }
+      ]
+    },
+    {
+      "@type": "odrl:Asset",
+      "@id":   "http://example.com/resources/R_sli/states/Consumed/",
+      "schema:duration": {
+        "@value": "PT0S",
+        "@type":  "xsd:duration"
+      }
+    }
+  ]
+}

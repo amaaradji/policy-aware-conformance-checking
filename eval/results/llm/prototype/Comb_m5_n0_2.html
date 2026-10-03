@@ -1,0 +1,30 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>No traces have conformance below 1.00; all activity sequences match the model without missing, extra, or out-of-order activities.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>No traces have policy violations; there are no activity, resource, or binding policy breaches reported.</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>All traces have both conformance and compliance scores of 1.00; there are no non-compliant traces with perfect conformance.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>There are no policy violations or sequence deviations in any trace, indicating full alignment between process execution and policy requirements.</li>
+    <li>Since no violations are present, no violation type is more common than others.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Continue monitoring the process model for any future control-flow deviations, but no immediate model changes are required.</li>
+    <li>Maintain current lifecycle state handling for all activities, ensuring strict adherence to defined activity policies.</li>
+    <li>Keep enforcing resource access patterns, usage caps, and state transitions as currently implemented to prevent resource policy violations.</li>
+    <li>Retain existing activity-resource assignment rules to uphold binding policy compliance.</li>
+  </ul>
+</div>

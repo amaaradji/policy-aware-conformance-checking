@@ -1,0 +1,38 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 1: Contains 'Unexpected Activity' at the start, which is not in the BPMN model.</li>
+    <li>Trace 3: Missing 'Fix Hardware' or 'Replace Hardware' activity; sequence deviates from the model.</li>
+    <li>Trace 4: Missing 'Request Support' before 'Install Software'; order does not match the model.</li>
+    <li>Trace 5: Contains 'Unexpected Activity' after 'Fix Hardware', which is not in the BPMN model.</li>
+    <li>Trace 8: Missing 'Close Ticket' at the end; incomplete process.</li>
+    <li>Trace 9: Starts with 'Fix Hardware' instead of 'Request Support'; order is incorrect.</li>
+    <li>Trace 10: Missing 'Close Ticket' at the end; incomplete process.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 1: Resource policy violation—activity 'Close Ticket' used resource 'Worker E' (NonShareableUnlimited) without enforcing exclusive access.</li>
+    <li>Trace 3: Resource policy violation—activity 'Request Support' used resource 'Resource H' (ShareableLimitedBR) without enforcing usage cap or sharing rules.</li>
+    <li>Trace 9: Resource policy violation—activity 'Close Ticket' used resource 'Worker E' (NonShareableUnlimited) without enforcing exclusive access.</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>No traces have conformance = 1.00 and compliance &lt; 1.00; all traces with perfect conformance are also fully compliant.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations occur independently of control-flow deviations, as some traces have resource policy violations despite following the correct activity sequence.</li>
+    <li>Resource policy violations are the most common, specifically related to improper handling of non-shareable or limited resources.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Model change: Update the BPMN model to explicitly disallow 'Unexpected Activity' and enforce required start and end activities.</li>
+    <li>Activity policy fix: Implement strict lifecycle state checks for all activities to ensure transitions follow the allowed state machine.</li>
+    <li>Resource policy fix: Enforce exclusive access for NonShareable resources and monitor usage caps for Limited resources; configure system to reject resource usage when these rules are violated.</li>
+    <li>Binding policy fix: Ensure that only activities in the 'Activated' state are permitted to consume resources by validating activity state before resource assignment.</li>
+  </ul>
+</div>

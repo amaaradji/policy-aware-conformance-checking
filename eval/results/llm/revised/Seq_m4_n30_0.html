@@ -1,0 +1,37 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 1: Missing activity 'Add to Cart'.</li>
+    <li>Trace 8: Missing activity 'Search Products'.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 2: Binding policy violation—activity 'Add to Cart' used resource 'Finance Clerk' instead of the bound 'Shopping Cart Service'.</li>
+    <li>Trace 5: Binding policy violation—activity 'Add to Cart' completed while resource 'Shopping Cart Service' was unlocked, violating binding state rules.</li>
+    <li>Trace 7: Activity policy violation—activity 'Add to Cart' had no activity policy defined for 'Shopping Cart Service'.</li>
+    <li>Trace 8: Activity policy violation—activity 'Checkout' with resource 'Payment Gateway' performed unauthorized transitions: notactivated->unknown and unknown->activated.</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>Trace 2: The activity sequence is correct, but 'Add to Cart' used an incorrect resource, violating the binding policy.</li>
+    <li>Trace 5: The activity sequence is correct, but 'Add to Cart' completed while its resource was not properly locked, violating the binding policy.</li>
+    <li>Trace 7: The activity sequence is correct, but 'Add to Cart' lacked a defined activity policy, causing an activity policy violation.</li>
+    <li>Trace 8: The activity sequence is correct, but 'Checkout' performed unauthorized lifecycle transitions, violating the activity policy.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations occur independently of control-flow deviations, as several traces with perfect conformance still have policy violations.</li>
+    <li>Binding policy violations are the most common, affecting multiple traces where activities either used the wrong resource or had incorrect resource state transitions.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Model Change: Update the process model to allow for optional 'Search Products' and 'Add to Cart' activities if business logic permits, or enforce their mandatory execution to match the model strictly.</li>
+    <li>Activity Policy Fix: Define and enforce explicit activity policies for all activities, ensuring all lifecycle transitions (including error and unknown states) are authorized and handled.</li>
+    <li>Resource Policy Fix: Review and configure resource state transitions to ensure resources are properly locked during consumption and cannot be unlocked or transitioned to 'done' while still in use.</li>
+    <li>Binding Policy Fix: Enforce strict activity-resource assignment rules so that each activity instance only uses its bound resource, and ensure resource state changes only occur when the activity is in the correct lifecycle state.</li>
+  </ul>
+</div>

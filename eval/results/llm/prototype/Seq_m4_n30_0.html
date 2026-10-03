@@ -1,0 +1,37 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 1: Missing 'Add to Cart' activity in the sequence.</li>
+    <li>Trace 8: Missing 'Search Products' activity in the sequence.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 2: [Binding Policy] - Activity 'Add to Cart' used resource 'Finance Clerk' instead of the bound 'Shopping Cart Service'.</li>
+    <li>Trace 5: [Binding Policy] - Activity 'Add to Cart' with resource 'Shopping Cart Service' had an invalid state transition: resource unlocked to done while activity was done.</li>
+    <li>Trace 7: [Activity Policy] - Activity 'Add to Cart' with resource 'Shopping Cart Service' lacked an activity policy definition.</li>
+    <li>Trace 8: [Activity Policy] - Activity 'Checkout' with resource 'Payment Gateway' had unauthorized state transitions: notactivated to unknown and unknown to activated.</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>Trace 2: The activity sequence is correct, but 'Add to Cart' used an incorrect resource, violating the binding policy.</li>
+    <li>Trace 5: The activity sequence is correct, but 'Add to Cart' had an invalid resource state transition, violating the binding policy.</li>
+    <li>Trace 7: The activity sequence is correct, but 'Add to Cart' lacked a required activity policy, violating lifecycle handling rules.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations can occur independently of sequence deviations, as seen in traces with perfect conformance but compliance issues.</li>
+    <li>Binding policy violations are the most common, affecting both resource assignment and state transitions.</li>
+    <li>Activity policy violations are also present, particularly with missing or unauthorized lifecycle transitions.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Update the BPMN model to enforce mandatory inclusion of 'Add to Cart' and 'Search Products' in all relevant process paths.</li>
+    <li>Define and enforce explicit lifecycle state machines for all Compensatable activities, ensuring only authorized transitions occur.</li>
+    <li>Review and configure resource state transitions for 'Shopping Cart Service' and 'Payment Gateway' to prevent invalid or unauthorized usage.</li>
+    <li>Implement strict binding checks so that only the correct resource (e.g., 'Shopping Cart Service') is assigned and consumed by the corresponding activity.</li>
+  </ul>
+</div>

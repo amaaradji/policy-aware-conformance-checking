@@ -1,0 +1,32 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 2 has conformance &lt; 1.00 due to the missing 'Risk Assessment' activity in the sequence.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 1: Activity Policy violation in 'Credit Check' with resource 'Credit Bureau API' due to exceeding the allowed retry count (more than 3 retries).</li>
+    <li>Trace 1: Resource Policy violation in 'Credit Check' with resource 'Credit Bureau API' due to resource usage exceeding the allowed elapsed time (over 5 minutes).</li>
+    <li>Trace 1: Binding Policy violations in 'Credit Check' and 'Risk Assessment' with resources 'Credit Bureau API' and 'Risk Analyst' due to invalid activity-resource state transitions while the activity was not in the correct state for resource consumption or release.</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>Trace 1 has perfect conformance but is not fully compliant because 'Credit Check' exceeded the allowed retry count and resource usage time, and there were improper activity-resource state transitions.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations can occur even when the activity sequence is correct, as seen in Trace 1, indicating that policy violations are independent of sequence deviations.</li>
+    <li>Activity Policy, Resource Policy, and Binding Policy violations all occurred in Trace 1, but Binding Policy violations were the most frequent.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Update the process model to ensure 'Risk Assessment' is always included in the activity sequence where required.</li>
+    <li>Enforce strict retry limits in the implementation of 'Credit Check' to prevent exceeding the allowed number of retries.</li>
+    <li>Configure the 'Credit Bureau API' resource to automatically lock or reject requests that would exceed the allowed elapsed time or usage cap.</li>
+    <li>Implement validation to ensure resources can only be consumed or released when the associated activity is in the correct state, preventing invalid activity-resource transitions.</li>
+  </ul>
+</div>

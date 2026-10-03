@@ -1,0 +1,174 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_5" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.43.1">
+  <bpmn:process id="Process_LoanApproval" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+      </bpmn:startEvent>
+    <bpmn:task id="Activity_Submit" name="Submit Loan Application">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+      </bpmn:task>
+    <bpmn:parallelGateway id="Gateway_AND_Split">
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+      <bpmn:outgoing>Flow_Credit</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Income</bpmn:outgoing>
+      </bpmn:parallelGateway>
+    <bpmn:task id="Activity_Credit" name="Check Credit Score">
+      <bpmn:incoming>Flow_Credit</bpmn:incoming>
+      <bpmn:outgoing>Flow_Join1</bpmn:outgoing>
+      </bpmn:task>
+    <bpmn:task id="Activity_Income" name="Verify Income">
+      <bpmn:incoming>Flow_Income</bpmn:incoming>
+      <bpmn:outgoing>Flow_Join2</bpmn:outgoing>
+      </bpmn:task>
+    <bpmn:parallelGateway id="Gateway_AND_Join">
+      <bpmn:incoming>Flow_Join1</bpmn:incoming>
+      <bpmn:incoming>Flow_Join2</bpmn:incoming>
+      <bpmn:outgoing>Flow_3</bpmn:outgoing>
+      </bpmn:parallelGateway>
+    <bpmn:exclusiveGateway id="Gateway_XOR" name="Decision">
+      <bpmn:incoming>Flow_3</bpmn:incoming>
+      <bpmn:outgoing>Flow_Approve</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Reject</bpmn:outgoing>
+      </bpmn:exclusiveGateway>
+    <bpmn:task id="Activity_Approve" name="Approve Loan">
+      <bpmn:incoming>Flow_Approve</bpmn:incoming>
+      <bpmn:outgoing>Flow_1aasqqi</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_Reject" name="Reject Loan">
+      <bpmn:incoming>Flow_Reject</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ucdb20</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_Notify" name="Notify Applicant">
+      <bpmn:incoming>Flow_0dbyn9d</bpmn:incoming>
+      <bpmn:outgoing>Flow_4</bpmn:outgoing>
+      </bpmn:task>
+    <bpmn:endEvent id="EndEvent_1">
+      <bpmn:incoming>Flow_4</bpmn:incoming>
+      </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="StartEvent_1" targetRef="Activity_Submit"/>
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="Activity_Submit" targetRef="Gateway_AND_Split"/>
+    <bpmn:sequenceFlow id="Flow_Credit" sourceRef="Gateway_AND_Split" targetRef="Activity_Credit"/>
+    <bpmn:sequenceFlow id="Flow_Income" sourceRef="Gateway_AND_Split" targetRef="Activity_Income"/>
+    <bpmn:sequenceFlow id="Flow_Join1" sourceRef="Activity_Credit" targetRef="Gateway_AND_Join"/>
+    <bpmn:sequenceFlow id="Flow_Join2" sourceRef="Activity_Income" targetRef="Gateway_AND_Join"/>
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="Gateway_AND_Join" targetRef="Gateway_XOR"/>
+    <bpmn:sequenceFlow id="Flow_Approve" sourceRef="Gateway_XOR" targetRef="Activity_Approve"/>
+    <bpmn:sequenceFlow id="Flow_Reject" sourceRef="Gateway_XOR" targetRef="Activity_Reject"/>
+    <bpmn:sequenceFlow id="Flow_4" sourceRef="Activity_Notify" targetRef="EndEvent_1"/>
+    <bpmn:exclusiveGateway id="Gateway_0ptexx7" name="approved/rejected">
+      <bpmn:incoming>Flow_0ucdb20</bpmn:incoming>
+      <bpmn:incoming>Flow_1aasqqi</bpmn:incoming>
+      <bpmn:outgoing>Flow_0dbyn9d</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_0dbyn9d" sourceRef="Gateway_0ptexx7" targetRef="Activity_Notify"/>
+    <bpmn:sequenceFlow id="Flow_0ucdb20" sourceRef="Activity_Reject" targetRef="Gateway_0ptexx7"/>
+    <bpmn:sequenceFlow id="Flow_1aasqqi" sourceRef="Activity_Approve" targetRef="Gateway_0ptexx7"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_LoanApproval">
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="160" y="152" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Submit_di" bpmnElement="Activity_Submit">
+        <dc:Bounds x="250" y="130" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_AND_Split_di" bpmnElement="Gateway_AND_Split">
+        <dc:Bounds x="400" y="145" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Credit_di" bpmnElement="Activity_Credit">
+        <dc:Bounds x="500" y="90" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Income_di" bpmnElement="Activity_Income">
+        <dc:Bounds x="500" y="200" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_AND_Join_di" bpmnElement="Gateway_AND_Join">
+        <dc:Bounds x="660" y="145" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_XOR_di" bpmnElement="Gateway_XOR" isMarkerVisible="true">
+        <dc:Bounds x="780" y="145" width="50" height="50"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="839.5" y="163" width="43" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Reject_di" bpmnElement="Activity_Reject">
+        <dc:Bounds x="880" y="200" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Approve_di" bpmnElement="Activity_Approve">
+        <dc:Bounds x="880" y="80" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0zj6j1t" bpmnElement="Gateway_0ptexx7" isMarkerVisible="true">
+        <dc:Bounds x="1015" y="155" width="50" height="50"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="915.5" y="173" width="89" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Notify_di" bpmnElement="Activity_Notify">
+        <dc:Bounds x="1120" y="140" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1_di" bpmnElement="EndEvent_1">
+        <dc:Bounds x="1292" y="162" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_4_di" bpmnElement="Flow_4">
+        <di:waypoint x="1220" y="180"/>
+        <di:waypoint x="1292" y="180"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="196" y="170"/>
+        <di:waypoint x="250" y="170"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="350" y="170"/>
+        <di:waypoint x="400" y="170"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Credit_di" bpmnElement="Flow_Credit">
+        <di:waypoint x="425" y="145"/>
+        <di:waypoint x="425" y="120"/>
+        <di:waypoint x="500" y="120"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Income_di" bpmnElement="Flow_Income">
+        <di:waypoint x="425" y="195"/>
+        <di:waypoint x="425" y="240"/>
+        <di:waypoint x="500" y="240"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Join1_di" bpmnElement="Flow_Join1">
+        <di:waypoint x="600" y="120"/>
+        <di:waypoint x="685" y="120"/>
+        <di:waypoint x="685" y="145"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Join2_di" bpmnElement="Flow_Join2">
+        <di:waypoint x="600" y="240"/>
+        <di:waypoint x="685" y="240"/>
+        <di:waypoint x="685" y="195"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <di:waypoint x="710" y="170"/>
+        <di:waypoint x="780" y="170"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Approve_di" bpmnElement="Flow_Approve">
+        <di:waypoint x="805" y="145"/>
+        <di:waypoint x="805" y="110"/>
+        <di:waypoint x="880" y="110"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Reject_di" bpmnElement="Flow_Reject">
+        <di:waypoint x="805" y="195"/>
+        <di:waypoint x="805" y="240"/>
+        <di:waypoint x="880" y="240"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0dbyn9d_di" bpmnElement="Flow_0dbyn9d">
+        <di:waypoint x="1065" y="180"/>
+        <di:waypoint x="1120" y="180"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ucdb20_di" bpmnElement="Flow_0ucdb20">
+        <di:waypoint x="980" y="240"/>
+        <di:waypoint x="1040" y="240"/>
+        <di:waypoint x="1040" y="205"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1aasqqi_di" bpmnElement="Flow_1aasqqi">
+        <di:waypoint x="980" y="120"/>
+        <di:waypoint x="1040" y="120"/>
+        <di:waypoint x="1040" y="155"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

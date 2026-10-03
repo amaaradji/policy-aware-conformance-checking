@@ -1,0 +1,8 @@
+type,traces,effective,pacc,no_sync,prototype,alignment,recall_effective,missed_inadmissible,flagged_admissible,fails_a,fails_r,fails_b
+activity_state_violation,20000,0.9438,0.9438,0.9298,0.925,0.0,1.0,0,2,0.9298,0.0,0.3408
+missing_policy,20000,1.0,1.0,1.0,0.2742,0.0,1.0,0,0,0.3302,0.3328,0.337
+premature_completion,20000,1.0,1.0,0.0,0.0,0.0,1.0,0,0,0.0,0.0,1.0
+resource_state_violation,20000,0.932,0.932,0.932,0.932,0.0,1.0,0,0,0.0,0.932,0.0244
+state_sequence_skip,20000,0.8552,0.8553,0.8246,0.8137,0.0,1.0,0,3,0.8246,0.0,0.3394
+timestamp_shift,20000,0.1901,0.1901,0.1159,0.0,0.0,1.0,0,0,0.009,0.1069,0.0742
+wrong_resource,20000,1.0,1.0,1.0,1.0,0.0,1.0,0,0,0.0,0.0,1.0

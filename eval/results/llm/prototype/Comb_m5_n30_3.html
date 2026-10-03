@@ -1,0 +1,31 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 3: Contains an extra 'Unexpected Activity' not present in the BPMN model.</li>
+    <li>Trace 4: Contains an extra 'Unexpected Activity' not present in the BPMN model.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 8: [ACTIVITY POLICY] violation—activity 'Verify Income' with resource 'Income Verification Service' (ShareableLimited) transitioned from failed to done, which is not allowed for Retriable activities.</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>Trace 8: Although the activity sequence matches the model, the 'Verify Income' activity violated its lifecycle policy by moving from failed to done, which is not permitted for Retriable activities.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations are independent of sequence deviations, as seen in Trace 8, which has perfect conformance but a policy violation.</li>
+    <li>Activity policy violations are the most common, with only one instance observed in the provided data.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Update the BPMN model to explicitly disallow or handle 'Unexpected Activity' to prevent extra activities in traces.</li>
+    <li>Enforce correct lifecycle transitions for Retriable activities, ensuring that a failed activity cannot transition directly to done without a valid retry.</li>
+    <li>Review and adjust resource usage logic for 'Income Verification Service' to ensure it adheres to its shareable and limited constraints, including proper handling after failures.</li>
+    <li>Implement strict checks so that only activities in the 'Activated' state can consume resources, preventing invalid activity-resource bindings.</li>
+  </ul>
+</div>

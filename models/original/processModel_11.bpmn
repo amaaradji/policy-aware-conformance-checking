@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_11" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.43.1">
+  <bpmn:process id="Process_TravelBooking" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+      </bpmn:startEvent>
+    <bpmn:task id="Activity_Request" name="Request Trip">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+      </bpmn:task>
+    <bpmn:exclusiveGateway id="Gateway_Choice" name="Booking Type?">
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+      <bpmn:outgoing>Flow_Flight</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Hotel</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Car</bpmn:outgoing>
+      </bpmn:exclusiveGateway>
+    <bpmn:task id="Activity_Flight" name="Book Flight">
+      <bpmn:incoming>Flow_Flight</bpmn:incoming>
+      <bpmn:outgoing>Flow_1wuig9l</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_Hotel" name="Book Hotel">
+      <bpmn:incoming>Flow_Hotel</bpmn:incoming>
+      <bpmn:outgoing>Flow_0th8p8k</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_Car" name="Book Car Rental">
+      <bpmn:incoming>Flow_Car</bpmn:incoming>
+      <bpmn:outgoing>Flow_0yvjf9h</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_Confirm" name="Confirm Booking">
+      <bpmn:incoming>Flow_127o5fs</bpmn:incoming>
+      <bpmn:outgoing>Flow_3</bpmn:outgoing>
+      </bpmn:task>
+    <bpmn:endEvent id="EndEvent_1">
+      <bpmn:incoming>Flow_3</bpmn:incoming>
+      </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="StartEvent_1" targetRef="Activity_Request"/>
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="Activity_Request" targetRef="Gateway_Choice"/>
+    <bpmn:sequenceFlow id="Flow_Flight" sourceRef="Gateway_Choice" targetRef="Activity_Flight"/>
+    <bpmn:sequenceFlow id="Flow_Hotel" sourceRef="Gateway_Choice" targetRef="Activity_Hotel"/>
+    <bpmn:sequenceFlow id="Flow_Car" sourceRef="Gateway_Choice" targetRef="Activity_Car"/>
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="Activity_Confirm" targetRef="EndEvent_1"/>
+    <bpmn:exclusiveGateway id="Gateway_08gih8c" name="flight/car/hotel">
+      <bpmn:incoming>Flow_1wuig9l</bpmn:incoming>
+      <bpmn:incoming>Flow_0yvjf9h</bpmn:incoming>
+      <bpmn:incoming>Flow_0th8p8k</bpmn:incoming>
+      <bpmn:outgoing>Flow_127o5fs</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_127o5fs" sourceRef="Gateway_08gih8c" targetRef="Activity_Confirm"/>
+    <bpmn:sequenceFlow id="Flow_1wuig9l" sourceRef="Activity_Flight" targetRef="Gateway_08gih8c"/>
+    <bpmn:sequenceFlow id="Flow_0yvjf9h" sourceRef="Activity_Car" targetRef="Gateway_08gih8c"/>
+    <bpmn:sequenceFlow id="Flow_0th8p8k" sourceRef="Activity_Hotel" targetRef="Gateway_08gih8c"/>
+    </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_TravelBooking">
+      <bpmndi:BPMNShape id="Activity_Flight_di" bpmnElement="Activity_Flight">
+        <dc:Bounds x="480" y="80" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Hotel_di" bpmnElement="Activity_Hotel">
+        <dc:Bounds x="480" y="170" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Car_di" bpmnElement="Activity_Car">
+        <dc:Bounds x="480" y="260" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1yl7tpx" bpmnElement="Gateway_08gih8c" isMarkerVisible="true">
+        <dc:Bounds x="645" y="185" width="50" height="50"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="705" y="203" width="69" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Confirm_di" bpmnElement="Activity_Confirm">
+        <dc:Bounds x="760" y="170" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1_di" bpmnElement="EndEvent_1">
+        <dc:Bounds x="912" y="192" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Choice_di" bpmnElement="Gateway_Choice" isMarkerVisible="true">
+        <dc:Bounds x="380" y="185" width="50" height="50"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="369" y="235" width="73" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Request_di" bpmnElement="Activity_Request">
+        <dc:Bounds x="230" y="170" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="152" y="192" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <di:waypoint x="860" y="210"/>
+        <di:waypoint x="912" y="210"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_127o5fs_di" bpmnElement="Flow_127o5fs">
+        <di:waypoint x="695" y="210"/>
+        <di:waypoint x="760" y="210"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1wuig9l_di" bpmnElement="Flow_1wuig9l">
+        <di:waypoint x="580" y="120"/>
+        <di:waypoint x="670" y="120"/>
+        <di:waypoint x="670" y="185"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0yvjf9h_di" bpmnElement="Flow_0yvjf9h">
+        <di:waypoint x="580" y="300"/>
+        <di:waypoint x="670" y="300"/>
+        <di:waypoint x="670" y="235"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0th8p8k_di" bpmnElement="Flow_0th8p8k">
+        <di:waypoint x="580" y="210"/>
+        <di:waypoint x="645" y="210"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="188" y="210"/>
+        <di:waypoint x="230" y="210"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="330" y="210"/>
+        <di:waypoint x="380" y="210"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Hotel_di" bpmnElement="Flow_Hotel">
+        <di:waypoint x="430" y="210"/>
+        <di:waypoint x="480" y="210"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Flight_di" bpmnElement="Flow_Flight">
+        <di:waypoint x="405" y="185"/>
+        <di:waypoint x="405" y="120"/>
+        <di:waypoint x="480" y="120"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Car_di" bpmnElement="Flow_Car">
+        <di:waypoint x="405" y="235"/>
+        <di:waypoint x="405" y="300"/>
+        <di:waypoint x="480" y="300"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

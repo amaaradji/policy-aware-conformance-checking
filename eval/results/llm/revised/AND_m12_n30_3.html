@@ -1,0 +1,34 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 2 contains an unexpected activity: 'Unexpected Activity' not present in the BPMN model.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 5: Activity 'Notify Team', resource 'System A', [ACTIVITY POLICY] violation—'failed-&gt;activated' transition is not authorized for Pivot activities.</li>
+    <li>Trace 6: Activity 'Assign Priority', resource 'Database C', [BINDING POLICY] violation—binding policy is absent for Retriable activity.</li>
+    <li>Trace 10: Activity 'Assign Priority', resource 'Database C', [BINDING POLICY] violation—binding policy is absent for Retriable activity.</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>Trace 5: Although the activity sequence matches the model, 'Notify Team' violated its activity policy by attempting an unauthorized lifecycle transition with 'System A'.</li>
+    <li>Trace 6 and Trace 10: Both traces followed the correct sequence, but 'Assign Priority' used 'Database C' without a binding policy, violating assignment rules for Retriable activities.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations are independent of sequence deviations; traces can be perfectly aligned yet still violate activity or binding policies.</li>
+    <li>Binding policy violations are the most common, occurring in Trace 6 and Trace 10 for the 'Assign Priority' activity.</li>
+    <li>Control-flow deviations and policy violations do not necessarily overlap, as seen in Trace 2 (sequence issue) and Traces 5, 6, 10 (policy issues).</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Update the BPMN model to explicitly exclude or handle 'Unexpected Activity' to prevent unmodeled steps in Trace 2.</li>
+    <li>Enforce lifecycle transition checks for Pivot activities, ensuring 'failed-&gt;activated' is blocked for 'Notify Team' with 'System A'.</li>
+    <li>Review and configure resource policies for 'System A' and 'Database C' to ensure proper state transitions and access restrictions during activity execution.</li>
+    <li>Implement binding policy enforcement for Retriable activities like 'Assign Priority', ensuring every activity-resource pair has a valid binding policy before execution.</li>
+  </ul>
+</div>

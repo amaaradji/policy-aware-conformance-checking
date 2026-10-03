@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_12" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.43.1">
+  <bpmn:process id="Process_Incident" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+      </bpmn:startEvent>
+    <bpmn:task id="Activity_Log" name="Log Incident">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+      </bpmn:task>
+    <bpmn:parallelGateway id="Gateway_AND_Split">
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+      <bpmn:outgoing>Flow_Notify</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Ticket</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Priority</bpmn:outgoing>
+      </bpmn:parallelGateway>
+    <bpmn:task id="Activity_Notify" name="Notify Team">
+      <bpmn:incoming>Flow_Notify</bpmn:incoming>
+      <bpmn:outgoing>Flow_Join</bpmn:outgoing>
+      </bpmn:task>
+    <bpmn:task id="Activity_Ticket" name="Create Ticket">
+      <bpmn:incoming>Flow_Ticket</bpmn:incoming>
+      <bpmn:outgoing>Flow_Join</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1twnftv</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_Priority" name="Assign Priority">
+      <bpmn:incoming>Flow_Priority</bpmn:incoming>
+      <bpmn:outgoing>Flow_Join</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1uqlvu8</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:parallelGateway id="Gateway_AND_Join">
+      <bpmn:incoming>Flow_Join</bpmn:incoming>
+      <bpmn:incoming>Flow_1twnftv</bpmn:incoming>
+      <bpmn:incoming>Flow_1uqlvu8</bpmn:incoming>
+      <bpmn:outgoing>Flow_3</bpmn:outgoing>
+      </bpmn:parallelGateway>
+    <bpmn:task id="Activity_Resolve" name="Resolve Incident">
+      <bpmn:incoming>Flow_3</bpmn:incoming>
+      <bpmn:outgoing>Flow_4</bpmn:outgoing>
+      </bpmn:task>
+    <bpmn:endEvent id="EndEvent_1">
+      <bpmn:incoming>Flow_4</bpmn:incoming>
+      </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="StartEvent_1" targetRef="Activity_Log"/>
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="Activity_Log" targetRef="Gateway_AND_Split"/>
+    <bpmn:sequenceFlow id="Flow_Notify" sourceRef="Gateway_AND_Split" targetRef="Activity_Notify"/>
+    <bpmn:sequenceFlow id="Flow_Ticket" sourceRef="Gateway_AND_Split" targetRef="Activity_Ticket"/>
+    <bpmn:sequenceFlow id="Flow_Priority" sourceRef="Gateway_AND_Split" targetRef="Activity_Priority"/>
+    <bpmn:sequenceFlow id="Flow_Join" sourceRef="Activity_Notify" targetRef="Gateway_AND_Join"/>
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="Gateway_AND_Join" targetRef="Activity_Resolve"/>
+    <bpmn:sequenceFlow id="Flow_4" sourceRef="Activity_Resolve" targetRef="EndEvent_1"/>
+    <bpmn:sequenceFlow id="Flow_1twnftv" sourceRef="Activity_Ticket" targetRef="Gateway_AND_Join"/>
+    <bpmn:sequenceFlow id="Flow_1uqlvu8" sourceRef="Activity_Priority" targetRef="Gateway_AND_Join"/>
+    </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_Incident">
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="160" y="192" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Log_di" bpmnElement="Activity_Log">
+        <dc:Bounds x="250" y="170" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_AND_Split_di" bpmnElement="Gateway_AND_Split">
+        <dc:Bounds x="400" y="185" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_AND_Join_di" bpmnElement="Gateway_AND_Join">
+        <dc:Bounds x="660" y="185" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Resolve_di" bpmnElement="Activity_Resolve">
+        <dc:Bounds x="760" y="170" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1_di" bpmnElement="EndEvent_1">
+        <dc:Bounds x="920" y="192" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Notify_di" bpmnElement="Activity_Notify">
+        <dc:Bounds x="490" y="80" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Ticket_di" bpmnElement="Activity_Ticket">
+        <dc:Bounds x="490" y="170" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Priority_di" bpmnElement="Activity_Priority">
+        <dc:Bounds x="490" y="260" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="196" y="210"/>
+        <di:waypoint x="250" y="210"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="350" y="210"/>
+        <di:waypoint x="400" y="210"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Priority_di" bpmnElement="Flow_Priority">
+        <di:waypoint x="425" y="235"/>
+        <di:waypoint x="425" y="300"/>
+        <di:waypoint x="490" y="300"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Ticket_di" bpmnElement="Flow_Ticket">
+        <di:waypoint x="450" y="210"/>
+        <di:waypoint x="490" y="210"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Notify_di" bpmnElement="Flow_Notify">
+        <di:waypoint x="425" y="185"/>
+        <di:waypoint x="425" y="120"/>
+        <di:waypoint x="490" y="120"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1twnftv_di" bpmnElement="Flow_1twnftv">
+        <di:waypoint x="590" y="210"/>
+        <di:waypoint x="660" y="210"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Join_di" bpmnElement="Flow_Join">
+        <di:waypoint x="590" y="120"/>
+        <di:waypoint x="685" y="120"/>
+        <di:waypoint x="685" y="185"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1uqlvu8_di" bpmnElement="Flow_1uqlvu8">
+        <di:waypoint x="590" y="300"/>
+        <di:waypoint x="685" y="300"/>
+        <di:waypoint x="685" y="235"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <di:waypoint x="710" y="210"/>
+        <di:waypoint x="760" y="210"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_4_di" bpmnElement="Flow_4">
+        <di:waypoint x="860" y="210"/>
+        <di:waypoint x="920" y="210"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

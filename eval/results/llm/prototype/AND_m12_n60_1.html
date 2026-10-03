@@ -1,0 +1,32 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 3: Contains an extra 'Unexpected Activity' not in the BPMN model.</li>
+    <li>Trace 5: Ends with an extra 'Unexpected Activity' after 'Resolve Incident'.</li>
+    <li>Trace 7: Missing 'Assign Priority' activity compared to the BPMN model.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 9: [BINDING POLICY] - Activity 'Resolve Incident' used resource 'HR System' instead of the bound 'Person I', violating the binding policy.</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>Trace 9: Although the activity sequence matches the BPMN model, 'Resolve Incident' was performed with an incorrect resource, violating the binding policy.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations can occur independently of sequence deviations, as shown by Trace 9, which is sequence-conformant but has a binding policy violation.</li>
+    <li>Binding policy violations are the only type observed in this dataset, specifically involving incorrect resource assignment.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Update the BPMN model to explicitly allow or restrict the occurrence and position of 'Unexpected Activity' to resolve control-flow mismatches.</li>
+    <li>Implement stricter lifecycle state validation for all activities to ensure transitions follow the required state machine.</li>
+    <li>Enforce resource state checks so that only eligible resources in the correct state are available for assignment and consumption.</li>
+    <li>Configure system logic to validate that each activity consumes only its correctly bound resource, rejecting mismatches at execution time.</li>
+  </ul>
+</div>

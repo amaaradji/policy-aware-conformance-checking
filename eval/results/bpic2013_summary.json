@@ -1,0 +1,22 @@
+{
+  "cases": 7554,
+  "events": 65533,
+  "activities": 13,
+  "train_cases": 3777,
+  "test_cases": 3777,
+  "test_variants": 1266,
+  "lifecycle_events_checked": 293077,
+  "discovery_seconds": 0.43,
+  "policy_seconds": 2.02,
+  "alignment_seconds": 41.15,
+  "injected": 378,
+  "effective": 322,
+  "detected_effective": 322,
+  "false_alarms": 0,
+  "aligned_case_share": 1.0,
+  "alignment_workers": 6,
+  "held_out_fitness_mean": 0.9658,
+  "held_out_fitness_perfect": 0.7257,
+  "alignment_only_flags_injected": 106,
+  "mean_pacc": 0.9757
+}

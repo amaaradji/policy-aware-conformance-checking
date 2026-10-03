@@ -1,0 +1,2857 @@
+{
+ "activities": [
+  {
+   "activity": "a",
+   "type": "Pivot",
+   "currentState": "NotActivated",
+   "resource": "Resource a",
+   "resourceType": "ShareableUnlimited",
+   "resource_current_state": "NotConsumed",
+   "activity_policy": {
+    "@context": [
+     "http://www.w3.org/ns/odrl.jsonld",
+     {
+      "ex": "http://example.com/ns#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "output": {
+       "@id": "http://example.com/ns#output",
+       "@type": "@id"
+      },
+      "consequence": {
+       "@id": "http://www.w3.org/ns/odrl/2/consequence",
+       "@type": "@id",
+       "@container": "@set"
+      }
+     }
+    ],
+    "@type": "Offer",
+    "@id": "http://example.com/AP_piv/ActivatedAPi",
+    "profile": {
+     "@id": "http://example.com/activityProfile:Pivot"
+    },
+    "permission": [
+     {
+      "assigner": {
+       "@id": "http://example.com/owners/Ai"
+      },
+      "target": {
+       "@id": "http://example.com/activity/Ai/states/NotActivated"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/activity/Ai/states/Activated"
+      }
+     }
+    ],
+    "obligation": [
+     {
+      "assigner": {
+       "@id": "http://example.com/owners/Ai"
+      },
+      "target": {
+       "@id": "http://example.com/activity/Ai/states/Activated"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/activity/Ai/states/Done"
+      },
+      "consequence": [
+       {
+        "action": {
+         "@id": "odrl:use"
+        },
+        "output": {
+         "@id": "http://example.com/activity/Ai/states/Failed"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   "resource_policy": {
+    "@context": [
+     "http://www.w3.org/ns/odrl.jsonld",
+     {
+      "ex": "http://example.com/ns#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "output": {
+       "@id": "http://example.com/ns#output",
+       "@type": "@id"
+      },
+      "consequence": {
+       "@id": "http://www.w3.org/ns/odrl/2/consequence",
+       "@type": "@id",
+       "@container": "@set"
+      }
+     }
+    ],
+    "@type": "Offer",
+    "@id": "http://example.com/RP_suli/consumePolicy:002",
+    "profile": {
+     "@id": "http://example.com/resourceProfile:ShareableUnlimited"
+    },
+    "permission": [
+     {
+      "@id": "http://example.com/rules/shareableUnlimitedR/R_suli",
+      "target": {
+       "@id": "http://example.com/resources/R_suli/states/NotConsumed/"
+      },
+      "assigner": {
+       "@id": "http://example.com/resources/R_suliOwner"
+      },
+      "action": [
+       {
+        "@id": "odrl:use"
+       },
+       {
+        "@id": "odrl:concurrentUse"
+       }
+      ],
+      "output": {
+       "@id": "http://example.com/resources/R_suli/states/Consumed/"
+      },
+      "duty": [
+       {
+        "target": {
+         "@id": "http://example.com/resources/R_suli/states/Consumed/"
+        },
+        "action": {
+         "@id": "odrl:use"
+        },
+        "output": {
+         "@id": "http://example.com/resources/R_suli/states/Withdrawn/"
+        },
+        "constraint": [
+         {
+          "leftOperand": {
+           "@id": "odrl:event"
+          },
+          "operator": {
+           "@id": "odrl:gt"
+          },
+          "rightOperand": {
+           "@id": "odrl:policyUsage"
+          }
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "binding_policy": {
+    "@context": [
+     "http://www.w3.org/ns/odrl.jsonld",
+     {
+      "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "dc": "http://purl.org/dc/terms/",
+      "ex": "http://example.com/ns#",
+      "output": {
+       "@id": "http://example.com/ns#output",
+       "@type": "@id"
+      }
+     }
+    ],
+    "@graph": [
+     {
+      "@type": "Request",
+      "@id": "http://example.com/IPSRiAi:003",
+      "profile": {
+       "@id": "http://example.com/activityProfile:ShareableUnlimited"
+      },
+      "permission": [
+       {
+        "@id": "http://example.com/rules/IPsulirule",
+        "target": {
+         "@id": "http://example.com/resources/R_suli/states/Consumed/"
+        },
+        "assignee": {
+         "@type": "PartyCollection",
+         "@id": "http://example.com/Groupi/Activities/states/Activated"
+        },
+        "output": {
+         "@id": "http://example.com/resources/R_suli/states/Withdrawn/"
+        },
+        "action": [
+         {
+          "@id": "odrl:use"
+         },
+         {
+          "@id": "odrl:concurrentUse"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "@type": "dc:Text",
+      "@id": "http://example.com/activity/Ai/states/Activated",
+      "odrl:partOf": {
+       "@id": "http://example.com/Groupi/Activities/states/Activated"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "activity": "b",
+   "type": "Compensatable",
+   "currentState": "NotActivated",
+   "resource": "Resource b",
+   "resourceType": "NonShareableLimitedBR",
+   "resource_current_state": "NotConsumed",
+   "activity_policy": {
+    "@context": [
+     "http://www.w3.org/ns/odrl.jsonld",
+     {
+      "ex": "http://example.com/ns#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "output": {
+       "@id": "http://example.com/ns#output",
+       "@type": "@id"
+      },
+      "consequence": {
+       "@id": "http://www.w3.org/ns/odrl/2/consequence",
+       "@type": "@id",
+       "@container": "@set"
+      }
+     }
+    ],
+    "@type": "Offer",
+    "@id": "http://example.com/AP_cps/cpsCP:002",
+    "profile": {
+     "@id": "http://example.com/activityProfile:Compensatable"
+    },
+    "permission": [
+     {
+      "assigner": {
+       "@id": "http://example.com/owners/Ai"
+      },
+      "target": {
+       "@id": "http://example.com/activity/Ai/states/NotActivated"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/activity/Ai/states/Activated"
+      }
+     },
+     {
+      "assigner": {
+       "@id": "http://example.com/owners/Ai"
+      },
+      "target": {
+       "@id": "http://example.com/activity/Ai/states/Done"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/activity/Ai/states/Compensated"
+      }
+     }
+    ],
+    "obligation": [
+     {
+      "assigner": {
+       "@id": "http://example.com/owners/Ai"
+      },
+      "target": {
+       "@id": "http://example.com/activity/Ai/states/Activated"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/activity/Ai/states/Done"
+      },
+      "consequence": [
+       {
+        "action": {
+         "@id": "odrl:use"
+        },
+        "output": {
+         "@id": "http://example.com/activity/Ai/states/Failed"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   "resource_policy": {
+    "@context": [
+     "http://www.w3.org/ns/odrl.jsonld",
+     {
+      "ex": "http://example.com/ns#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "output": {
+       "@id": "http://example.com/ns#output",
+       "@type": "@id"
+      },
+      "consequence": {
+       "@id": "http://www.w3.org/ns/odrl/2/consequence",
+       "@type": "@id",
+       "@container": "@set"
+      }
+     }
+    ],
+    "@type": "Offer",
+    "@id": "http://example.com/nsRP_lri/consumePolicy:001",
+    "profile": {
+     "@id": "http://example.com/resourceProfile:NonShareableLimitedBR"
+    },
+    "permission": [
+     {
+      "target": {
+       "@id": "http://example.com/resources/nsR_lri/states/MadeAvailable/"
+      },
+      "assigner": {
+       "@id": "http://example.com/resources/nsR_lriOwner"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/resources/nsR_lri/states/NotConsumed/"
+      }
+     },
+     {
+      "target": {
+       "@id": "http://example.com/resources/nsR_lri/states/NotConsumed/"
+      },
+      "assigner": {
+       "@id": "http://example.com/resources/nsR_lriOwner"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/resources/nsR_lri/states/Locked/"
+      }
+     },
+     {
+      "target": {
+       "@id": "http://example.com/resources/nsR_lri/states/Locked/"
+      },
+      "assigner": {
+       "@id": "http://example.com/resources/nsR_lriOwner"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/resources/nsR_lri/states/Consumed/"
+      },
+      "duty": [
+       {
+        "target": {
+         "@id": "http://example.com/resources/nsR_lri/states/Consumed/"
+        },
+        "action": {
+         "@id": "odrl:use"
+        },
+        "output": {
+         "@id": "http://example.com/resources/nsR_lri/states/Unlocked/"
+        },
+        "constraint": [
+         {
+          "leftOperand": {
+           "@id": "odrl:event"
+          },
+          "operator": {
+           "@id": "odrl:gt"
+          },
+          "rightOperand": {
+           "@id": "odrl:policyUsage"
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "target": {
+       "@id": "http://example.com/resources/nsR_lri/states/Unlocked/"
+      },
+      "assigner": {
+       "@id": "http://example.com/resources/nsR_lriOwner"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/resources/nsR_lri/states/Done/"
+      }
+     }
+    ],
+    "obligation": [
+     {
+      "target": {
+       "@id": "http://example.com/resources/nsR_lri/states/Done/"
+      },
+      "assigner": {
+       "@id": "http://example.com/resources/nsR_lriOwner"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/resources/nsR_lri/states/MadeAvailable/"
+      },
+      "consequence": [
+       {
+        "assigner": {
+         "@id": "http://example.com/resources/nsR_lriOwner"
+        },
+        "action": {
+         "@id": "odrl:use"
+        },
+        "output": {
+         "@id": "http://example.com/resources/nsR_lri/states/Withdrawn/"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   "binding_policy": {
+    "@context": [
+     "http://www.w3.org/ns/odrl.jsonld",
+     {
+      "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "ex": "http://example.com/ns#",
+      "output": {
+       "@id": "http://example.com/ns#output",
+       "@type": "@id"
+      }
+     }
+    ],
+    "@type": "Request",
+    "@id": "http://example.com/IPlrRiAi:004",
+    "profile": {
+     "@id": "http://example.com/activityProfile:NonShareableLimitedBR"
+    },
+    "permission": [
+     {
+      "@id": "http://example.com/rules/IPlriairule1",
+      "target": {
+       "@id": "http://example.com/resources/nsR_lri/states/Consumed/"
+      },
+      "assignee": {
+       "@id": "http://example.com/activity/Ai/states/Activated"
+      },
+      "output": {
+       "@id": "http://example.com/resources/nsR_lri/states/Done/"
+      },
+      "action": [
+       {
+        "rdf:value": {
+         "@id": "odrl:use"
+        },
+        "refinement": [
+         {
+          "leftOperand": {
+           "@id": "odrl:elapsedTime"
+          },
+          "operator": {
+           "@id": "odrl:lteq"
+          },
+          "rightOperand": {
+           "@value": "PT5M",
+           "@type": "xsd:duration"
+          },
+          "rdfs:comment": "Accumulated metered time periods must not exceed X minutes"
+         }
+        ]
+       }
+      ],
+      "duty": [
+       {
+        "action": {
+         "@id": "odrl:use"
+        },
+        "rdfs:comment": "Ensure exclusive (non-shared) access during consumption",
+        "constraint": [
+         {
+          "leftOperand": {
+           "@id": "odrl:event"
+          },
+          "operator": {
+           "@id": "odrl:lt"
+          },
+          "rightOperand": {
+           "@id": "odrl:policyUsage"
+          }
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "activity": "c",
+   "type": "Pivot",
+   "currentState": "NotActivated",
+   "resource": "Resource c",
+   "resourceType": "NonShareableLimitedBR",
+   "resource_current_state": "NotConsumed",
+   "activity_policy": {
+    "@context": [
+     "http://www.w3.org/ns/odrl.jsonld",
+     {
+      "ex": "http://example.com/ns#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "output": {
+       "@id": "http://example.com/ns#output",
+       "@type": "@id"
+      },
+      "consequence": {
+       "@id": "http://www.w3.org/ns/odrl/2/consequence",
+       "@type": "@id",
+       "@container": "@set"
+      }
+     }
+    ],
+    "@type": "Offer",
+    "@id": "http://example.com/AP_piv/ActivatedAPi",
+    "profile": {
+     "@id": "http://example.com/activityProfile:Pivot"
+    },
+    "permission": [
+     {
+      "assigner": {
+       "@id": "http://example.com/owners/Ai"
+      },
+      "target": {
+       "@id": "http://example.com/activity/Ai/states/NotActivated"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/activity/Ai/states/Activated"
+      }
+     }
+    ],
+    "obligation": [
+     {
+      "assigner": {
+       "@id": "http://example.com/owners/Ai"
+      },
+      "target": {
+       "@id": "http://example.com/activity/Ai/states/Activated"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/activity/Ai/states/Done"
+      },
+      "consequence": [
+       {
+        "action": {
+         "@id": "odrl:use"
+        },
+        "output": {
+         "@id": "http://example.com/activity/Ai/states/Failed"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   "resource_policy": {
+    "@context": [
+     "http://www.w3.org/ns/odrl.jsonld",
+     {
+      "ex": "http://example.com/ns#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "output": {
+       "@id": "http://example.com/ns#output",
+       "@type": "@id"
+      },
+      "consequence": {
+       "@id": "http://www.w3.org/ns/odrl/2/consequence",
+       "@type": "@id",
+       "@container": "@set"
+      }
+     }
+    ],
+    "@type": "Offer",
+    "@id": "http://example.com/nsRP_lri/consumePolicy:001",
+    "profile": {
+     "@id": "http://example.com/resourceProfile:NonShareableLimitedBR"
+    },
+    "permission": [
+     {
+      "target": {
+       "@id": "http://example.com/resources/nsR_lri/states/MadeAvailable/"
+      },
+      "assigner": {
+       "@id": "http://example.com/resources/nsR_lriOwner"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/resources/nsR_lri/states/NotConsumed/"
+      }
+     },
+     {
+      "target": {
+       "@id": "http://example.com/resources/nsR_lri/states/NotConsumed/"
+      },
+      "assigner": {
+       "@id": "http://example.com/resources/nsR_lriOwner"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/resources/nsR_lri/states/Locked/"
+      }
+     },
+     {
+      "target": {
+       "@id": "http://example.com/resources/nsR_lri/states/Locked/"
+      },
+      "assigner": {
+       "@id": "http://example.com/resources/nsR_lriOwner"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/resources/nsR_lri/states/Consumed/"
+      },
+      "duty": [
+       {
+        "target": {
+         "@id": "http://example.com/resources/nsR_lri/states/Consumed/"
+        },
+        "action": {
+         "@id": "odrl:use"
+        },
+        "output": {
+         "@id": "http://example.com/resources/nsR_lri/states/Unlocked/"
+        },
+        "constraint": [
+         {
+          "leftOperand": {
+           "@id": "odrl:event"
+          },
+          "operator": {
+           "@id": "odrl:gt"
+          },
+          "rightOperand": {
+           "@id": "odrl:policyUsage"
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "target": {
+       "@id": "http://example.com/resources/nsR_lri/states/Unlocked/"
+      },
+      "assigner": {
+       "@id": "http://example.com/resources/nsR_lriOwner"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/resources/nsR_lri/states/Done/"
+      }
+     }
+    ],
+    "obligation": [
+     {
+      "target": {
+       "@id": "http://example.com/resources/nsR_lri/states/Done/"
+      },
+      "assigner": {
+       "@id": "http://example.com/resources/nsR_lriOwner"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/resources/nsR_lri/states/MadeAvailable/"
+      },
+      "consequence": [
+       {
+        "assigner": {
+         "@id": "http://example.com/resources/nsR_lriOwner"
+        },
+        "action": {
+         "@id": "odrl:use"
+        },
+        "output": {
+         "@id": "http://example.com/resources/nsR_lri/states/Withdrawn/"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   "binding_policy": {
+    "@context": [
+     "http://www.w3.org/ns/odrl.jsonld",
+     {
+      "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "ex": "http://example.com/ns#",
+      "output": {
+       "@id": "http://example.com/ns#output",
+       "@type": "@id"
+      }
+     }
+    ],
+    "@type": "Request",
+    "@id": "http://example.com/IPlrRiAi:004",
+    "profile": {
+     "@id": "http://example.com/activityProfile:NonShareableLimitedBR"
+    },
+    "permission": [
+     {
+      "@id": "http://example.com/rules/IPlriairule1",
+      "target": {
+       "@id": "http://example.com/resources/nsR_lri/states/Consumed/"
+      },
+      "assignee": {
+       "@id": "http://example.com/activity/Ai/states/Activated"
+      },
+      "output": {
+       "@id": "http://example.com/resources/nsR_lri/states/Done/"
+      },
+      "action": [
+       {
+        "rdf:value": {
+         "@id": "odrl:use"
+        },
+        "refinement": [
+         {
+          "leftOperand": {
+           "@id": "odrl:elapsedTime"
+          },
+          "operator": {
+           "@id": "odrl:lteq"
+          },
+          "rightOperand": {
+           "@value": "PT5M",
+           "@type": "xsd:duration"
+          },
+          "rdfs:comment": "Accumulated metered time periods must not exceed X minutes"
+         }
+        ]
+       }
+      ],
+      "duty": [
+       {
+        "action": {
+         "@id": "odrl:use"
+        },
+        "rdfs:comment": "Ensure exclusive (non-shared) access during consumption",
+        "constraint": [
+         {
+          "leftOperand": {
+           "@id": "odrl:event"
+          },
+          "operator": {
+           "@id": "odrl:lt"
+          },
+          "rightOperand": {
+           "@id": "odrl:policyUsage"
+          }
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "activity": "d",
+   "type": "Compensatable",
+   "currentState": "NotActivated",
+   "resource": "Resource d",
+   "resourceType": "ShareableUnlimited",
+   "resource_current_state": "NotConsumed",
+   "activity_policy": {
+    "@context": [
+     "http://www.w3.org/ns/odrl.jsonld",
+     {
+      "ex": "http://example.com/ns#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "output": {
+       "@id": "http://example.com/ns#output",
+       "@type": "@id"
+      },
+      "consequence": {
+       "@id": "http://www.w3.org/ns/odrl/2/consequence",
+       "@type": "@id",
+       "@container": "@set"
+      }
+     }
+    ],
+    "@type": "Offer",
+    "@id": "http://example.com/AP_cps/cpsCP:002",
+    "profile": {
+     "@id": "http://example.com/activityProfile:Compensatable"
+    },
+    "permission": [
+     {
+      "assigner": {
+       "@id": "http://example.com/owners/Ai"
+      },
+      "target": {
+       "@id": "http://example.com/activity/Ai/states/NotActivated"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/activity/Ai/states/Activated"
+      }
+     },
+     {
+      "assigner": {
+       "@id": "http://example.com/owners/Ai"
+      },
+      "target": {
+       "@id": "http://example.com/activity/Ai/states/Done"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/activity/Ai/states/Compensated"
+      }
+     }
+    ],
+    "obligation": [
+     {
+      "assigner": {
+       "@id": "http://example.com/owners/Ai"
+      },
+      "target": {
+       "@id": "http://example.com/activity/Ai/states/Activated"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/activity/Ai/states/Done"
+      },
+      "consequence": [
+       {
+        "action": {
+         "@id": "odrl:use"
+        },
+        "output": {
+         "@id": "http://example.com/activity/Ai/states/Failed"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   "resource_policy": {
+    "@context": [
+     "http://www.w3.org/ns/odrl.jsonld",
+     {
+      "ex": "http://example.com/ns#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "output": {
+       "@id": "http://example.com/ns#output",
+       "@type": "@id"
+      },
+      "consequence": {
+       "@id": "http://www.w3.org/ns/odrl/2/consequence",
+       "@type": "@id",
+       "@container": "@set"
+      }
+     }
+    ],
+    "@type": "Offer",
+    "@id": "http://example.com/RP_suli/consumePolicy:002",
+    "profile": {
+     "@id": "http://example.com/resourceProfile:ShareableUnlimited"
+    },
+    "permission": [
+     {
+      "@id": "http://example.com/rules/shareableUnlimitedR/R_suli",
+      "target": {
+       "@id": "http://example.com/resources/R_suli/states/NotConsumed/"
+      },
+      "assigner": {
+       "@id": "http://example.com/resources/R_suliOwner"
+      },
+      "action": [
+       {
+        "@id": "odrl:use"
+       },
+       {
+        "@id": "odrl:concurrentUse"
+       }
+      ],
+      "output": {
+       "@id": "http://example.com/resources/R_suli/states/Consumed/"
+      },
+      "duty": [
+       {
+        "target": {
+         "@id": "http://example.com/resources/R_suli/states/Consumed/"
+        },
+        "action": {
+         "@id": "odrl:use"
+        },
+        "output": {
+         "@id": "http://example.com/resources/R_suli/states/Withdrawn/"
+        },
+        "constraint": [
+         {
+          "leftOperand": {
+           "@id": "odrl:event"
+          },
+          "operator": {
+           "@id": "odrl:gt"
+          },
+          "rightOperand": {
+           "@id": "odrl:policyUsage"
+          }
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "binding_policy": {
+    "@context": [
+     "http://www.w3.org/ns/odrl.jsonld",
+     {
+      "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "dc": "http://purl.org/dc/terms/",
+      "ex": "http://example.com/ns#",
+      "output": {
+       "@id": "http://example.com/ns#output",
+       "@type": "@id"
+      }
+     }
+    ],
+    "@graph": [
+     {
+      "@type": "Request",
+      "@id": "http://example.com/IPSRiAi:003",
+      "profile": {
+       "@id": "http://example.com/activityProfile:ShareableUnlimited"
+      },
+      "permission": [
+       {
+        "@id": "http://example.com/rules/IPsulirule",
+        "target": {
+         "@id": "http://example.com/resources/R_suli/states/Consumed/"
+        },
+        "assignee": {
+         "@type": "PartyCollection",
+         "@id": "http://example.com/Groupi/Activities/states/Activated"
+        },
+        "output": {
+         "@id": "http://example.com/resources/R_suli/states/Withdrawn/"
+        },
+        "action": [
+         {
+          "@id": "odrl:use"
+         },
+         {
+          "@id": "odrl:concurrentUse"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "@type": "dc:Text",
+      "@id": "http://example.com/activity/Ai/states/Activated",
+      "odrl:partOf": {
+       "@id": "http://example.com/Groupi/Activities/states/Activated"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "activity": "e",
+   "type": "Pivot",
+   "currentState": "NotActivated",
+   "resource": "Resource e",
+   "resourceType": "NonShareableUnlimited",
+   "resource_current_state": "NotConsumed",
+   "activity_policy": {
+    "@context": [
+     "http://www.w3.org/ns/odrl.jsonld",
+     {
+      "ex": "http://example.com/ns#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "output": {
+       "@id": "http://example.com/ns#output",
+       "@type": "@id"
+      },
+      "consequence": {
+       "@id": "http://www.w3.org/ns/odrl/2/consequence",
+       "@type": "@id",
+       "@container": "@set"
+      }
+     }
+    ],
+    "@type": "Offer",
+    "@id": "http://example.com/AP_piv/ActivatedAPi",
+    "profile": {
+     "@id": "http://example.com/activityProfile:Pivot"
+    },
+    "permission": [
+     {
+      "assigner": {
+       "@id": "http://example.com/owners/Ai"
+      },
+      "target": {
+       "@id": "http://example.com/activity/Ai/states/NotActivated"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/activity/Ai/states/Activated"
+      }
+     }
+    ],
+    "obligation": [
+     {
+      "assigner": {
+       "@id": "http://example.com/owners/Ai"
+      },
+      "target": {
+       "@id": "http://example.com/activity/Ai/states/Activated"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/activity/Ai/states/Done"
+      },
+      "consequence": [
+       {
+        "action": {
+         "@id": "odrl:use"
+        },
+        "output": {
+         "@id": "http://example.com/activity/Ai/states/Failed"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   "resource_policy": {
+    "@context": [
+     "http://www.w3.org/ns/odrl.jsonld",
+     {
+      "ex": "http://example.com/ns#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "output": {
+       "@id": "http://example.com/ns#output",
+       "@type": "@id"
+      },
+      "consequence": {
+       "@id": "http://www.w3.org/ns/odrl/2/consequence",
+       "@type": "@id",
+       "@container": "@set"
+      }
+     }
+    ],
+    "@type": "Offer",
+    "@id": "http://example.com/nsRP_uli/consumePolicy:002",
+    "profile": {
+     "@id": "http://example.com/resourceProfile:NonShareableUnlimited"
+    },
+    "permission": [
+     {
+      "target": {
+       "@id": "http://example.com/resources/nsR_uli/states/NotConsumed/"
+      },
+      "assigner": {
+       "@id": "http://example.com/resources/nsR_uliOwner"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/resources/nsR_uli/states/Locked/"
+      }
+     },
+     {
+      "target": {
+       "@id": "http://example.com/resources/nsR_uli/states/Locked/"
+      },
+      "assigner": {
+       "@id": "http://example.com/resources/nsR_uliOwner"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/resources/nsR_uli/states/Consumed/"
+      },
+      "duty": [
+       {
+        "target": {
+         "@id": "http://example.com/resources/nsR_uli/states/Consumed/"
+        },
+        "action": {
+         "@id": "odrl:use"
+        },
+        "output": {
+         "@id": "http://example.com/resources/nsR_uli/states/Unlocked/"
+        },
+        "constraint": [
+         {
+          "leftOperand": {
+           "@id": "odrl:event"
+          },
+          "operator": {
+           "@id": "odrl:gt"
+          },
+          "rightOperand": {
+           "@id": "odrl:policyUsage"
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "target": {
+       "@id": "http://example.com/resources/nsR_uli/states/Unlocked/"
+      },
+      "assigner": {
+       "@id": "http://example.com/resources/nsR_uliOwner"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/resources/nsR_uli/states/Done/"
+      }
+     },
+     {
+      "target": {
+       "@id": "http://example.com/resources/nsR_uli/states/Done/"
+      },
+      "assigner": {
+       "@id": "http://example.com/resources/nsR_uliOwner"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/resources/nsR_uli/states/Withdrawn/"
+      }
+     }
+    ]
+   },
+   "binding_policy": {
+    "@context": [
+     "http://www.w3.org/ns/odrl.jsonld",
+     {
+      "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "ex": "http://example.com/ns#",
+      "output": {
+       "@id": "http://example.com/ns#output",
+       "@type": "@id"
+      }
+     }
+    ],
+    "@type": "Request",
+    "@id": "http://example.com/IPsRiAi:003",
+    "profile": {
+     "@id": "http://example.com/activityProfile:NonShareableUnlimited"
+    },
+    "permission": [
+     {
+      "@id": "http://example.com/rules/IPnsulirule",
+      "target": {
+       "@id": "http://example.com/resources/nsR_uli/states/Consumed/"
+      },
+      "assignee": {
+       "@id": "http://example.com/activity/Ai/states/Activated"
+      },
+      "output": {
+       "@id": "http://example.com/resources/nsR_uli/states/Done/"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "duty": [
+       {
+        "action": {
+         "@id": "odrl:use"
+        },
+        "rdfs:comment": "Ensure exclusive (non-shared) access during consumption",
+        "constraint": [
+         {
+          "leftOperand": {
+           "@id": "odrl:event"
+          },
+          "operator": {
+           "@id": "odrl:lt"
+          },
+          "rightOperand": {
+           "@id": "odrl:policyUsage"
+          }
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "activity": "f",
+   "type": "Retriable",
+   "currentState": "NotActivated",
+   "resource": "Resource f",
+   "resourceType": "NonShareableUnlimited",
+   "resource_current_state": "NotConsumed",
+   "activity_policy": {
+    "@context": [
+     "http://www.w3.org/ns/odrl.jsonld",
+     {
+      "ex": "http://example.com/ns#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "output": {
+       "@id": "http://example.com/ns#output",
+       "@type": "@id"
+      },
+      "consequence": {
+       "@id": "http://www.w3.org/ns/odrl/2/consequence",
+       "@type": "@id",
+       "@container": "@set"
+      }
+     }
+    ],
+    "@graph": [
+     {
+      "@type": "Offer",
+      "@id": "http://example.com/AP_ret/ActivatedAPi",
+      "profile": {
+       "@id": "http://example.com/activityProfile:Retriable"
+      },
+      "inheritFrom": {
+       "@id": "http://example.com/failureAP:005"
+      },
+      "permission": [
+       {
+        "assigner": {
+         "@id": "http://example.com/owners/Ai"
+        },
+        "target": {
+         "@id": "http://example.com/activity/Ai/states/NotActivated"
+        },
+        "action": {
+         "@id": "odrl:use"
+        },
+        "output": {
+         "@id": "http://example.com/activity/Ai/states/Activated"
+        }
+       }
+      ],
+      "obligation": [
+       {
+        "assigner": {
+         "@id": "http://example.com/owners/Ai"
+        },
+        "target": {
+         "@id": "http://example.com/activity/Ai/states/Activated"
+        },
+        "action": {
+         "@id": "odrl:use"
+        },
+        "output": {
+         "@id": "http://example.com/activity/Ai/states/Done"
+        },
+        "consequence": [
+         {
+          "@id": "http://example.com/failureAP:005"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "@type": "Offer",
+      "@id": "http://example.com/failureAP:005",
+      "profile": {
+       "@id": "http://example.com/activityProfile:Retriable:failure"
+      },
+      "obligation": [
+       {
+        "assigner": {
+         "@id": "http://example.com/owners/Ai"
+        },
+        "target": {
+         "@id": "http://example.com/activity/Ai/states/Activated"
+        },
+        "action": {
+         "@id": "odrl:use"
+        },
+        "output": {
+         "@id": "http://example.com/activity/Ai/states/Failed"
+        },
+        "constraint": [
+         {
+          "leftOperand": {
+           "@id": "odrl:count"
+          },
+          "operator": {
+           "@id": "odrl:lteq"
+          },
+          "rightOperand": {
+           "@value": "3",
+           "@type": "xsd:integer"
+          },
+          "rdfs:comment": "Replace 3 with your actual maximum retry count X"
+         }
+        ],
+        "duty": [
+         {
+          "action": {
+           "@id": "odrl:use"
+          },
+          "output": {
+           "@id": "http://example.com/activity/Ai/states/Activated"
+          },
+          "constraint": [
+           {
+            "leftOperand": {
+             "@id": "odrl:event"
+            },
+            "operator": {
+             "@id": "odrl:gt"
+            },
+            "rightOperand": {
+             "@id": "odrl:policyUsage"
+            }
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "resource_policy": {
+    "@context": [
+     "http://www.w3.org/ns/odrl.jsonld",
+     {
+      "ex": "http://example.com/ns#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "output": {
+       "@id": "http://example.com/ns#output",
+       "@type": "@id"
+      },
+      "consequence": {
+       "@id": "http://www.w3.org/ns/odrl/2/consequence",
+       "@type": "@id",
+       "@container": "@set"
+      }
+     }
+    ],
+    "@type": "Offer",
+    "@id": "http://example.com/nsRP_uli/consumePolicy:002",
+    "profile": {
+     "@id": "http://example.com/resourceProfile:NonShareableUnlimited"
+    },
+    "permission": [
+     {
+      "target": {
+       "@id": "http://example.com/resources/nsR_uli/states/NotConsumed/"
+      },
+      "assigner": {
+       "@id": "http://example.com/resources/nsR_uliOwner"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/resources/nsR_uli/states/Locked/"
+      }
+     },
+     {
+      "target": {
+       "@id": "http://example.com/resources/nsR_uli/states/Locked/"
+      },
+      "assigner": {
+       "@id": "http://example.com/resources/nsR_uliOwner"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/resources/nsR_uli/states/Consumed/"
+      },
+      "duty": [
+       {
+        "target": {
+         "@id": "http://example.com/resources/nsR_uli/states/Consumed/"
+        },
+        "action": {
+         "@id": "odrl:use"
+        },
+        "output": {
+         "@id": "http://example.com/resources/nsR_uli/states/Unlocked/"
+        },
+        "constraint": [
+         {
+          "leftOperand": {
+           "@id": "odrl:event"
+          },
+          "operator": {
+           "@id": "odrl:gt"
+          },
+          "rightOperand": {
+           "@id": "odrl:policyUsage"
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "target": {
+       "@id": "http://example.com/resources/nsR_uli/states/Unlocked/"
+      },
+      "assigner": {
+       "@id": "http://example.com/resources/nsR_uliOwner"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/resources/nsR_uli/states/Done/"
+      }
+     },
+     {
+      "target": {
+       "@id": "http://example.com/resources/nsR_uli/states/Done/"
+      },
+      "assigner": {
+       "@id": "http://example.com/resources/nsR_uliOwner"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/resources/nsR_uli/states/Withdrawn/"
+      }
+     }
+    ]
+   },
+   "binding_policy": {
+    "@context": [
+     "http://www.w3.org/ns/odrl.jsonld",
+     {
+      "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "ex": "http://example.com/ns#",
+      "output": {
+       "@id": "http://example.com/ns#output",
+       "@type": "@id"
+      }
+     }
+    ],
+    "@type": "Request",
+    "@id": "http://example.com/IPsRiAi:003",
+    "profile": {
+     "@id": "http://example.com/activityProfile:NonShareableUnlimited"
+    },
+    "permission": [
+     {
+      "@id": "http://example.com/rules/IPnsulirule",
+      "target": {
+       "@id": "http://example.com/resources/nsR_uli/states/Consumed/"
+      },
+      "assignee": {
+       "@id": "http://example.com/activity/Ai/states/Activated"
+      },
+      "output": {
+       "@id": "http://example.com/resources/nsR_uli/states/Done/"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "duty": [
+       {
+        "action": {
+         "@id": "odrl:use"
+        },
+        "rdfs:comment": "Ensure exclusive (non-shared) access during consumption",
+        "constraint": [
+         {
+          "leftOperand": {
+           "@id": "odrl:event"
+          },
+          "operator": {
+           "@id": "odrl:lt"
+          },
+          "rightOperand": {
+           "@id": "odrl:policyUsage"
+          }
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "activity": "g",
+   "type": "Retriable",
+   "currentState": "NotActivated",
+   "resource": "Resource g",
+   "resourceType": "NonShareableUnlimited",
+   "resource_current_state": "NotConsumed",
+   "activity_policy": {
+    "@context": [
+     "http://www.w3.org/ns/odrl.jsonld",
+     {
+      "ex": "http://example.com/ns#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "output": {
+       "@id": "http://example.com/ns#output",
+       "@type": "@id"
+      },
+      "consequence": {
+       "@id": "http://www.w3.org/ns/odrl/2/consequence",
+       "@type": "@id",
+       "@container": "@set"
+      }
+     }
+    ],
+    "@graph": [
+     {
+      "@type": "Offer",
+      "@id": "http://example.com/AP_ret/ActivatedAPi",
+      "profile": {
+       "@id": "http://example.com/activityProfile:Retriable"
+      },
+      "inheritFrom": {
+       "@id": "http://example.com/failureAP:005"
+      },
+      "permission": [
+       {
+        "assigner": {
+         "@id": "http://example.com/owners/Ai"
+        },
+        "target": {
+         "@id": "http://example.com/activity/Ai/states/NotActivated"
+        },
+        "action": {
+         "@id": "odrl:use"
+        },
+        "output": {
+         "@id": "http://example.com/activity/Ai/states/Activated"
+        }
+       }
+      ],
+      "obligation": [
+       {
+        "assigner": {
+         "@id": "http://example.com/owners/Ai"
+        },
+        "target": {
+         "@id": "http://example.com/activity/Ai/states/Activated"
+        },
+        "action": {
+         "@id": "odrl:use"
+        },
+        "output": {
+         "@id": "http://example.com/activity/Ai/states/Done"
+        },
+        "consequence": [
+         {
+          "@id": "http://example.com/failureAP:005"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "@type": "Offer",
+      "@id": "http://example.com/failureAP:005",
+      "profile": {
+       "@id": "http://example.com/activityProfile:Retriable:failure"
+      },
+      "obligation": [
+       {
+        "assigner": {
+         "@id": "http://example.com/owners/Ai"
+        },
+        "target": {
+         "@id": "http://example.com/activity/Ai/states/Activated"
+        },
+        "action": {
+         "@id": "odrl:use"
+        },
+        "output": {
+         "@id": "http://example.com/activity/Ai/states/Failed"
+        },
+        "constraint": [
+         {
+          "leftOperand": {
+           "@id": "odrl:count"
+          },
+          "operator": {
+           "@id": "odrl:lteq"
+          },
+          "rightOperand": {
+           "@value": "3",
+           "@type": "xsd:integer"
+          },
+          "rdfs:comment": "Replace 3 with your actual maximum retry count X"
+         }
+        ],
+        "duty": [
+         {
+          "action": {
+           "@id": "odrl:use"
+          },
+          "output": {
+           "@id": "http://example.com/activity/Ai/states/Activated"
+          },
+          "constraint": [
+           {
+            "leftOperand": {
+             "@id": "odrl:event"
+            },
+            "operator": {
+             "@id": "odrl:gt"
+            },
+            "rightOperand": {
+             "@id": "odrl:policyUsage"
+            }
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "resource_policy": {
+    "@context": [
+     "http://www.w3.org/ns/odrl.jsonld",
+     {
+      "ex": "http://example.com/ns#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "output": {
+       "@id": "http://example.com/ns#output",
+       "@type": "@id"
+      },
+      "consequence": {
+       "@id": "http://www.w3.org/ns/odrl/2/consequence",
+       "@type": "@id",
+       "@container": "@set"
+      }
+     }
+    ],
+    "@type": "Offer",
+    "@id": "http://example.com/nsRP_uli/consumePolicy:002",
+    "profile": {
+     "@id": "http://example.com/resourceProfile:NonShareableUnlimited"
+    },
+    "permission": [
+     {
+      "target": {
+       "@id": "http://example.com/resources/nsR_uli/states/NotConsumed/"
+      },
+      "assigner": {
+       "@id": "http://example.com/resources/nsR_uliOwner"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/resources/nsR_uli/states/Locked/"
+      }
+     },
+     {
+      "target": {
+       "@id": "http://example.com/resources/nsR_uli/states/Locked/"
+      },
+      "assigner": {
+       "@id": "http://example.com/resources/nsR_uliOwner"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/resources/nsR_uli/states/Consumed/"
+      },
+      "duty": [
+       {
+        "target": {
+         "@id": "http://example.com/resources/nsR_uli/states/Consumed/"
+        },
+        "action": {
+         "@id": "odrl:use"
+        },
+        "output": {
+         "@id": "http://example.com/resources/nsR_uli/states/Unlocked/"
+        },
+        "constraint": [
+         {
+          "leftOperand": {
+           "@id": "odrl:event"
+          },
+          "operator": {
+           "@id": "odrl:gt"
+          },
+          "rightOperand": {
+           "@id": "odrl:policyUsage"
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "target": {
+       "@id": "http://example.com/resources/nsR_uli/states/Unlocked/"
+      },
+      "assigner": {
+       "@id": "http://example.com/resources/nsR_uliOwner"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/resources/nsR_uli/states/Done/"
+      }
+     },
+     {
+      "target": {
+       "@id": "http://example.com/resources/nsR_uli/states/Done/"
+      },
+      "assigner": {
+       "@id": "http://example.com/resources/nsR_uliOwner"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/resources/nsR_uli/states/Withdrawn/"
+      }
+     }
+    ]
+   },
+   "binding_policy": {
+    "@context": [
+     "http://www.w3.org/ns/odrl.jsonld",
+     {
+      "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "ex": "http://example.com/ns#",
+      "output": {
+       "@id": "http://example.com/ns#output",
+       "@type": "@id"
+      }
+     }
+    ],
+    "@type": "Request",
+    "@id": "http://example.com/IPsRiAi:003",
+    "profile": {
+     "@id": "http://example.com/activityProfile:NonShareableUnlimited"
+    },
+    "permission": [
+     {
+      "@id": "http://example.com/rules/IPnsulirule",
+      "target": {
+       "@id": "http://example.com/resources/nsR_uli/states/Consumed/"
+      },
+      "assignee": {
+       "@id": "http://example.com/activity/Ai/states/Activated"
+      },
+      "output": {
+       "@id": "http://example.com/resources/nsR_uli/states/Done/"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "duty": [
+       {
+        "action": {
+         "@id": "odrl:use"
+        },
+        "rdfs:comment": "Ensure exclusive (non-shared) access during consumption",
+        "constraint": [
+         {
+          "leftOperand": {
+           "@id": "odrl:event"
+          },
+          "operator": {
+           "@id": "odrl:lt"
+          },
+          "rightOperand": {
+           "@id": "odrl:policyUsage"
+          }
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "activity": "h",
+   "type": "Retriable",
+   "currentState": "NotActivated",
+   "resource": "Resource h",
+   "resourceType": "NonShareableLimited",
+   "resource_current_state": "NotConsumed",
+   "activity_policy": {
+    "@context": [
+     "http://www.w3.org/ns/odrl.jsonld",
+     {
+      "ex": "http://example.com/ns#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "output": {
+       "@id": "http://example.com/ns#output",
+       "@type": "@id"
+      },
+      "consequence": {
+       "@id": "http://www.w3.org/ns/odrl/2/consequence",
+       "@type": "@id",
+       "@container": "@set"
+      }
+     }
+    ],
+    "@graph": [
+     {
+      "@type": "Offer",
+      "@id": "http://example.com/AP_ret/ActivatedAPi",
+      "profile": {
+       "@id": "http://example.com/activityProfile:Retriable"
+      },
+      "inheritFrom": {
+       "@id": "http://example.com/failureAP:005"
+      },
+      "permission": [
+       {
+        "assigner": {
+         "@id": "http://example.com/owners/Ai"
+        },
+        "target": {
+         "@id": "http://example.com/activity/Ai/states/NotActivated"
+        },
+        "action": {
+         "@id": "odrl:use"
+        },
+        "output": {
+         "@id": "http://example.com/activity/Ai/states/Activated"
+        }
+       }
+      ],
+      "obligation": [
+       {
+        "assigner": {
+         "@id": "http://example.com/owners/Ai"
+        },
+        "target": {
+         "@id": "http://example.com/activity/Ai/states/Activated"
+        },
+        "action": {
+         "@id": "odrl:use"
+        },
+        "output": {
+         "@id": "http://example.com/activity/Ai/states/Done"
+        },
+        "consequence": [
+         {
+          "@id": "http://example.com/failureAP:005"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "@type": "Offer",
+      "@id": "http://example.com/failureAP:005",
+      "profile": {
+       "@id": "http://example.com/activityProfile:Retriable:failure"
+      },
+      "obligation": [
+       {
+        "assigner": {
+         "@id": "http://example.com/owners/Ai"
+        },
+        "target": {
+         "@id": "http://example.com/activity/Ai/states/Activated"
+        },
+        "action": {
+         "@id": "odrl:use"
+        },
+        "output": {
+         "@id": "http://example.com/activity/Ai/states/Failed"
+        },
+        "constraint": [
+         {
+          "leftOperand": {
+           "@id": "odrl:count"
+          },
+          "operator": {
+           "@id": "odrl:lteq"
+          },
+          "rightOperand": {
+           "@value": "3",
+           "@type": "xsd:integer"
+          },
+          "rdfs:comment": "Replace 3 with your actual maximum retry count X"
+         }
+        ],
+        "duty": [
+         {
+          "action": {
+           "@id": "odrl:use"
+          },
+          "output": {
+           "@id": "http://example.com/activity/Ai/states/Activated"
+          },
+          "constraint": [
+           {
+            "leftOperand": {
+             "@id": "odrl:event"
+            },
+            "operator": {
+             "@id": "odrl:gt"
+            },
+            "rightOperand": {
+             "@id": "odrl:policyUsage"
+            }
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "resource_policy": {
+    "@context": [
+     "http://www.w3.org/ns/odrl.jsonld",
+     {
+      "ex": "http://example.com/ns#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "schema": "https://schema.org/",
+      "output": {
+       "@id": "http://example.com/ns#output",
+       "@type": "@id"
+      },
+      "consequence": {
+       "@id": "http://www.w3.org/ns/odrl/2/consequence",
+       "@type": "@id",
+       "@container": "@set"
+      }
+     }
+    ],
+    "@graph": [
+     {
+      "@type": "Offer",
+      "@id": "http://example.com/nsRP_li/consumePolicy:001",
+      "profile": {
+       "@id": "http://example.com/resourceProfile:NonShareableLimited"
+      },
+      "permission": [
+       {
+        "target": {
+         "@id": "http://example.com/resources/nsR_li/states/NotConsumed/"
+        },
+        "assigner": {
+         "@id": "http://example.com/resources/nsR_liOwner"
+        },
+        "action": {
+         "@id": "odrl:use"
+        },
+        "output": {
+         "@id": "http://example.com/resources/nsR_li/states/Locked/"
+        }
+       },
+       {
+        "@id": "http://example.com/rules/nonShareableLimitedRcc1rule",
+        "target": {
+         "@id": "http://example.com/resources/nsR_li/states/Locked/"
+        },
+        "assigner": {
+         "@id": "http://example.com/resources/nsR_liOwner"
+        },
+        "action": {
+         "@id": "odrl:use"
+        },
+        "output": {
+         "@id": "http://example.com/resources/nsR_li/states/Consumed/"
+        },
+        "duty": [
+         {
+          "target": {
+           "@id": "http://example.com/resources/nsR_li/states/Consumed/"
+          },
+          "action": {
+           "@id": "odrl:use"
+          },
+          "output": {
+           "@id": "http://example.com/resources/nsR_li/states/Unlocked/"
+          },
+          "constraint": [
+           {
+            "leftOperand": {
+             "@id": "odrl:event"
+            },
+            "operator": {
+             "@id": "odrl:gt"
+            },
+            "rightOperand": {
+             "@id": "odrl:policyUsage"
+            }
+           }
+          ]
+         },
+         {
+          "target": {
+           "@id": "http://example.com/resources/nsR_li/states/Unlocked/"
+          },
+          "assigner": {
+           "@id": "http://example.com/resources/nsR_liOwner"
+          },
+          "action": {
+           "@id": "odrl:use"
+          },
+          "output": {
+           "@id": "http://example.com/resources/nsR_li/states/Done/"
+          }
+         }
+        ]
+       }
+      ],
+      "obligation": [
+       {
+        "target": {
+         "@id": "http://example.com/resources/nsR_li/states/Done/"
+        },
+        "assigner": {
+         "@id": "http://example.com/resources/nsR_liOwner"
+        },
+        "action": {
+         "@id": "odrl:use"
+        },
+        "output": {
+         "@id": "http://example.com/resources/nsR_li/states/Withdrawn/"
+        }
+       }
+      ]
+     },
+     {
+      "@type": "odrl:Asset",
+      "@id": "http://example.com/resources/nsR_li/states/Consumed/",
+      "schema:duration": {
+       "@value": "PT1H",
+       "@type": "xsd:duration"
+      }
+     }
+    ]
+   },
+   "resource_policy2": {
+    "@context": [
+     "http://www.w3.org/ns/odrl.jsonld",
+     {
+      "ex": "http://example.com/ns#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "output": {
+       "@id": "http://example.com/ns#output",
+       "@type": "@id"
+      },
+      "consequence": {
+       "@id": "http://www.w3.org/ns/odrl/2/consequence",
+       "@type": "@id",
+       "@container": "@set"
+      }
+     }
+    ],
+    "@type": "Offer",
+    "@id": "http://example.com/nsRP_li/consumePolicy:002",
+    "profile": {
+     "@id": "http://example.com/resourceProfile:NonShareableLimited"
+    },
+    "obligation": [
+     {
+      "target": {
+       "@id": "http://example.com/resources/nsR_li/states/NotConsumed/"
+      },
+      "assigner": {
+       "@id": "http://example.com/resources/nsR_liOwner"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/resources/nsR_li/states/Withdrawn/"
+      },
+      "constraint": [
+       {
+        "leftOperand": {
+         "@id": "odrl:dateTime"
+        },
+        "operator": {
+         "@id": "odrl:lteq"
+        },
+        "rightOperand": {
+         "@value": "2026-01-01",
+         "@type": "xsd:date"
+        },
+        "rdfs:comment": "elapsed availability time of Y minutes"
+       }
+      ]
+     }
+    ]
+   },
+   "binding_policy": {
+    "@context": [
+     "http://www.w3.org/ns/odrl.jsonld",
+     {
+      "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "ex": "http://example.com/ns#",
+      "output": {
+       "@id": "http://example.com/ns#output",
+       "@type": "@id"
+      }
+     }
+    ],
+    "@type": "Request",
+    "@id": "http://example.com/IPLRiAi:002",
+    "profile": {
+     "@id": "http://example.com/activityProfile:NonShareableLimited"
+    },
+    "permission": [
+     {
+      "@id": "http://example.com/rules/IPliairule",
+      "target": {
+       "@id": "http://example.com/resources/nsR_li/states/Consumed/"
+      },
+      "assignee": {
+       "@id": "http://example.com/activity/Ai/states/Activated"
+      },
+      "output": {
+       "@id": "http://example.com/resources/nsR_li/states/Done/"
+      },
+      "action": [
+       {
+        "rdf:value": {
+         "@id": "odrl:use"
+        },
+        "refinement": [
+         {
+          "leftOperand": {
+           "@id": "odrl:elapsedTime"
+          },
+          "operator": {
+           "@id": "odrl:lteq"
+          },
+          "rightOperand": {
+           "@value": "PT5M",
+           "@type": "xsd:duration"
+          },
+          "rdfs:label": "CurrentUse",
+          "rdfs:comment": "Elapsed consumption time must not exceed X minutes"
+         }
+        ]
+       }
+      ],
+      "duty": [
+       {
+        "action": {
+         "@id": "odrl:use"
+        },
+        "rdfs:comment": "Ensure exclusive (non-shared) access during consumption",
+        "constraint": [
+         {
+          "leftOperand": {
+           "@id": "odrl:event"
+          },
+          "operator": {
+           "@id": "odrl:lt"
+          },
+          "rightOperand": {
+           "@id": "odrl:policyUsage"
+          }
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "activity": "i",
+   "type": "Pivot",
+   "currentState": "NotActivated",
+   "resource": "Resource i",
+   "resourceType": "ShareableLimited",
+   "resource_current_state": "NotConsumed",
+   "activity_policy": {
+    "@context": [
+     "http://www.w3.org/ns/odrl.jsonld",
+     {
+      "ex": "http://example.com/ns#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "output": {
+       "@id": "http://example.com/ns#output",
+       "@type": "@id"
+      },
+      "consequence": {
+       "@id": "http://www.w3.org/ns/odrl/2/consequence",
+       "@type": "@id",
+       "@container": "@set"
+      }
+     }
+    ],
+    "@type": "Offer",
+    "@id": "http://example.com/AP_piv/ActivatedAPi",
+    "profile": {
+     "@id": "http://example.com/activityProfile:Pivot"
+    },
+    "permission": [
+     {
+      "assigner": {
+       "@id": "http://example.com/owners/Ai"
+      },
+      "target": {
+       "@id": "http://example.com/activity/Ai/states/NotActivated"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/activity/Ai/states/Activated"
+      }
+     }
+    ],
+    "obligation": [
+     {
+      "assigner": {
+       "@id": "http://example.com/owners/Ai"
+      },
+      "target": {
+       "@id": "http://example.com/activity/Ai/states/Activated"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/activity/Ai/states/Done"
+      },
+      "consequence": [
+       {
+        "action": {
+         "@id": "odrl:use"
+        },
+        "output": {
+         "@id": "http://example.com/activity/Ai/states/Failed"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   "resource_policy": {
+    "@context": [
+     "http://www.w3.org/ns/odrl.jsonld",
+     {
+      "ex": "http://example.com/ns#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "schema": "https://schema.org/",
+      "output": {
+       "@id": "http://example.com/ns#output",
+       "@type": "@id"
+      },
+      "consequence": {
+       "@id": "http://www.w3.org/ns/odrl/2/consequence",
+       "@type": "@id",
+       "@container": "@set"
+      }
+     }
+    ],
+    "@graph": [
+     {
+      "@type": "Offer",
+      "@id": "http://example.com/RP_li/consumePolicy:001",
+      "profile": {
+       "@id": "http://example.com/resourceProfile:ShareableLimited"
+      },
+      "permission": [
+       {
+        "@id": "http://example.com/rules/shareableLimitedRcc1rule",
+        "target": {
+         "@id": "http://example.com/resources/R_sli/states/NotConsumed/"
+        },
+        "assigner": {
+         "@id": "http://example.com/resources/R_sliOwner"
+        },
+        "action": [
+         {
+          "@id": "odrl:use"
+         },
+         {
+          "@id": "odrl:concurrentUse"
+         }
+        ],
+        "output": {
+         "@id": "http://example.com/resources/R_sli/states/Consumed/"
+        },
+        "duty": [
+         {
+          "target": {
+           "@id": "http://example.com/resources/R_sli/states/Consumed/"
+          },
+          "action": {
+           "@id": "odrl:use"
+          },
+          "output": {
+           "@id": "http://example.com/resources/R_sli/states/Done/"
+          },
+          "constraint": [
+           {
+            "leftOperand": {
+             "@id": "odrl:event"
+            },
+            "operator": {
+             "@id": "odrl:gt"
+            },
+            "rightOperand": {
+             "@id": "odrl:policyUsage"
+            }
+           }
+          ]
+         }
+        ]
+       }
+      ],
+      "obligation": [
+       {
+        "target": {
+         "@id": "http://example.com/resources/R_sli/states/Done/"
+        },
+        "assigner": {
+         "@id": "http://example.com/resources/R_sliOwner"
+        },
+        "action": {
+         "@id": "odrl:use"
+        },
+        "output": {
+         "@id": "http://example.com/resources/R_sli/states/Withdrawn/"
+        }
+       }
+      ]
+     },
+     {
+      "@type": "odrl:Asset",
+      "@id": "http://example.com/resources/R_sli/states/Consumed/",
+      "schema:duration": {
+       "@value": "PT1H",
+       "@type": "xsd:duration"
+      }
+     }
+    ]
+   },
+   "resource_policy2": {
+    "@context": [
+     "http://www.w3.org/ns/odrl.jsonld",
+     {
+      "ex": "http://example.com/ns#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "output": {
+       "@id": "http://example.com/ns#output",
+       "@type": "@id"
+      },
+      "consequence": {
+       "@id": "http://www.w3.org/ns/odrl/2/consequence",
+       "@type": "@id",
+       "@container": "@set"
+      }
+     }
+    ],
+    "@type": "Offer",
+    "@id": "http://example.com/RP_li/consumePolicy:002",
+    "profile": {
+     "@id": "http://example.com/resourceProfile:ShareableLimited"
+    },
+    "obligation": [
+     {
+      "target": {
+       "@id": "http://example.com/resources/R_sliCycle2/states/NotConsumed/"
+      },
+      "action": [
+       {
+        "@id": "odrl:use"
+       },
+       {
+        "@id": "odrl:concurrentUse"
+       }
+      ],
+      "output": {
+       "@id": "http://example.com/resources/R_sliCycle2/states/Withdrawn/"
+      },
+      "constraint": [
+       {
+        "leftOperand": {
+         "@id": "odrl:dateTime"
+        },
+        "operator": {
+         "@id": "odrl:lteq"
+        },
+        "rightOperand": {
+         "@value": "2026-01-01",
+         "@type": "xsd:date"
+        },
+        "rdfs:comment": "elapsed availability time of Y minutes"
+       }
+      ]
+     }
+    ]
+   },
+   "binding_policy": {
+    "@context": [
+     "http://www.w3.org/ns/odrl.jsonld",
+     {
+      "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "dc": "http://purl.org/dc/terms/",
+      "ex": "http://example.com/ns#",
+      "output": {
+       "@id": "http://example.com/ns#output",
+       "@type": "@id"
+      }
+     }
+    ],
+    "@graph": [
+     {
+      "@type": "Request",
+      "@id": "http://example.com/IPLRiAi:002",
+      "profile": {
+       "@id": "http://example.com/activityProfile:ShareableLimited"
+      },
+      "permission": [
+       {
+        "@id": "http://example.com/rules/IPliairule",
+        "target": {
+         "@id": "http://example.com/resources/R_sli/states/Consumed/"
+        },
+        "assignee": {
+         "@type": "PartyCollection",
+         "@id": "http://example.com/Groupi/Activities/states/Activated"
+        },
+        "output": {
+         "@id": "http://example.com/resources/R_sli/states/Done/"
+        },
+        "action": [
+         {
+          "rdf:value": {
+           "@id": "odrl:use"
+          },
+          "refinement": [
+           {
+            "leftOperand": {
+             "@id": "odrl:elapsedTime"
+            },
+            "operator": {
+             "@id": "odrl:lteq"
+            },
+            "rightOperand": {
+             "@value": "PT5M",
+             "@type": "xsd:duration"
+            },
+            "rdfs:label": "CurrentUse",
+            "rdfs:comment": "Elapsed consumption time must not exceed X minutes"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "@type": "dc:Text",
+      "@id": "http://example.com/activity/Ai/states/Activated",
+      "odrl:partOf": {
+       "@id": "http://example.com/Groupi/Activities/states/Activated"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "activity": "j",
+   "type": "Retriable",
+   "currentState": "NotActivated",
+   "resource": "Resource j",
+   "resourceType": "ShareableLimitedBR",
+   "resource_current_state": "NotConsumed",
+   "activity_policy": {
+    "@context": [
+     "http://www.w3.org/ns/odrl.jsonld",
+     {
+      "ex": "http://example.com/ns#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "output": {
+       "@id": "http://example.com/ns#output",
+       "@type": "@id"
+      },
+      "consequence": {
+       "@id": "http://www.w3.org/ns/odrl/2/consequence",
+       "@type": "@id",
+       "@container": "@set"
+      }
+     }
+    ],
+    "@graph": [
+     {
+      "@type": "Offer",
+      "@id": "http://example.com/AP_ret/ActivatedAPi",
+      "profile": {
+       "@id": "http://example.com/activityProfile:Retriable"
+      },
+      "inheritFrom": {
+       "@id": "http://example.com/failureAP:005"
+      },
+      "permission": [
+       {
+        "assigner": {
+         "@id": "http://example.com/owners/Ai"
+        },
+        "target": {
+         "@id": "http://example.com/activity/Ai/states/NotActivated"
+        },
+        "action": {
+         "@id": "odrl:use"
+        },
+        "output": {
+         "@id": "http://example.com/activity/Ai/states/Activated"
+        }
+       }
+      ],
+      "obligation": [
+       {
+        "assigner": {
+         "@id": "http://example.com/owners/Ai"
+        },
+        "target": {
+         "@id": "http://example.com/activity/Ai/states/Activated"
+        },
+        "action": {
+         "@id": "odrl:use"
+        },
+        "output": {
+         "@id": "http://example.com/activity/Ai/states/Done"
+        },
+        "consequence": [
+         {
+          "@id": "http://example.com/failureAP:005"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "@type": "Offer",
+      "@id": "http://example.com/failureAP:005",
+      "profile": {
+       "@id": "http://example.com/activityProfile:Retriable:failure"
+      },
+      "obligation": [
+       {
+        "assigner": {
+         "@id": "http://example.com/owners/Ai"
+        },
+        "target": {
+         "@id": "http://example.com/activity/Ai/states/Activated"
+        },
+        "action": {
+         "@id": "odrl:use"
+        },
+        "output": {
+         "@id": "http://example.com/activity/Ai/states/Failed"
+        },
+        "constraint": [
+         {
+          "leftOperand": {
+           "@id": "odrl:count"
+          },
+          "operator": {
+           "@id": "odrl:lteq"
+          },
+          "rightOperand": {
+           "@value": "3",
+           "@type": "xsd:integer"
+          },
+          "rdfs:comment": "Replace 3 with your actual maximum retry count X"
+         }
+        ],
+        "duty": [
+         {
+          "action": {
+           "@id": "odrl:use"
+          },
+          "output": {
+           "@id": "http://example.com/activity/Ai/states/Activated"
+          },
+          "constraint": [
+           {
+            "leftOperand": {
+             "@id": "odrl:event"
+            },
+            "operator": {
+             "@id": "odrl:gt"
+            },
+            "rightOperand": {
+             "@id": "odrl:policyUsage"
+            }
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "resource_policy": {
+    "@context": [
+     "http://www.w3.org/ns/odrl.jsonld",
+     {
+      "ex": "http://example.com/ns#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "output": {
+       "@id": "http://example.com/ns#output",
+       "@type": "@id"
+      },
+      "consequence": {
+       "@id": "http://www.w3.org/ns/odrl/2/consequence",
+       "@type": "@id",
+       "@container": "@set"
+      }
+     }
+    ],
+    "@type": "Offer",
+    "@id": "http://example.com/RP_lri/consumePolicy:001",
+    "profile": {
+     "@id": "http://example.com/resourceProfile:ShareableLimitedBR"
+    },
+    "permission": [
+     {
+      "target": {
+       "@id": "http://example.com/resources/R_slri/states/MadeAvailable/"
+      },
+      "assigner": {
+       "@id": "http://example.com/resources/R_slriOwner"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/resources/R_slri/states/NotConsumed/"
+      }
+     },
+     {
+      "target": {
+       "@id": "http://example.com/resources/R_slri/states/NotConsumed/"
+      },
+      "assigner": {
+       "@id": "http://example.com/resources/R_slriOwner"
+      },
+      "action": [
+       {
+        "@id": "odrl:use"
+       },
+       {
+        "@id": "odrl:concurrentUse"
+       }
+      ],
+      "output": {
+       "@id": "http://example.com/resources/R_slri/states/Consumed/"
+      }
+     },
+     {
+      "target": {
+       "@id": "http://example.com/resources/R_slri/states/Consumed/"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/resources/R_slri/states/Done/"
+      }
+     }
+    ],
+    "obligation": [
+     {
+      "target": {
+       "@id": "http://example.com/resources/R_slri/states/Done/"
+      },
+      "assigner": {
+       "@id": "http://example.com/resources/R_slriOwner"
+      },
+      "action": {
+       "@id": "odrl:use"
+      },
+      "output": {
+       "@id": "http://example.com/resources/R_slri/states/MadeAvailable/"
+      },
+      "consequence": [
+       {
+        "assigner": {
+         "@id": "http://example.com/resources/R_slriOwner"
+        },
+        "action": {
+         "@id": "odrl:use"
+        },
+        "output": {
+         "@id": "http://example.com/resources/R_slri/states/Withdrawn/"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   "binding_policy": {
+    "@context": [
+     "http://www.w3.org/ns/odrl.jsonld",
+     {
+      "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "dc": "http://purl.org/dc/terms/",
+      "ex": "http://example.com/ns#",
+      "output": {
+       "@id": "http://example.com/ns#output",
+       "@type": "@id"
+      }
+     }
+    ],
+    "@graph": [
+     {
+      "@type": "Request",
+      "@id": "http://example.com/IPlrRiAi:004",
+      "profile": {
+       "@id": "http://example.com/activityProfile:ShareableLimitedBR"
+      },
+      "permission": [
+       {
+        "@id": "http://example.com/rules/IPlriairule1",
+        "target": {
+         "@id": "http://example.com/resources/R_slri/states/Consumed/"
+        },
+        "assignee": {
+         "@type": "PartyCollection",
+         "@id": "http://example.com/Groupi/Activities/states/Activated"
+        },
+        "output": {
+         "@id": "http://example.com/resources/R_slri/states/Done/"
+        },
+        "action": [
+         {
+          "rdf:value": {
+           "@id": "odrl:use"
+          },
+          "refinement": [
+           {
+            "leftOperand": {
+             "@id": "odrl:elapsedTime"
+            },
+            "operator": {
+             "@id": "odrl:lteq"
+            },
+            "rightOperand": {
+             "@value": "PT5M",
+             "@type": "xsd:duration"
+            },
+            "rdfs:comment": "Accumulated metered time periods must not exceed X minutes"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "@type": "dc:Text",
+      "@id": "http://example.com/activity/Ai/states/Activated",
+      "odrl:partOf": {
+       "@id": "http://example.com/Groupi/Activities/states/Activated"
+      }
+     }
+    ]
+   }
+  }
+ ]
+}

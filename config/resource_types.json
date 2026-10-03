@@ -1,0 +1,72 @@
+{
+  "NonShareableLimited": {
+    "states": ["NotMadeAvailable", "MadeAvailable", "NotConsumed", "Locked", "Consumed", "Released", "Unlocked", "Done", "Withdrawn"],
+    "transitions": {
+      "NotMadeAvailable": ["MadeAvailable"],
+      "MadeAvailable": ["NotConsumed"],
+      "NotConsumed": ["Locked", "Withdrawn"],
+      "Locked": ["Consumed"],
+      "Consumed": ["Unlocked"],
+      "Unlocked": ["Done"],
+      "Done": ["Withdrawn"]
+    }
+  },
+
+  "NonShareableLimitedBR": {
+    "states": ["NotMadeAvailable", "MadeAvailable", "NotConsumed", "Locked", "Consumed", "Released", "Unlocked", "Done", "Withdrawn"],
+    "transitions": {
+      "NotMadeAvailable": ["MadeAvailable"],
+      "MadeAvailable": ["NotConsumed"],
+      "NotConsumed": ["Locked"],
+      "Locked": ["Consumed"],
+      "Consumed": ["Unlocked"],
+      "Unlocked": ["Done"],
+      "Done": ["MadeAvailable","Withdrawn"]
+    }
+  },
+
+  "NonShareableUnlimited": {
+    "states": ["NotMadeAvailable", "MadeAvailable", "NotConsumed", "Locked", "Consumed", "Released", "Unlocked", "Done", "Withdrawn"],
+    "transitions": {
+      "NotMadeAvailable": ["MadeAvailable"],
+      "MadeAvailable": ["NotConsumed"],
+      "NotConsumed": ["Locked"],
+      "Locked": ["Consumed"],
+      "Consumed": ["Unlocked"],
+      "Unlocked": ["Done"],
+      "Done": ["Withdrawn"]
+    }
+  },
+  
+  "ShareableLimited": {
+    "states": ["NotMadeAvailable", "MadeAvailable", "NotConsumed", "Consumed", "Done", "Withdrawn"],
+    "transitions": {
+      "NotMadeAvailable": ["MadeAvailable"],
+      "MadeAvailable": ["NotConsumed"],
+      "NotConsumed": ["Consumed","Withdrawn"],
+      "Consumed": ["Done"],
+      "Done": ["Withdrawn"]
+    }
+  },
+
+  "ShareableLimitedBR": {
+    "states": ["NotMadeAvailable", "MadeAvailable", "NotConsumed", "Consumed", "Done", "Withdrawn"],
+    "transitions": {
+      "NotMadeAvailable": ["MadeAvailable"],
+      "MadeAvailable": ["NotConsumed"],
+      "NotConsumed": ["Consumed"],
+      "Consumed": ["Done"],
+      "Done": [ "MadeAvailable","Withdrawn"]
+    }
+  },
+
+  "ShareableUnlimited": {
+    "states": ["NotMadeAvailable", "MadeAvailable", "NotConsumed", "Consumed", "Done", "Withdrawn"],
+    "transitions": {
+      "NotMadeAvailable": ["MadeAvailable"],
+      "MadeAvailable": ["NotConsumed"],
+      "NotConsumed": ["Consumed"],
+      "Consumed": ["Withdrawn"]
+    }
+  }
+}

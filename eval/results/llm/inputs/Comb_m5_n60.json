@@ -1,0 +1,156 @@
+{
+  "inputs": {
+    "report": "Trace 1: Conformance: 1.000, Compliance: 0.991, Total: 0.997\nTrace 2: Conformance: 0.800, Compliance: 0.972, Total: 0.852\nTrace 3: Conformance: 1.000, Compliance: 0.992, Total: 0.998\nTrace 4: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 5: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 6: Conformance: 0.909, Compliance: 0.989, Total: 0.933\nTrace 7: Conformance: 0.909, Compliance: 0.978, Total: 0.930\nTrace 8: Conformance: 1.000, Compliance: 0.989, Total: 0.997\nTrace 9: Conformance: 0.889, Compliance: 1.000, Total: 0.922\nTrace 10: Conformance: 1.000, Compliance: 0.976, Total: 0.993\nOverall score: 0.9621",
+    "sequences": "Trace 1: Submit Loan Application -> Verify Income -> Check Credit Score -> Approve Loan -> Notify Applicant\nTrace 2: Submit Loan Application -> Verify Income -> Check Credit Score -> Notify Applicant -> Approve Loan\nTrace 3: Submit Loan Application -> Verify Income -> Check Credit Score -> Approve Loan -> Notify Applicant\nTrace 4: Submit Loan Application -> Check Credit Score -> Verify Income -> Reject Loan -> Notify Applicant\nTrace 5: Submit Loan Application -> Verify Income -> Check Credit Score -> Approve Loan -> Notify Applicant\nTrace 6: Submit Loan Application -> Verify Income -> Check Credit Score -> Approve Loan -> Unexpected Activity -> Notify Applicant\nTrace 7: Submit Loan Application -> Verify Income -> Unexpected Activity -> Check Credit Score -> Reject Loan -> Notify Applicant\nTrace 8: Submit Loan Application -> Check Credit Score -> Verify Income -> Approve Loan -> Notify Applicant\nTrace 9: Submit Loan Application -> Check Credit Score -> Verify Income -> Notify Applicant\nTrace 10: Submit Loan Application -> Verify Income -> Check Credit Score -> Approve Loan -> Notify Applicant",
+    "violations": "Trace 1:\n  - [ACTIVITY POLICY] activity 'Verify Income' (Retriable), resource 'Income Verification Service' (ShareableLimited), event 11: activated->unknown not authorized\nTrace 2:\n  - [BINDING POLICY] activity 'Approve Loan' (Compensatable), resource 'Loan Approval System' (NonShareableUnlimited), event 31: resource locked->consumed while activity done\n  - [BINDING POLICY] activity 'Approve Loan' (Compensatable), resource 'Loan Approval System' (NonShareableUnlimited), event 32: resource consumed->unlocked while activity done\n  - [BINDING POLICY] activity 'Approve Loan' (Compensatable), resource 'Loan Approval System' (NonShareableUnlimited), event 33: resource unlocked->done while activity done\nTrace 3:\n  - [RESOURCE POLICY] activity 'Approve Loan' (Compensatable), resource 'Loan Approval System' (NonShareableUnlimited), event 26: resource policy absent\nTrace 6:\n  - [BINDING POLICY] activity 'Verify Income' (Retriable), resource 'Income Verification Service' (ShareableLimited), event 12: resource 'Approval Board' is not the bound 'Income Verification Service'\nTrace 7:\n  - [RESOURCE POLICY] activity 'Reject Loan' (Pivot), resource 'Rejection Letter Template' (ShareableUnlimited), event 19: notconsumed->overused not authorized\n  - [RESOURCE POLICY] activity 'Reject Loan' (Pivot), resource 'Rejection Letter Template' (ShareableUnlimited), event 20: overused->withdrawn not authorized\nTrace 8:\n  - [RESOURCE POLICY] activity 'Verify Income' (Retriable), resource 'Income Verification Service' (ShareableLimited), event 10: resource policy absent\nTrace 10:\n  - [ACTIVITY POLICY] activity 'Verify Income' (Retriable), resource 'Income Verification Service' (ShareableLimited), event 8: activated->compensated not authorized\n  - [ACTIVITY POLICY] activity 'Verify Income' (Retriable), resource 'Income Verification Service' (ShareableLimited), event 9: compensated->done not authorized",
+    "activities": "Submit Loan Application, Check Credit Score, Verify Income, Approve Loan, Reject Loan, Notify Applicant",
+    "deviations": "Trace 2: 'Approve Loan' out of order\nTrace 6: unexpected 'Unexpected Activity'\nTrace 7: unexpected 'Unexpected Activity'\nTrace 9: missing 'Reject Loan'"
+  },
+  "f": [
+    1.0,
+    0.8,
+    1.0,
+    1.0,
+    1.0,
+    0.9090909090909091,
+    0.9090909090909091,
+    1.0,
+    0.8888888888888888,
+    1.0
+  ],
+  "v": [
+    0.990990990990991,
+    0.9722222222222222,
+    0.991869918699187,
+    1.0,
+    1.0,
+    0.989247311827957,
+    0.9777777777777777,
+    0.989247311827957,
+    1.0,
+    0.9761904761904762
+  ],
+  "pacc": [
+    0.9972972972972973,
+    0.8516666666666666,
+    0.9975609756097561,
+    1.0,
+    1.0,
+    0.9331378299120234,
+    0.9296969696969697,
+    0.9967741935483871,
+    0.9222222222222222,
+    0.9928571428571429
+  ],
+  "reasons": [
+    {
+      "event": 10,
+      "activity": "Verify Income",
+      "a": "activated->unknown not authorized",
+      "r": "",
+      "b": "",
+      "trace": 0
+    },
+    {
+      "event": 30,
+      "activity": "Approve Loan",
+      "a": "",
+      "r": "",
+      "b": "resource locked->consumed while activity done",
+      "trace": 1
+    },
+    {
+      "event": 31,
+      "activity": "Approve Loan",
+      "a": "",
+      "r": "",
+      "b": "resource consumed->unlocked while activity done",
+      "trace": 1
+    },
+    {
+      "event": 32,
+      "activity": "Approve Loan",
+      "a": "",
+      "r": "",
+      "b": "resource unlocked->done while activity done",
+      "trace": 1
+    },
+    {
+      "event": 25,
+      "activity": "Approve Loan",
+      "a": "",
+      "r": "resource policy absent",
+      "b": "",
+      "trace": 2
+    },
+    {
+      "event": 11,
+      "activity": "Verify Income",
+      "a": "",
+      "r": "",
+      "b": "resource 'Approval Board' is not the bound 'Income Verification Service'",
+      "trace": 5
+    },
+    {
+      "event": 18,
+      "activity": "Reject Loan",
+      "a": "",
+      "r": "notconsumed->overused not authorized",
+      "b": "",
+      "trace": 6
+    },
+    {
+      "event": 19,
+      "activity": "Reject Loan",
+      "a": "",
+      "r": "overused->withdrawn not authorized",
+      "b": "",
+      "trace": 6
+    },
+    {
+      "event": 9,
+      "activity": "Verify Income",
+      "a": "",
+      "r": "resource policy absent",
+      "b": "",
+      "trace": 7
+    },
+    {
+      "event": 7,
+      "activity": "Verify Income",
+      "a": "activated->compensated not authorized",
+      "r": "",
+      "b": "",
+      "trace": 9
+    },
+    {
+      "event": 8,
+      "activity": "Verify Income",
+      "a": "compensated->done not authorized",
+      "r": "",
+      "b": "",
+      "trace": 9
+    }
+  ],
+  "deviations": [
+    [],
+    [
+      "Approve Loan",
+      "Reject Loan"
+    ],
+    [],
+    [],
+    [],
+    [
+      "Unexpected Activity"
+    ],
+    [
+      "Unexpected Activity"
+    ],
+    [],
+    [
+      "Reject Loan"
+    ],
+    []
+  ]
+}

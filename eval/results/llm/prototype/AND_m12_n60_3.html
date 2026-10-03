@@ -1,0 +1,32 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 3: Contains an extra 'Unexpected Activity' between 'Assign Priority' and 'Create Ticket'.</li>
+    <li>Trace 5: Contains an extra 'Unexpected Activity' after 'Resolve Incident'.</li>
+    <li>Trace 7: Missing 'Assign Priority' activity before 'Resolve Incident'.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 9: [BINDING POLICY] - Activity 'Resolve Incident' used resource 'HR System' instead of the bound 'Person I', violating the binding policy.</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>Trace 9: Although the activity sequence is correct, the 'Resolve Incident' activity incorrectly used 'HR System' instead of the assigned 'Person I', resulting in a binding policy violation.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations can occur independently of sequence deviations, as seen in Trace 9, which has perfect control-flow but a binding policy violation.</li>
+    <li>Binding policy violations are the only type observed in this dataset, indicating that incorrect activity-resource assignments are the most common issue.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Model Change: Update the process model to explicitly allow or restrict 'Unexpected Activity' occurrences and enforce mandatory execution of 'Assign Priority' before 'Resolve Incident'.</li>
+    <li>Activity Policy Fix: Implement stricter lifecycle state checks to ensure all activities follow their required activation and completion paths without skipping or repeating states.</li>
+    <li>Resource Policy Fix: Enforce resource usage rules by configuring systems to prevent resource sharing or reuse beyond defined limits and ensure resources in 'Done' state are withdrawn.</li>
+    <li>Binding Policy Fix: Introduce automated validation to ensure that only the correct, pre-assigned resource is used by each activity at runtime, blocking unauthorized resource substitutions.</li>
+  </ul>
+</div>

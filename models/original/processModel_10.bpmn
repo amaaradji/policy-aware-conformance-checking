@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_10" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.43.1">
+  <bpmn:process id="Process_Recruitment" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+      </bpmn:startEvent>
+    <bpmn:task id="Activity_Screen" name="Screen CV">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+      </bpmn:task>
+    <bpmn:parallelGateway id="Gateway_AND_Split">
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+      <bpmn:outgoing>Flow_Phone</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Test</bpmn:outgoing>
+      </bpmn:parallelGateway>
+    <bpmn:task id="Activity_Phone" name="Phone Interview">
+      <bpmn:incoming>Flow_Phone</bpmn:incoming>
+      <bpmn:outgoing>Flow_Join1</bpmn:outgoing>
+      </bpmn:task>
+    <bpmn:task id="Activity_Test" name="Technical Test">
+      <bpmn:incoming>Flow_Test</bpmn:incoming>
+      <bpmn:outgoing>Flow_Join2</bpmn:outgoing>
+      </bpmn:task>
+    <bpmn:parallelGateway id="Gateway_AND_Join">
+      <bpmn:incoming>Flow_Join1</bpmn:incoming>
+      <bpmn:incoming>Flow_Join2</bpmn:incoming>
+      <bpmn:outgoing>Flow_3</bpmn:outgoing>
+      </bpmn:parallelGateway>
+    <bpmn:task id="Activity_Final" name="Final Interview">
+      <bpmn:incoming>Flow_3</bpmn:incoming>
+      <bpmn:outgoing>Flow_4</bpmn:outgoing>
+      </bpmn:task>
+    <bpmn:endEvent id="EndEvent_1">
+      <bpmn:incoming>Flow_4</bpmn:incoming>
+      </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="StartEvent_1" targetRef="Activity_Screen"/>
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="Activity_Screen" targetRef="Gateway_AND_Split"/>
+    <bpmn:sequenceFlow id="Flow_Phone" sourceRef="Gateway_AND_Split" targetRef="Activity_Phone"/>
+    <bpmn:sequenceFlow id="Flow_Test" sourceRef="Gateway_AND_Split" targetRef="Activity_Test"/>
+    <bpmn:sequenceFlow id="Flow_Join1" sourceRef="Activity_Phone" targetRef="Gateway_AND_Join"/>
+    <bpmn:sequenceFlow id="Flow_Join2" sourceRef="Activity_Test" targetRef="Gateway_AND_Join"/>
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="Gateway_AND_Join" targetRef="Activity_Final"/>
+    <bpmn:sequenceFlow id="Flow_4" sourceRef="Activity_Final" targetRef="EndEvent_1"/>
+    </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_Recruitment">
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="160" y="102" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Screen_di" bpmnElement="Activity_Screen">
+        <dc:Bounds x="250" y="80" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_AND_Split_di" bpmnElement="Gateway_AND_Split">
+        <dc:Bounds x="400" y="95" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Phone_di" bpmnElement="Activity_Phone">
+        <dc:Bounds x="500" y="40" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Test_di" bpmnElement="Activity_Test">
+        <dc:Bounds x="500" y="150" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_AND_Join_di" bpmnElement="Gateway_AND_Join">
+        <dc:Bounds x="660" y="95" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Final_di" bpmnElement="Activity_Final">
+        <dc:Bounds x="760" y="80" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1_di" bpmnElement="EndEvent_1">
+        <dc:Bounds x="920" y="102" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="196" y="120"/>
+        <di:waypoint x="250" y="120"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="350" y="120"/>
+        <di:waypoint x="400" y="120"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Phone_di" bpmnElement="Flow_Phone">
+        <di:waypoint x="425" y="95"/>
+        <di:waypoint x="425" y="60"/>
+        <di:waypoint x="500" y="60"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Join1_di" bpmnElement="Flow_Join1">
+        <di:waypoint x="600" y="60"/>
+        <di:waypoint x="685" y="60"/>
+        <di:waypoint x="685" y="95"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <di:waypoint x="710" y="120"/>
+        <di:waypoint x="760" y="120"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_4_di" bpmnElement="Flow_4">
+        <di:waypoint x="860" y="120"/>
+        <di:waypoint x="920" y="120"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Join2_di" bpmnElement="Flow_Join2">
+        <di:waypoint x="600" y="190"/>
+        <di:waypoint x="685" y="190"/>
+        <di:waypoint x="685" y="145"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Test_di" bpmnElement="Flow_Test">
+        <di:waypoint x="425" y="145"/>
+        <di:waypoint x="425" y="190"/>
+        <di:waypoint x="500" y="190"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

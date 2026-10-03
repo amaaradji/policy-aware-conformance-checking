@@ -1,0 +1,27 @@
+{
+  "Pivot": {
+    "states": ["NotActivated", "Activated", "Done", "Failed"],
+    "transitions": {
+      "NotActivated": ["Activated"],
+      "Activated": ["Done", "Failed"]
+    }
+  },
+
+  "Compensatable": {
+    "states": ["NotActivated", "Activated", "Done", "Failed", "Compensated"],
+    "transitions": {
+      "NotActivated": ["Activated"],
+      "Activated": ["Done", "Failed"],
+      "Done": ["Compensated"]
+    }
+  },
+
+  "Retriable": {
+    "states": ["NotActivated", "Activated", "Done", "Failed"],
+    "transitions": {
+      "NotActivated": ["Activated"],
+      "Activated": ["Done", "Failed"],
+      "Failed": ["Activated"]
+    }
+  }
+}

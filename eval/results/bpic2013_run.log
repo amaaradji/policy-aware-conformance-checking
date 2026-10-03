@@ -1,0 +1,54 @@
+
+[93m============================================================[0m
+
+  Welcome to [96mPM4Py[0m — Community Version
+  Open-Source License (AGPL v3)
+
+  \U0001f4da Docs & Examples:
+     https://processintelligence.solutions/pm4py
+
+  \u2696\ufe0f  [93mLicense: AGPL v3 — Commercial use requires open-sourcing your application.[0m
+     Business use without open-sourcing? A commercial license is available:
+     https://processintelligence.solutions/pm4py#licensing
+
+[93m============================================================[0m
+
+D:\GitHub\Zakaria\PolicyMining\BPIC\.venv\Lib\site-packages\pm4py\utils.py:1027: UserWarning: Install the optional requirement `r4pm` to import/export files faster. `rustxes` remains supported as a fallback.
+  warnings.warn(
+parsing log, completed traces ::   0%|          | 0/7554 [00:00<?, ?it/s]parsing log, completed traces ::   0%|          | 1/7554 [00:00<16:59,  7.41it/s]parsing log, completed traces ::   1%|1         | 101/7554 [00:00<00:14, 517.54it/s]parsing log, completed traces ::   3%|2         | 199/7554 [00:00<00:10, 709.82it/s]parsing log, completed traces ::   4%|4         | 305/7554 [00:00<00:08, 835.85it/s]parsing log, completed traces ::   5%|5         | 393/7554 [00:00<00:08, 799.60it/s]parsing log, completed traces ::   7%|6         | 502/7554 [00:00<00:07, 890.91it/s]parsing log, completed traces ::   8%|8         | 616/7554 [00:00<00:07, 966.89it/s]parsing log, completed traces ::  10%|9         | 732/7554 [00:00<00:06, 1024.62it/s]parsing log, completed traces ::  11%|#1        | 849/7554 [00:00<00:06, 1066.64it/s]parsing log, completed traces ::  13%|#3        | 987/7554 [00:01<00:05, 1161.25it/s]parsing log, completed traces ::  15%|#4        | 1105/7554 [00:01<00:05, 1081.52it/s]parsing log, completed traces ::  16%|#6        | 1235/7554 [00:01<00:05, 1142.44it/s]parsing log, completed traces ::  18%|#7        | 1358/7554 [00:01<00:05, 1160.34it/s]parsing log, completed traces ::  20%|#9        | 1494/7554 [00:01<00:04, 1216.49it/s]parsing log, completed traces ::  22%|##1       | 1639/7554 [00:01<00:04, 1280.94it/s]parsing log, completed traces ::  23%|##3       | 1773/7554 [00:01<00:04, 1184.55it/s]parsing log, completed traces ::  25%|##5       | 1918/7554 [00:01<00:04, 1256.57it/s]parsing log, completed traces ::  28%|##7       | 2095/7554 [00:01<00:03, 1401.81it/s]parsing log, completed traces ::  30%|###       | 2271/7554 [00:02<00:03, 1503.92it/s]parsing log, completed traces ::  33%|###2      | 2492/7554 [00:02<00:02, 1705.10it/s]parsing log, completed traces ::  37%|###6      | 2787/7554 [00:02<00:02, 2065.94it/s]parsing log, completed traces ::  40%|###9      | 2996/7554 [00:02<00:02, 1789.71it/s]parsing log, completed traces ::  43%|####2     | 3247/7554 [00:02<00:02, 1981.08it/s]parsing log, completed traces ::  46%|####6     | 3485/7554 [00:02<00:01, 2087.41it/s]parsing log, completed traces ::  49%|####8     | 3701/7554 [00:02<00:01, 1968.44it/s]parsing log, completed traces ::  52%|#####2    | 3930/7554 [00:02<00:01, 2054.34it/s]parsing log, completed traces ::  56%|#####5    | 4194/7554 [00:02<00:01, 2217.96it/s]parsing log, completed traces ::  59%|#####8    | 4430/7554 [00:03<00:01, 2258.22it/s]parsing log, completed traces ::  62%|######2   | 4705/7554 [00:03<00:01, 2102.30it/s]parsing log, completed traces ::  66%|######5   | 4976/7554 [00:03<00:01, 2262.61it/s]parsing log, completed traces ::  69%|######9   | 5225/7554 [00:03<00:01, 2313.01it/s]parsing log, completed traces ::  73%|#######2  | 5481/7554 [00:03<00:00, 2381.68it/s]parsing log, completed traces ::  76%|#######5  | 5723/7554 [00:03<00:00, 2379.80it/s]parsing log, completed traces ::  79%|#######9  | 5989/7554 [00:03<00:00, 2456.16it/s]parsing log, completed traces ::  83%|########2 | 6258/7554 [00:03<00:00, 2522.55it/s]parsing log, completed traces ::  87%|########6 | 6556/7554 [00:03<00:00, 2650.13it/s]parsing log, completed traces ::  90%|######### | 6823/7554 [00:04<00:00, 2245.44it/s]parsing log, completed traces ::  94%|#########4| 7138/7554 [00:04<00:00, 2482.94it/s]parsing log, completed traces ::  98%|#########7| 7398/7554 [00:04<00:00, 2513.02it/s]parsing log, completed traces :: 100%|##########| 7554/7554 [00:04<00:00, 1765.43it/s]
+D:\GitHub\Zakaria\PolicyMining\BPIC\eval\experiments\exp_bpic2013.py:48: FutureWarning: The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+  traces = {c: list(zip(g.activity, g.timestamp.dt.to_pydatetime()))
+D:\GitHub\Zakaria\PolicyMining\BPIC\.venv\Lib\site-packages\pm4py\utils.py:231: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  df[xes_constants.DEFAULT_NAME_KEY] = df[activity_key]
+D:\GitHub\Zakaria\PolicyMining\BPIC\.venv\Lib\site-packages\pm4py\utils.py:235: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  df[xes_constants.DEFAULT_TIMESTAMP_KEY] = df[timestamp_key]
+{
+  "cases": 7554,
+  "events": 65533,
+  "activities": 13,
+  "train_cases": 3777,
+  "test_cases": 3777,
+  "test_variants": 1266,
+  "lifecycle_events_checked": 293077,
+  "discovery_seconds": 0.43,
+  "policy_seconds": 2.02,
+  "alignment_seconds": 41.15,
+  "injected": 378,
+  "effective": 322,
+  "detected_effective": 322,
+  "false_alarms": 0,
+  "aligned_case_share": 1.0,
+  "alignment_workers": 6,
+  "held_out_fitness_mean": 0.9658,
+  "held_out_fitness_perfect": 0.7257,
+  "alignment_only_flags_injected": 106,
+  "mean_pacc": 0.9757
+}

@@ -1,0 +1,33 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 2: Contains an extra activity ('Unexpected Activity') not present in the BPMN model.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 5: Activity 'Notify Team' with resource 'System A' violated the Activity Policy by attempting a failed-&gt;activated transition, which is not allowed for Pivot activities.</li>
+    <li>Trace 6: Activity 'Assign Priority' with resource 'Database C' violated the Binding Policy due to a missing binding policy during resource consumption.</li>
+    <li>Trace 10: Activity 'Assign Priority' with resource 'Database C' violated the Binding Policy due to a missing binding policy during resource consumption.</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>Trace 5: Although the activity sequence is correct, the 'Notify Team' activity violated its lifecycle by retrying after failure, which is not permitted for Pivot activities.</li>
+    <li>Trace 6 and Trace 10: Both traces followed the correct activity order, but 'Assign Priority' consumed 'Database C' without a valid binding policy, breaching the binding policy rules.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations can occur independently of sequence deviations, as seen in traces with perfect conformance but compliance issues.</li>
+    <li>Binding Policy violations are the most common, appearing in two separate traces involving the same activity and resource.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Update the BPMN model to explicitly exclude or handle 'Unexpected Activity' to prevent extra activities in the process flow.</li>
+    <li>Enforce strict lifecycle transitions for Pivot activities, ensuring that once failed, they cannot be reactivated.</li>
+    <li>Review resource 'System A' and 'Database C' configurations to ensure proper enforcement of access patterns and state transitions, especially regarding exclusivity and terminal states.</li>
+    <li>Implement mandatory binding policy checks before allowing any activity to consume a resource, particularly for 'Assign Priority' and 'Database C'.</li>
+  </ul>
+</div>

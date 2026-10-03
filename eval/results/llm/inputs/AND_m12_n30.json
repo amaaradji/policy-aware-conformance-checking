@@ -1,0 +1,85 @@
+{
+  "inputs": {
+    "report": "Trace 1: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 2: Conformance: 0.909, Compliance: 1.000, Total: 0.936\nTrace 3: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 4: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 5: Conformance: 1.000, Compliance: 0.989, Total: 0.997\nTrace 6: Conformance: 1.000, Compliance: 0.991, Total: 0.997\nTrace 7: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 8: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 9: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 10: Conformance: 1.000, Compliance: 0.991, Total: 0.997\nOverall score: 0.9928",
+    "sequences": "Trace 1: Log Incident -> Notify Team -> Assign Priority -> Create Ticket -> Resolve Incident\nTrace 2: Log Incident -> Assign Priority -> Notify Team -> Create Ticket -> Resolve Incident -> Unexpected Activity\nTrace 3: Log Incident -> Notify Team -> Create Ticket -> Assign Priority -> Resolve Incident\nTrace 4: Log Incident -> Assign Priority -> Create Ticket -> Notify Team -> Resolve Incident\nTrace 5: Log Incident -> Assign Priority -> Create Ticket -> Notify Team -> Resolve Incident\nTrace 6: Log Incident -> Create Ticket -> Notify Team -> Assign Priority -> Resolve Incident\nTrace 7: Log Incident -> Create Ticket -> Notify Team -> Assign Priority -> Resolve Incident\nTrace 8: Log Incident -> Assign Priority -> Create Ticket -> Notify Team -> Resolve Incident\nTrace 9: Log Incident -> Notify Team -> Create Ticket -> Assign Priority -> Resolve Incident\nTrace 10: Log Incident -> Create Ticket -> Assign Priority -> Notify Team -> Resolve Incident",
+    "violations": "Trace 5:\n  - [ACTIVITY POLICY] activity 'Notify Team' (Pivot), resource 'System A' (NonShareableLimited), event 22: failed->activated not authorized\nTrace 6:\n  - [BINDING POLICY] activity 'Assign Priority' (Retriable), resource 'Database C' (NonShareableUnlimited), event 31: binding policy absent\nTrace 10:\n  - [BINDING POLICY] activity 'Assign Priority' (Retriable), resource 'Database C' (NonShareableUnlimited), event 22: binding policy absent",
+    "activities": "Log Incident, Notify Team, Create Ticket, Assign Priority, Resolve Incident",
+    "deviations": "Trace 2: unexpected 'Unexpected Activity'"
+  },
+  "f": [
+    1.0,
+    0.9090909090909091,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "v": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.9888888888888889,
+    0.9912280701754386,
+    1.0,
+    1.0,
+    1.0,
+    0.9912280701754386
+  ],
+  "pacc": [
+    1.0,
+    0.9363636363636364,
+    1.0,
+    1.0,
+    0.9966666666666667,
+    0.9973684210526316,
+    1.0,
+    1.0,
+    1.0,
+    0.9973684210526316
+  ],
+  "reasons": [
+    {
+      "event": 21,
+      "activity": "Notify Team",
+      "a": "failed->activated not authorized",
+      "r": "",
+      "b": "",
+      "trace": 4
+    },
+    {
+      "event": 30,
+      "activity": "Assign Priority",
+      "a": "",
+      "r": "",
+      "b": "binding policy absent",
+      "trace": 5
+    },
+    {
+      "event": 21,
+      "activity": "Assign Priority",
+      "a": "",
+      "r": "",
+      "b": "binding policy absent",
+      "trace": 9
+    }
+  ],
+  "deviations": [
+    [],
+    [
+      "Unexpected Activity"
+    ],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    []
+  ]
+}

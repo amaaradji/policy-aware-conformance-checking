@@ -1,0 +1,30 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>No traces have conformance below 1.00; all activity sequences match the BPMN model without missing, extra, or out-of-order activities.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>No policy violations were detected in any trace; all activities and resources complied with their respective policies.</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>There are no traces with conformance of 1.00 and compliance below 1.00; all traces are both perfectly conformant and compliant.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>There is no evidence of policy violations or sequence deviations in the provided traces; all traces are fully conformant and compliant.</li>
+    <li>Since no violations occurred, no violation type is present or more common than others in this dataset.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS (MANDATORY)</h3>
+  <ul>
+    <li>Regularly review and update the BPMN model to ensure it continues to reflect actual process execution and business requirements.</li>
+    <li>Maintain strict enforcement of activity lifecycle transitions to prevent future activity policy violations.</li>
+    <li>Continue monitoring resource usage patterns and enforce exclusive access, usage caps, and correct state transitions for all resources.</li>
+    <li>Ensure that only activities in the 'Activated' state are allowed to consume resources, and validate binding rules during process execution.</li>
+  </ul>
+</div>

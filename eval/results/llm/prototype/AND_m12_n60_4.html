@@ -1,0 +1,33 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 3: Contains an extra 'Unexpected Activity' not in the BPMN model.</li>
+    <li>Trace 5: Contains an extra 'Unexpected Activity' at the end, not in the BPMN model.</li>
+    <li>Trace 7: Missing 'Assign Priority' activity compared to the BPMN model.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 9: [BINDING POLICY] - Activity 'Resolve Incident' used resource 'HR System' instead of the bound 'Person I', violating the binding policy for activity-resource assignment.</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>Trace 9: Although the activity sequence matches the model, the 'Resolve Incident' activity consumed a resource ('HR System') that was not the correct bound resource ('Person I'), resulting in a binding policy violation.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations can occur independently of control-flow deviations, as shown by Trace 9, which has perfect conformance but a binding policy violation.</li>
+    <li>Control-flow issues (such as missing or extra activities) do not necessarily lead to policy violations, and vice versa.</li>
+    <li>The most common violation type in this dataset is the binding policy violation, as only this type appears in the summary.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Model Change: Update the BPMN model to explicitly allow or restrict 'Unexpected Activity' and enforce the mandatory presence of 'Assign Priority' where required.</li>
+    <li>Activity Policy Fix: Implement stricter lifecycle state checks to ensure all activities follow their defined activation and completion paths without unauthorized retries or compensations.</li>
+    <li>Resource Policy Fix: Review and enforce resource usage rules, ensuring resources are not reused after reaching a terminal 'Done' state and that usage caps are respected.</li>
+    <li>Binding Policy Fix: Enforce validation so that activities can only consume resources to which they are correctly bound at the time of activation, preventing substitution with unbound resources.</li>
+  </ul>
+</div>

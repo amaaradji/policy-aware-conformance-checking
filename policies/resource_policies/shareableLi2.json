@@ -1,0 +1,43 @@
+{
+  "@context": [
+    "http://www.w3.org/ns/odrl.jsonld",
+    {
+      "ex":   "http://example.com/ns#",
+      "xsd":  "http://www.w3.org/2001/XMLSchema#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "output": {
+        "@id":   "http://example.com/ns#output",
+        "@type": "@id"
+      },
+      "consequence": {
+        "@id":        "http://www.w3.org/ns/odrl/2/consequence",
+        "@type":      "@id",
+        "@container": "@set"
+      }
+    }
+  ],
+  "@type": "Offer",
+  "@id":   "http://example.com/RP_li/consumePolicy:002",
+  "profile": { "@id": "http://example.com/resourceProfile:ShareableLimited" },
+  "obligation": [
+    {
+      "target": { "@id": "http://example.com/resources/R_sliCycle2/states/NotConsumed/" },
+      "action": [
+        { "@id": "odrl:use" },
+        { "@id": "odrl:concurrentUse" }
+      ],
+      "output": { "@id": "http://example.com/resources/R_sliCycle2/states/Withdrawn/" },
+      "constraint": [
+        {
+          "leftOperand": { "@id": "odrl:dateTime" },
+          "operator":    { "@id": "odrl:lteq" },
+          "rightOperand": {
+            "@value": "2026-01-01",
+            "@type":  "xsd:date"
+          },
+          "rdfs:comment": "elapsed availability time of Y minutes"
+        }
+      ]
+    }
+  ]
+}

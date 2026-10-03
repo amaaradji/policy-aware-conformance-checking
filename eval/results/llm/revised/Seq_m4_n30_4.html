@@ -1,0 +1,41 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 1: Missing activity 'Add to Cart'.</li>
+    <li>Trace 8: Missing activity 'Search Products'.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 2: [Binding Policy] - Activity 'Add to Cart' used resource 'Finance Clerk' instead of the bound 'Shopping Cart Service'.</li>
+    <li>Trace 5: [Binding Policy] - Activity 'Add to Cart' completed while resource 'Shopping Cart Service' was unlocked, violating binding state rules.</li>
+    <li>Trace 7: [Activity Policy] - Activity 'Add to Cart' lacked an activity policy for 'Shopping Cart Service', violating lifecycle authorization.</li>
+    <li>Trace 8: [Activity Policy] - Activity 'Checkout' with resource 'Payment Gateway' took unauthorized transitions: notactivated->unknown and unknown->activated.</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>Trace 2: The main violation was using a resource ('Finance Clerk') not bound to the activity 'Add to Cart', breaching binding policy rules.</li>
+    <li>Trace 5: The activity 'Add to Cart' completed while its resource ('Shopping Cart Service') was unlocked, violating the binding policy for proper state management.</li>
+    <li>Trace 7: The activity 'Add to Cart' lacked an activity policy for its resource, resulting in unauthorized lifecycle transitions despite correct sequence.</li>
+    <li>Trace 8: The activity 'Checkout' with 'Payment Gateway' took unauthorized lifecycle transitions, causing compliance issues even though the sequence was valid.</li>
+    <li>Trace 5 and Trace 7 had binding and activity policy violations, respectively, without sequence deviations.</li>
+    <li>Trace 2 had a binding policy violation, but no control-flow deviation.</li>
+    <li>Trace 8 had activity policy violations, but also a sequence deviation.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations occur independently of control-flow deviations, as several traces with perfect sequence still have compliance issues.</li>
+    <li>Binding policy violations are the most common, affecting multiple traces where resource assignment or state transitions were incorrect.</li>
+    <li>Activity policy violations also appear, particularly in traces where lifecycle transitions were unauthorized, but resource policy violations are absent in this dataset.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Update the BPMN model to enforce mandatory inclusion of 'Add to Cart' and 'Search Products' in all traces to prevent missing activities.</li>
+    <li>Implement explicit lifecycle state handlers for Compensatable activities, ensuring only authorized transitions (e.g., notactivated->activated->done/failed) are possible.</li>
+    <li>Configure resource 'Shopping Cart Service' to prevent unlocking or state changes while the consuming activity is not in the 'Activated' state, enforcing proper access patterns.</li>
+    <li>Enforce strict binding rules so activities can only use their assigned resources, and ensure resource state changes are synchronized with activity completion.</li>
+  </ul>
+</div>

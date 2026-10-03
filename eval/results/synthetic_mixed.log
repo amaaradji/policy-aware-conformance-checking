@@ -1,0 +1,21 @@
+model 1 (Seq, 3 activities) done
+model 2 (AND, 4 activities) done
+model 3 (XOR, 4 activities) done
+model 4 (Seq, 4 activities) done
+model 5 (Comb, 6 activities) done
+model 6 (Comb, 6 activities) done
+model 7 (XOR, 3 activities) done
+model 8 (Seq, 3 activities) done
+model 9 (XOR, 4 activities) done
+model 10 (AND, 4 activities) done
+model 11 (XOR, 5 activities) done
+model 12 (AND, 5 activities) done
+model 13 (XOR, 6 activities) done
+model 14 (Seq, 4 activities) done
+model 15 (Comb, 6 activities) done
+model 16 (Seq, 3 activities) done
+model 17 (XOR, 3 activities) done
+model 18 (Seq, 4 activities) done
+model 19 (AND, 4 activities) done
+model 20 (XOR, 5 activities) done
+D:\GitHub\Zakaria\PolicyMining\BPIC\eval\results\synthetic_mixed_traces.csv

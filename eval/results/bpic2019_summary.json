@@ -1,0 +1,96 @@
+{
+  "cases": 251734,
+  "events": 1595923,
+  "activities": 42,
+  "categories": {
+    "2-way match": {
+      "cases": 1044,
+      "events": 5898,
+      "lifecycle_events_checked": 23592,
+      "policy_seconds": 0.17,
+      "policy_events_per_second": 139417,
+      "cases_violating": 0,
+      "discovery_seconds": 0.05,
+      "test_cases": 522,
+      "test_variants": 103,
+      "alignment_seconds": 4.66,
+      "alignment_workers": 6,
+      "unaligned": 0,
+      "aligned_case_share": 1.0
+    },
+    "3-way match, invoice after GR": {
+      "cases": 15182,
+      "events": 319233,
+      "lifecycle_events_checked": 1276932,
+      "policy_seconds": 9.85,
+      "policy_events_per_second": 129582,
+      "cases_violating": 0,
+      "discovery_seconds": 22.07,
+      "test_cases": 7591,
+      "test_variants": 2330,
+      "alignment_seconds": 1210.66,
+      "alignment_workers": 6,
+      "unaligned": 1507,
+      "aligned_case_share": 0.8015
+    },
+    "3-way match, invoice before GR": {
+      "cases": 221010,
+      "events": 1234708,
+      "lifecycle_events_checked": 4938832,
+      "policy_seconds": 37.57,
+      "policy_events_per_second": 131453,
+      "cases_violating": 654,
+      "discovery_seconds": 6.73,
+      "test_cases": 110505,
+      "test_variants": 4843,
+      "alignment_seconds": 519.71,
+      "alignment_workers": 6,
+      "unaligned": 3,
+      "aligned_case_share": 1.0
+    },
+    "Consignment": {
+      "cases": 14498,
+      "events": 36084,
+      "lifecycle_events_checked": 144336,
+      "policy_seconds": 1.12,
+      "policy_events_per_second": 129152,
+      "cases_violating": 0,
+      "discovery_seconds": 0.14,
+      "test_cases": 7249,
+      "test_variants": 188,
+      "alignment_seconds": 4.73,
+      "alignment_workers": 6,
+      "unaligned": 0,
+      "aligned_case_share": 1.0
+    }
+  },
+  "agreement": {
+    "checker": 654,
+    "independent": 654,
+    "both": 654,
+    "only_checker": 0,
+    "only_independent": 0
+  },
+  "test": {
+    "2-way match": {
+      "f": 0.9731,
+      "v": 1.0,
+      "pacc": 0.9812
+    },
+    "3-way match, invoice after GR": {
+      "f": 0.9713,
+      "v": 1.0,
+      "pacc": 0.9799
+    },
+    "3-way match, invoice before GR": {
+      "f": 0.9688,
+      "v": 1.0,
+      "pacc": 0.9782
+    },
+    "Consignment": {
+      "f": 0.9796,
+      "v": 1.0,
+      "pacc": 0.9857
+    }
+  }
+}

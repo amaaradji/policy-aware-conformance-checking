@@ -1,0 +1,9 @@
+variant,scenario,explanations_with_error
+prototype,AND_m12_n60,4
+prototype,Comb_m5_n30,2
+prototype,Comb_m5_n60,5
+prototype,Seq_m4_n30,4
+prototype,Seq_m4_n60,5
+prototype,XOR_m13_n30,2
+prototype,XOR_m13_n60,5
+revised,Seq_m4_n30,3

@@ -1,0 +1,31 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 3: Contains an extra 'Unexpected Activity' before 'Check Credit Score'.</li>
+    <li>Trace 4: Contains an extra 'Unexpected Activity' after 'Reject Loan' and before 'Notify Applicant'.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 8: [ACTIVITY POLICY] violation in activity 'Verify Income' using resource 'Income Verification Service'—transition from failed to done is not authorized.</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>Trace 8: Although the activity sequence matches the model, 'Verify Income' violated its lifecycle policy by moving from failed to done without proper authorization.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations can occur independently of sequence deviations, as shown by Trace 8, which is perfectly conformant but not fully compliant.</li>
+    <li>Activity policy violations are the most common in this dataset, with no resource or binding policy violations reported.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Model Change: Update the BPMN model to explicitly handle or restrict 'Unexpected Activity' occurrences in the process flow.</li>
+    <li>Activity Policy Fix: Enforce strict lifecycle transitions for 'Retriable' activities, ensuring failed activities cannot transition directly to done without an authorized retry.</li>
+    <li>Resource Policy Fix: Review and reinforce resource usage rules for 'Income Verification Service' to ensure compliance with shareable and limited access constraints.</li>
+    <li>Binding Policy Fix: Implement validation to ensure only activities in the 'Activated' state can consume resources, preventing unauthorized associations.</li>
+  </ul>
+</div>

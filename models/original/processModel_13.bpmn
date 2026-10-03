@@ -1,0 +1,221 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_13" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.43.1">
+  <bpmn:process id="Process_ITSupport" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+      </bpmn:startEvent>
+    <bpmn:task id="Activity_Request" name="Request Support">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+      </bpmn:task>
+    <bpmn:exclusiveGateway id="Gateway_Type" name="Issue Type?">
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+      <bpmn:outgoing>Flow_Hardware</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Software</bpmn:outgoing>
+      </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway id="Gateway_Hardware" name="Hardware Action?">
+      <bpmn:incoming>Flow_Hardware</bpmn:incoming>
+      <bpmn:outgoing>Flow_Fix</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Replace</bpmn:outgoing>
+      </bpmn:exclusiveGateway>
+    <bpmn:task id="Activity_Fix" name="Fix Hardware">
+      <bpmn:incoming>Flow_Fix</bpmn:incoming>
+      <bpmn:outgoing>Flow_1q0ebeo</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_Replace" name="Replace Hardware">
+      <bpmn:incoming>Flow_Replace</bpmn:incoming>
+      <bpmn:outgoing>Flow_01j0djf</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="Gateway_Software" name="Software Action?">
+      <bpmn:incoming>Flow_Software</bpmn:incoming>
+      <bpmn:outgoing>Flow_Install</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Update</bpmn:outgoing>
+      </bpmn:exclusiveGateway>
+    <bpmn:task id="Activity_Install" name="Install Software">
+      <bpmn:incoming>Flow_Install</bpmn:incoming>
+      <bpmn:outgoing>Flow_14mg8er</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_Update" name="Update Software">
+      <bpmn:incoming>Flow_Update</bpmn:incoming>
+      <bpmn:outgoing>Flow_1a23ofs</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_Close" name="Close Ticket">
+      <bpmn:incoming>Flow_07na8gs</bpmn:incoming>
+      <bpmn:outgoing>Flow_3</bpmn:outgoing>
+      </bpmn:task>
+    <bpmn:endEvent id="EndEvent_1">
+      <bpmn:incoming>Flow_3</bpmn:incoming>
+      </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="StartEvent_1" targetRef="Activity_Request"/>
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="Activity_Request" targetRef="Gateway_Type"/>
+    <bpmn:sequenceFlow id="Flow_Hardware" sourceRef="Gateway_Type" targetRef="Gateway_Hardware"/>
+    <bpmn:sequenceFlow id="Flow_Software" sourceRef="Gateway_Type" targetRef="Gateway_Software"/>
+    <bpmn:sequenceFlow id="Flow_Fix" sourceRef="Gateway_Hardware" targetRef="Activity_Fix"/>
+    <bpmn:sequenceFlow id="Flow_Replace" sourceRef="Gateway_Hardware" targetRef="Activity_Replace"/>
+    <bpmn:sequenceFlow id="Flow_Install" sourceRef="Gateway_Software" targetRef="Activity_Install"/>
+    <bpmn:sequenceFlow id="Flow_Update" sourceRef="Gateway_Software" targetRef="Activity_Update"/>
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="Activity_Close" targetRef="EndEvent_1"/>
+    <bpmn:exclusiveGateway id="Gateway_1u4bsed" name="hardware/software">
+      <bpmn:incoming>Flow_1jvbda7</bpmn:incoming>
+      <bpmn:incoming>Flow_0wxtllo</bpmn:incoming>
+      <bpmn:outgoing>Flow_07na8gs</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway id="Gateway_0x8kgml" name="fix/replace">
+      <bpmn:incoming>Flow_01j0djf</bpmn:incoming>
+      <bpmn:incoming>Flow_1q0ebeo</bpmn:incoming>
+      <bpmn:outgoing>Flow_0wxtllo</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway id="Gateway_1ru3fi9" name="install/update">
+      <bpmn:incoming>Flow_14mg8er</bpmn:incoming>
+      <bpmn:incoming>Flow_1a23ofs</bpmn:incoming>
+      <bpmn:outgoing>Flow_1jvbda7</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_14mg8er" sourceRef="Activity_Install" targetRef="Gateway_1ru3fi9"/>
+    <bpmn:sequenceFlow id="Flow_1a23ofs" sourceRef="Activity_Update" targetRef="Gateway_1ru3fi9"/>
+    <bpmn:sequenceFlow id="Flow_1jvbda7" sourceRef="Gateway_1ru3fi9" targetRef="Gateway_1u4bsed"/>
+    <bpmn:sequenceFlow id="Flow_07na8gs" sourceRef="Gateway_1u4bsed" targetRef="Activity_Close"/>
+    <bpmn:sequenceFlow id="Flow_01j0djf" sourceRef="Activity_Replace" targetRef="Gateway_0x8kgml"/>
+    <bpmn:sequenceFlow id="Flow_1q0ebeo" sourceRef="Activity_Fix" targetRef="Gateway_0x8kgml"/>
+    <bpmn:sequenceFlow id="Flow_0wxtllo" sourceRef="Gateway_0x8kgml" targetRef="Gateway_1u4bsed"/>
+    </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_ITSupport">
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="160" y="320" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Request_di" bpmnElement="Activity_Request">
+        <dc:Bounds x="250" y="300" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Type_di" bpmnElement="Gateway_Type" isMarkerVisible="true">
+        <dc:Bounds x="400" y="315" width="50" height="50"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="460" y="331" width="60" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Software_di" bpmnElement="Gateway_Software" isMarkerVisible="true">
+        <dc:Bounds x="500" y="400" width="50" height="50"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="560" y="418" width="83" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Install_di" bpmnElement="Activity_Install">
+        <dc:Bounds x="600" y="350" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Update_di" bpmnElement="Activity_Update">
+        <dc:Bounds x="600" y="450" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0uamn14" bpmnElement="Gateway_0x8kgml" isMarkerVisible="true">
+        <dc:Bounds x="755" y="165" width="50" height="50"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="705" y="173" width="50" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1onh1bm" bpmnElement="Gateway_1ru3fi9" isMarkerVisible="true">
+        <dc:Bounds x="745" y="400" width="50" height="50"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="797" y="443" width="65" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1ll4v3t" bpmnElement="Gateway_1u4bsed" isMarkerVisible="true">
+        <dc:Bounds x="865" y="305" width="50" height="50"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="777" y="324" width="86" height="27"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Close_di" bpmnElement="Activity_Close">
+        <dc:Bounds x="980" y="290" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1_di" bpmnElement="EndEvent_1">
+        <dc:Bounds x="1132" y="312" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Fix_di" bpmnElement="Activity_Fix">
+        <dc:Bounds x="600" y="80" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Replace_di" bpmnElement="Activity_Replace">
+        <dc:Bounds x="600" y="210" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Hardware_di" bpmnElement="Gateway_Hardware" isMarkerVisible="true">
+        <dc:Bounds x="500" y="165" width="50" height="50"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="560" y="183" width="87" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <di:waypoint x="1080" y="330"/>
+        <di:waypoint x="1132" y="330"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Install_di" bpmnElement="Flow_Install">
+        <di:waypoint x="525" y="400"/>
+        <di:waypoint x="525" y="380"/>
+        <di:waypoint x="600" y="380"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Update_di" bpmnElement="Flow_Update">
+        <di:waypoint x="525" y="450"/>
+        <di:waypoint x="525" y="490"/>
+        <di:waypoint x="600" y="490"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_14mg8er_di" bpmnElement="Flow_14mg8er">
+        <di:waypoint x="700" y="370"/>
+        <di:waypoint x="770" y="370"/>
+        <di:waypoint x="770" y="400"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1a23ofs_di" bpmnElement="Flow_1a23ofs">
+        <di:waypoint x="700" y="490"/>
+        <di:waypoint x="770" y="490"/>
+        <di:waypoint x="770" y="450"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1jvbda7_di" bpmnElement="Flow_1jvbda7">
+        <di:waypoint x="795" y="425"/>
+        <di:waypoint x="890" y="425"/>
+        <di:waypoint x="890" y="355"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Software_di" bpmnElement="Flow_Software">
+        <di:waypoint x="425" y="365"/>
+        <di:waypoint x="425" y="425"/>
+        <di:waypoint x="500" y="425"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Hardware_di" bpmnElement="Flow_Hardware">
+        <di:waypoint x="425" y="315"/>
+        <di:waypoint x="425" y="190"/>
+        <di:waypoint x="500" y="190"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_07na8gs_di" bpmnElement="Flow_07na8gs">
+        <di:waypoint x="915" y="330"/>
+        <di:waypoint x="980" y="330"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_01j0djf_di" bpmnElement="Flow_01j0djf">
+        <di:waypoint x="700" y="250"/>
+        <di:waypoint x="780" y="250"/>
+        <di:waypoint x="780" y="215"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1q0ebeo_di" bpmnElement="Flow_1q0ebeo">
+        <di:waypoint x="700" y="120"/>
+        <di:waypoint x="780" y="120"/>
+        <di:waypoint x="780" y="165"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Fix_di" bpmnElement="Flow_Fix">
+        <di:waypoint x="525" y="165"/>
+        <di:waypoint x="525" y="120"/>
+        <di:waypoint x="600" y="120"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Replace_di" bpmnElement="Flow_Replace">
+        <di:waypoint x="525" y="215"/>
+        <di:waypoint x="525" y="250"/>
+        <di:waypoint x="600" y="250"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0wxtllo_di" bpmnElement="Flow_0wxtllo">
+        <di:waypoint x="805" y="190"/>
+        <di:waypoint x="890" y="190"/>
+        <di:waypoint x="890" y="305"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="350" y="340"/>
+        <di:waypoint x="400" y="340"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="196" y="338"/>
+        <di:waypoint x="250" y="338"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

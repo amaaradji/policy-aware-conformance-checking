@@ -1,0 +1,40 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 2: Contains unexpected activity 'Unexpected Activity'.</li>
+    <li>Trace 4: 'Checkout' occurs out of order before 'Add to Cart'.</li>
+    <li>Trace 6: Missing activity 'Add to Cart'.</li>
+    <li>Trace 8: 'Add to Cart' occurs out of order before 'Search Products'.</li>
+    <li>Trace 10: 'Add to Cart' occurs out of order before 'Search Products'.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 1: [ACTIVITY POLICY] - 'Search Products' with resource 'Product Catalog Database' performed a notactivated->failed transition, which is not authorized for Retriable activities.</li>
+    <li>Trace 2: [RESOURCE POLICY] - 'Login to Account' with resource 'User Authentication Service' lacked a resource policy definition for a NonShareableLimited resource.</li>
+    <li>Trace 4: [BINDING POLICY] - 'Add to Cart' used resource 'Accounting System' instead of the bound 'Shopping Cart Service'.</li>
+    <li>Trace 7: [BINDING POLICY] - 'Add to Cart' used resource 'Accounting System' instead of the bound 'Shopping Cart Service'.</li>
+    <li>Trace 9: [BINDING POLICY] - 'Login to Account' used resource 'Accounting System' instead of the bound 'User Authentication Service'.</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>Trace 1: Although the activity sequence is correct, 'Search Products' performed an unauthorized notactivated->failed transition, violating the activity policy for Retriable activities.</li>
+    <li>Trace 9: The activity sequence is correct, but 'Login to Account' used 'Accounting System' instead of the bound 'User Authentication Service', violating the binding policy.</li>
+    <li>Trace 7: The activity sequence is correct, but 'Add to Cart' used 'Accounting System' instead of the bound 'Shopping Cart Service', violating the binding policy.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations occur both with and without control-flow deviations, indicating they are independent issues.</li>
+    <li>Binding policy violations are the most common, appearing in Traces 4, 7, and 9.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Model Change: Update the process model to enforce the correct order of 'Add to Cart' before 'Checkout' and prevent unexpected activities.</li>
+    <li>Activity Policy Fix: Ensure that Retriable activities like 'Search Products' cannot transition directly from notactivated to failed without first being activated.</li>
+    <li>Resource Policy Fix: Define and enforce resource policies for all NonShareableLimited resources, especially for 'User Authentication Service', to prevent unauthorized or undefined usage.</li>
+    <li>Binding Policy Fix: Restrict activities to use only their bound resources by validating resource assignments before execution, especially for 'Add to Cart' and 'Login to Account'.</li>
+  </ul>
+</div>

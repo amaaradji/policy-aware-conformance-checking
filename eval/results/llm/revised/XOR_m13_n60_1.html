@@ -1,0 +1,39 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 1: Unexpected activity 'Unexpected Activity' occurred.</li>
+    <li>Trace 3: 'Request Support' was executed out of order.</li>
+    <li>Trace 4: 'Request Support' was missing from the sequence.</li>
+    <li>Trace 5: Unexpected activity 'Unexpected Activity' occurred.</li>
+    <li>Trace 8: 'Close Ticket' was missing from the sequence.</li>
+    <li>Trace 9: 'Request Support' was executed out of order.</li>
+    <li>Trace 10: 'Close Ticket' was missing from the sequence.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 1: [RESOURCE POLICY] violation in activity 'Close Ticket' with resource 'Worker E'—resource policy was absent.</li>
+    <li>Trace 3: [RESOURCE POLICY] violation in activity 'Request Support' with resource 'Resource H'—resource policy was absent.</li>
+    <li>Trace 9: [RESOURCE POLICY] violation in activity 'Close Ticket' with resource 'Worker E'—resource policy was absent.</li>
+  </ul>
+  
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>No traces have perfect conformance (1.00) with compliance below 1.00; all traces with conformance = 1.00 are fully compliant.</li>
+  </ul>
+  
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations are independent of sequence deviations, as traces with correct activity order can still violate resource policies.</li>
+    <li>All observed policy violations are of the [RESOURCE POLICY] type, specifically due to absent resource policies during activity execution.</li>
+    <li>No activity or binding policy violations were detected in the provided traces.</li>
+  </ul>
+  
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Update the BPMN model to explicitly restrict or handle 'Unexpected Activity' and enforce mandatory inclusion of 'Request Support' and 'Close Ticket' in all traces.</li>
+    <li>Review lifecycle transition handling for all activities to ensure each activity instance follows only authorized transitions and constraints.</li>
+    <li>Define and enforce resource policies for all resources, especially 'Worker E' and 'Resource H', to prevent execution when the policy is absent.</li>
+    <li>Establish clear binding rules that require activities to use only their assigned resources and ensure resource state changes occur only during valid activity states.</li>
+  </ul>
+</div>

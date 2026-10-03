@@ -1,0 +1,58 @@
+{
+  "inputs": {
+    "report": "Trace 1: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 2: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 3: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 4: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 5: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 6: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 7: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 8: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 9: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 10: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nOverall score: 1.0000",
+    "sequences": "Trace 1: Login to Account -> Search Products -> Add to Cart -> Checkout\nTrace 2: Login to Account -> Search Products -> Add to Cart -> Checkout\nTrace 3: Login to Account -> Search Products -> Add to Cart -> Checkout\nTrace 4: Login to Account -> Search Products -> Add to Cart -> Checkout\nTrace 5: Login to Account -> Search Products -> Add to Cart -> Checkout\nTrace 6: Login to Account -> Search Products -> Add to Cart -> Checkout\nTrace 7: Login to Account -> Search Products -> Add to Cart -> Checkout\nTrace 8: Login to Account -> Search Products -> Add to Cart -> Checkout\nTrace 9: Login to Account -> Search Products -> Add to Cart -> Checkout\nTrace 10: Login to Account -> Search Products -> Add to Cart -> Checkout",
+    "violations": "No violations found.",
+    "activities": "Login to Account, Search Products, Add to Cart, Checkout",
+    "deviations": "No control-flow deviations."
+  },
+  "f": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "v": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "pacc": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "reasons": [],
+  "deviations": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    []
+  ]
+}

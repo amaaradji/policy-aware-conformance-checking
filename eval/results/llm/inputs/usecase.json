@@ -1,0 +1,81 @@
+{
+  "inputs": {
+    "report": "Trace 1: Conformance: 1.000, Compliance: 0.943, Total: 0.983\nTrace 2: Conformance: 0.857, Compliance: 1.000, Total: 0.900\nTrace 3: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nOverall score: 0.9610",
+    "sequences": "Trace 1: Receive Application -> Credit Check -> Risk Assessment -> Approve and Disburse\nTrace 2: Receive Application -> Credit Check -> Approve and Disburse\nTrace 3: Receive Application -> Credit Check -> Risk Assessment -> Approve and Disburse",
+    "violations": "Trace 1:\n  - [ACTIVITY POLICY] activity 'Credit Check' (Retriable), resource 'Credit Bureau API' (NonShareableLimited), event 14: activated->failed violates count lteq 3 (observed 4)\n  - [ACTIVITY POLICY] activity 'Credit Check' (Retriable), resource 'Credit Bureau API' (NonShareableLimited), event 15: failed->activated violates count lteq 3 (observed 4)\n  - [RESOURCE POLICY] activity 'Credit Check' (Retriable), resource 'Credit Bureau API' (NonShareableLimited), event 18: consumed->unlocked violates elapsedTime lteq 0:05:00 (observed 0:09:00)\n  - [BINDING POLICY] activity 'Credit Check' (Retriable), resource 'Credit Bureau API' (NonShareableLimited), event 19: consumption consumed->done violates elapsedTime lteq 0:05:00 (observed 0:10:00)\n  - [BINDING POLICY] activity 'Risk Assessment' (Compensatable), resource 'Risk Analyst' (NonShareableUnlimited), event 27: resource consumed->unlocked while activity done\n  - [BINDING POLICY] activity 'Risk Assessment' (Compensatable), resource 'Risk Analyst' (NonShareableUnlimited), event 28: resource unlocked->done while activity done",
+    "activities": "Receive Application, Credit Check, Risk Assessment, Approve and Disburse",
+    "deviations": "Trace 2: missing 'Risk Assessment'"
+  },
+  "f": [
+    1.0,
+    0.8571428571428572,
+    1.0
+  ],
+  "v": [
+    0.9428571428571428,
+    1.0,
+    1.0
+  ],
+  "pacc": [
+    0.9828571428571429,
+    0.9,
+    1.0
+  ],
+  "reasons": [
+    {
+      "event": 13,
+      "activity": "Credit Check",
+      "a": "activated->failed violates count lteq 3 (observed 4)",
+      "r": "",
+      "b": "",
+      "trace": 0
+    },
+    {
+      "event": 14,
+      "activity": "Credit Check",
+      "a": "failed->activated violates count lteq 3 (observed 4)",
+      "r": "",
+      "b": "",
+      "trace": 0
+    },
+    {
+      "event": 17,
+      "activity": "Credit Check",
+      "a": "",
+      "r": "consumed->unlocked violates elapsedTime lteq 0:05:00 (observed 0:09:00)",
+      "b": "",
+      "trace": 0
+    },
+    {
+      "event": 18,
+      "activity": "Credit Check",
+      "a": "",
+      "r": "",
+      "b": "consumption consumed->done violates elapsedTime lteq 0:05:00 (observed 0:10:00)",
+      "trace": 0
+    },
+    {
+      "event": 26,
+      "activity": "Risk Assessment",
+      "a": "",
+      "r": "",
+      "b": "resource consumed->unlocked while activity done",
+      "trace": 0
+    },
+    {
+      "event": 27,
+      "activity": "Risk Assessment",
+      "a": "",
+      "r": "",
+      "b": "resource unlocked->done while activity done",
+      "trace": 0
+    }
+  ],
+  "deviations": [
+    [],
+    [
+      "Risk Assessment"
+    ],
+    []
+  ]
+}

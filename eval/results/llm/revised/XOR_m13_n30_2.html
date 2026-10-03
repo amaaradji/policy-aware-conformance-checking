@@ -1,0 +1,37 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 1: Missing 'Close Ticket'.</li>
+    <li>Trace 3: Unexpected 'Unexpected Activity'.</li>
+    <li>Trace 4: Unexpected 'Unexpected Activity'.</li>
+    <li>Trace 6: 'Request Support' occurred out of order.</li>
+    <li>Trace 9: Unexpected 'Unexpected Activity'.</li>
+    <li>Trace 10: Unexpected 'Unexpected Activity'.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 9: [BINDING POLICY] violation—activity 'Request Support' used resource 'Resource H' (ShareableLimitedBR) after the activity was done, causing a resource state change while not activated.</li>
+    <li>Trace 9: [ACTIVITY POLICY] violation—activity 'Request Support' with resource 'Resource H' (ShareableLimitedBR) performed a done→activated transition, which is not authorized for Pivot activities.</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>No traces have conformance = 1.00 and compliance &lt; 1.00; all traces with perfect conformance are also fully compliant.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations are not strictly tied to sequence deviations, as Trace 9 has both control-flow and policy violations, but other traces with sequence issues do not show policy violations.</li>
+    <li>Binding policy and activity policy violations are observed, both occurring in Trace 9; no resource policy violations are present.</li>
+    <li>Binding policy violations are the most common among the observed policy violations in this dataset.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Model change: Update the process model to explicitly allow or handle 'Unexpected Activity' and enforce the correct order for 'Request Support' and 'Close Ticket'.</li>
+    <li>Activity policy fix: Enforce that Pivot activities like 'Request Support' cannot transition from 'done' back to 'activated' by validating lifecycle transitions in the workflow engine.</li>
+    <li>Resource policy fix: Review and restrict resource state transitions to prevent consumption changes when the activity is not in the 'Activated' state, especially for shareable resources.</li>
+    <li>Binding policy fix: Ensure that resource consumption for an activity only occurs during its 'Activated' state and that resources are released or locked according to the binding constraints before activity completion.</li>
+  </ul>
+</div>

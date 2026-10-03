@@ -1,0 +1,58 @@
+{
+  "inputs": {
+    "report": "Trace 1: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 2: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 3: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 4: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 5: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 6: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 7: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 8: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 9: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 10: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nOverall score: 1.0000",
+    "sequences": "Trace 1: Log Incident -> Assign Priority -> Create Ticket -> Notify Team -> Resolve Incident\nTrace 2: Log Incident -> Create Ticket -> Notify Team -> Assign Priority -> Resolve Incident\nTrace 3: Log Incident -> Notify Team -> Assign Priority -> Create Ticket -> Resolve Incident\nTrace 4: Log Incident -> Assign Priority -> Create Ticket -> Notify Team -> Resolve Incident\nTrace 5: Log Incident -> Notify Team -> Create Ticket -> Assign Priority -> Resolve Incident\nTrace 6: Log Incident -> Notify Team -> Assign Priority -> Create Ticket -> Resolve Incident\nTrace 7: Log Incident -> Notify Team -> Assign Priority -> Create Ticket -> Resolve Incident\nTrace 8: Log Incident -> Notify Team -> Create Ticket -> Assign Priority -> Resolve Incident\nTrace 9: Log Incident -> Notify Team -> Create Ticket -> Assign Priority -> Resolve Incident\nTrace 10: Log Incident -> Notify Team -> Create Ticket -> Assign Priority -> Resolve Incident",
+    "violations": "No violations found.",
+    "activities": "Log Incident, Notify Team, Create Ticket, Assign Priority, Resolve Incident",
+    "deviations": "No control-flow deviations."
+  },
+  "f": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "v": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "pacc": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "reasons": [],
+  "deviations": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    []
+  ]
+}

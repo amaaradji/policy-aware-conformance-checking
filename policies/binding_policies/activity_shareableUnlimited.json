@@ -1,0 +1,46 @@
+{
+  "@context": [
+    "http://www.w3.org/ns/odrl.jsonld",
+    {
+      "rdf":   "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+      "rdfs":  "http://www.w3.org/2000/01/rdf-schema#",
+      "xsd":   "http://www.w3.org/2001/XMLSchema#",
+      "dc":    "http://purl.org/dc/terms/",
+      "ex":    "http://example.com/ns#",
+      "output": {
+        "@id":   "http://example.com/ns#output",
+        "@type": "@id"
+      }
+    }
+  ],
+
+  "@graph": [
+    {
+      "@type": "Request",
+      "@id":   "http://example.com/IPSRiAi:003",
+      "profile": { "@id": "http://example.com/activityProfile:ShareableUnlimited" },
+
+      "permission": [
+        {
+          "@id":    "http://example.com/rules/IPsulirule",
+          "target": { "@id": "http://example.com/resources/R_suli/states/Consumed/" },
+          "assignee": {
+            "@type": "PartyCollection",
+            "@id":   "http://example.com/Groupi/Activities/states/Activated"
+          },
+          "output": { "@id": "http://example.com/resources/R_suli/states/Withdrawn/" },
+          "action": [
+            { "@id": "odrl:use" },
+            { "@id": "odrl:concurrentUse" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "@type":       "dc:Text",
+      "@id":         "http://example.com/activity/Ai/states/Activated",
+      "odrl:partOf": { "@id": "http://example.com/Groupi/Activities/states/Activated" }
+    }
+  ]
+}

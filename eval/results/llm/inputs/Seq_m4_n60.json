@@ -1,0 +1,109 @@
+{
+  "inputs": {
+    "report": "Trace 1: Conformance: 1.000, Compliance: 0.988, Total: 0.996\nTrace 2: Conformance: 0.889, Compliance: 0.989, Total: 0.919\nTrace 3: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 4: Conformance: 0.750, Compliance: 0.988, Total: 0.821\nTrace 5: Conformance: 1.000, Compliance: 1.000, Total: 1.000\nTrace 6: Conformance: 0.857, Compliance: 1.000, Total: 0.900\nTrace 7: Conformance: 1.000, Compliance: 0.990, Total: 0.997\nTrace 8: Conformance: 0.750, Compliance: 1.000, Total: 0.825\nTrace 9: Conformance: 1.000, Compliance: 0.986, Total: 0.996\nTrace 10: Conformance: 0.750, Compliance: 1.000, Total: 0.825\nOverall score: 0.9279",
+    "sequences": "Trace 1: Login to Account -> Search Products -> Add to Cart -> Checkout\nTrace 2: Login to Account -> Search Products -> Unexpected Activity -> Add to Cart -> Checkout\nTrace 3: Login to Account -> Search Products -> Add to Cart -> Checkout\nTrace 4: Login to Account -> Search Products -> Checkout -> Add to Cart\nTrace 5: Login to Account -> Search Products -> Add to Cart -> Checkout\nTrace 6: Login to Account -> Search Products -> Checkout\nTrace 7: Login to Account -> Search Products -> Add to Cart -> Checkout\nTrace 8: Login to Account -> Add to Cart -> Search Products -> Checkout\nTrace 9: Login to Account -> Search Products -> Add to Cart -> Checkout\nTrace 10: Login to Account -> Add to Cart -> Search Products -> Checkout",
+    "violations": "Trace 1:\n  - [ACTIVITY POLICY] activity 'Search Products' (Retriable), resource 'Product Catalog Database' (ShareableLimited), event 10: notactivated->failed not authorized\nTrace 2:\n  - [RESOURCE POLICY] activity 'Login to Account' (Pivot), resource 'User Authentication Service' (NonShareableLimited), event 7: resource policy absent\nTrace 4:\n  - [BINDING POLICY] activity 'Add to Cart' (Compensatable), resource 'Shopping Cart Service' (NonShareableLimitedBR), event 15: resource 'Accounting System' is not the bound 'Shopping Cart Service'\nTrace 7:\n  - [BINDING POLICY] activity 'Add to Cart' (Compensatable), resource 'Shopping Cart Service' (NonShareableLimitedBR), event 26: resource 'Accounting System' is not the bound 'Shopping Cart Service'\nTrace 9:\n  - [BINDING POLICY] activity 'Login to Account' (Pivot), resource 'User Authentication Service' (NonShareableLimited), event 1: resource 'Accounting System' is not the bound 'User Authentication Service'",
+    "activities": "Login to Account, Search Products, Add to Cart, Checkout",
+    "deviations": "Trace 2: unexpected 'Unexpected Activity'\nTrace 4: 'Checkout' out of order\nTrace 6: missing 'Add to Cart'\nTrace 8: 'Add to Cart' out of order\nTrace 10: 'Add to Cart' out of order"
+  },
+  "f": [
+    1.0,
+    0.8888888888888888,
+    1.0,
+    0.75,
+    1.0,
+    0.8571428571428572,
+    1.0,
+    0.75,
+    1.0,
+    0.75
+  ],
+  "v": [
+    0.9876543209876543,
+    0.9885057471264368,
+    1.0,
+    0.9876543209876543,
+    1.0,
+    1.0,
+    0.9904761904761905,
+    1.0,
+    0.9855072463768116,
+    1.0
+  ],
+  "pacc": [
+    0.9962962962962962,
+    0.9187739463601532,
+    1.0,
+    0.8212962962962962,
+    1.0,
+    0.9,
+    0.9971428571428571,
+    0.825,
+    0.9956521739130435,
+    0.825
+  ],
+  "reasons": [
+    {
+      "event": 9,
+      "activity": "Search Products",
+      "a": "notactivated->failed not authorized",
+      "r": "",
+      "b": "",
+      "trace": 0
+    },
+    {
+      "event": 6,
+      "activity": "Login to Account",
+      "a": "",
+      "r": "resource policy absent",
+      "b": "",
+      "trace": 1
+    },
+    {
+      "event": 14,
+      "activity": "Add to Cart",
+      "a": "",
+      "r": "",
+      "b": "resource 'Accounting System' is not the bound 'Shopping Cart Service'",
+      "trace": 3
+    },
+    {
+      "event": 25,
+      "activity": "Add to Cart",
+      "a": "",
+      "r": "",
+      "b": "resource 'Accounting System' is not the bound 'Shopping Cart Service'",
+      "trace": 6
+    },
+    {
+      "event": 0,
+      "activity": "Login to Account",
+      "a": "",
+      "r": "",
+      "b": "resource 'Accounting System' is not the bound 'User Authentication Service'",
+      "trace": 8
+    }
+  ],
+  "deviations": [
+    [],
+    [
+      "Unexpected Activity"
+    ],
+    [],
+    [
+      "Checkout"
+    ],
+    [],
+    [
+      "Add to Cart"
+    ],
+    [],
+    [
+      "Search Products"
+    ],
+    [],
+    [
+      "Search Products"
+    ]
+  ]
+}

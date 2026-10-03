@@ -1,0 +1,20 @@
+activity_policies/compensatable.json: notactivated->activated; done->compensated; activated->done; activated->failed
+activity_policies/pivot.json: notactivated->activated; activated->done; activated->failed
+activity_policies/retriable.json: notactivated->activated; activated->done; activated->failed [["Constraint(operand='count', op='lteq', value=3)"]]; failed->activated [["Constraint(operand='count', op='lteq', value=3)", "Constraint(operand='event', op='gt', value='policyUsage')"]]
+resource_policies/non-ShareableLi1.json: notconsumed->locked; locked->consumed; consumed->unlocked [["Constraint(operand='event', op='gt', value='policyUsage')", "Constraint(operand='elapsedTime', op='lteq', value=datetime.timedelta(seconds=3600))"]]; unlocked->done; done->withdrawn
+resource_policies/non-ShareableLi2.json: notconsumed->withdrawn [["Constraint(operand='dateTime', op='lteq', value=datetime.date(2026, 1, 1))"]]
+resource_policies/non-ShareableLr.json: madeavailable->notconsumed; notconsumed->locked; locked->consumed; consumed->unlocked [["Constraint(operand='event', op='gt', value='policyUsage')"]]; unlocked->done; done->madeavailable; done->withdrawn
+resource_policies/non-ShareableUL.json: notconsumed->locked; locked->consumed; consumed->unlocked [["Constraint(operand='event', op='gt', value='policyUsage')"]]; unlocked->done; done->withdrawn
+resource_policies/shareableLi1.json: notconsumed->consumed; consumed->done [["Constraint(operand='event', op='gt', value='policyUsage')", "Constraint(operand='elapsedTime', op='lteq', value=datetime.timedelta(seconds=3600))"]]; done->withdrawn
+resource_policies/shareableLi2.json: notconsumed->withdrawn [["Constraint(operand='dateTime', op='lteq', value=datetime.date(2026, 1, 1))"]]
+resource_policies/shareableLr.json: madeavailable->notconsumed; notconsumed->consumed; consumed->done; done->madeavailable; done->withdrawn
+resource_policies/shareableUL.json: notconsumed->consumed; consumed->withdrawn [["Constraint(operand='event', op='gt', value='policyUsage')"]]
+binding_policies/activity_noneShareableLimitedButRenewable.json: sync consumed->done while activated ["Constraint(operand='elapsedTime', op='lteq', value=datetime.timedelta(seconds=300))"]
+binding_policies/activity_noneShareableUnlimited.json: sync consumed->done while activated []
+binding_policies/activity_noneSharealeLimited.json: sync consumed->done while activated ["Constraint(operand='elapsedTime', op='lteq', value=datetime.timedelta(seconds=300))"]
+binding_policies/activity_shareableLimited.json: sync consumed->done while activated ["Constraint(operand='elapsedTime', op='lteq', value=datetime.timedelta(seconds=300))"]
+binding_policies/activity_shareableLimitedButRenewable.json: sync consumed->done while activated ["Constraint(operand='elapsedTime', op='lteq', value=datetime.timedelta(seconds=300))"]
+binding_policies/activity_shareableUnlimited.json: sync consumed->withdrawn while activated []
+clean traces: 6000; with v < 1: 0; with f < 1: 0; reasons: {}
+published-mode agreement: 171550 of 171550 events identical; examples: []
+VALID

@@ -1,0 +1,39 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 1: Missing activity 'Add to Cart'.</li>
+    <li>Trace 8: Missing activity 'Search Products'.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 2: [BINDING POLICY] - Activity 'Add to Cart' used resource 'Finance Clerk' instead of the bound 'Shopping Cart Service'.</li>
+    <li>Trace 5: [BINDING POLICY] - Activity 'Add to Cart' released resource 'Shopping Cart Service' (unlocked->done) while the activity was still marked as done.</li>
+    <li>Trace 7: [ACTIVITY POLICY] - Activity 'Add to Cart' executed without an activity policy defined for 'Shopping Cart Service'.</li>
+    <li>Trace 8: [ACTIVITY POLICY] - Activity 'Checkout' on resource 'Payment Gateway' performed unauthorized transitions: notactivated->unknown and unknown->activated.</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>Trace 2: The activity 'Add to Cart' used a resource ('Finance Clerk') that was not the bound 'Shopping Cart Service', violating the binding policy.</li>
+    <li>Trace 5: The activity 'Add to Cart' released the resource 'Shopping Cart Service' while the activity was still marked as done, breaching the binding policy.</li>
+    <li>Trace 7: The activity 'Add to Cart' was executed without an activity policy present for 'Shopping Cart Service', violating the activity policy.</li>
+    <li>Trace 5 and Trace 7 both followed the correct activity sequence but failed compliance due to policy violations.</li>
+    <li>Trace 7: No resource or binding policy violations were reported, only activity policy absence.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations occur independently of control-flow deviations, as some traces with perfect activity sequences still have policy breaches.</li>
+    <li>Binding policy violations are the most common, appearing in both Trace 2 and Trace 5.</li>
+    <li>Activity policy violations are also present but less frequent, with no resource policy violations observed in this dataset.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Model Change: Update the process model to enforce mandatory inclusion of 'Add to Cart' and 'Search Products' in all relevant traces.</li>
+    <li>Activity Policy Fix: Define and enforce explicit activity policies for all Compensatable activities, ensuring only authorized lifecycle transitions are allowed.</li>
+    <li>Resource Policy Fix: Review and configure resource state transitions to prevent premature release or unauthorized state changes during activity execution.</li>
+    <li>Binding Policy Fix: Enforce strict resource binding so that activities only use their assigned resources and ensure resource state changes align with activity states.</li>
+  </ul>
+</div>

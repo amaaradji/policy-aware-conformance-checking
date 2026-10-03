@@ -1,0 +1,32 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 3: Contains unexpected activity 'Unexpected Activity'.</li>
+    <li>Trace 5: Contains unexpected activity 'Unexpected Activity'.</li>
+    <li>Trace 7: Missing required activity 'Assign Priority'.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 9: [BINDING POLICY] - Activity 'Resolve Incident' used resource 'HR System' instead of the bound resource 'Person I', violating the binding policy for this activity-resource pair.</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>Trace 9: Although the activity sequence matches the model, 'Resolve Incident' used a resource different from its assigned binding, resulting in a binding policy violation.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations can occur independently of control-flow deviations, as shown by Trace 9, which is perfectly aligned in sequence but has a binding policy violation.</li>
+    <li>Binding policy violations are the most common in this dataset, with no activity or resource policy violations observed.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Update the process model to explicitly handle or restrict 'Unexpected Activity' and ensure 'Assign Priority' is always included where required.</li>
+    <li>Review and enforce correct lifecycle transitions for all activities, ensuring each activity only follows authorized state changes as per its policy.</li>
+    <li>Audit resource access patterns and configure resource management to prevent unauthorized sharing or state transitions during activity execution.</li>
+    <li>Strengthen binding enforcement so that activities can only use their assigned resources, and implement runtime checks to prevent resource substitution during execution.</li>
+  </ul>
+</div>

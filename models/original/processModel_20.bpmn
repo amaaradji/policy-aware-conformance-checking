@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_20" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.43.1">
+  <bpmn:process id="Process_MeetingSchedule" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+      </bpmn:startEvent>
+    <bpmn:task id="Activity_Request" name="Request Meeting">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+      </bpmn:task>
+    <bpmn:exclusiveGateway id="Gateway_Type" name="Meeting Type?">
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+      <bpmn:outgoing>Flow_InPerson</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Virtual</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Hybrid</bpmn:outgoing>
+      </bpmn:exclusiveGateway>
+    <bpmn:task id="Activity_InPerson" name="Book Room">
+      <bpmn:incoming>Flow_InPerson</bpmn:incoming>
+      <bpmn:outgoing>Flow_1hs7hco</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_Virtual" name="Setup Virtual Link">
+      <bpmn:incoming>Flow_Virtual</bpmn:incoming>
+      <bpmn:outgoing>Flow_1io9s5g</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_Hybrid" name="Setup Hybrid Setup">
+      <bpmn:incoming>Flow_Hybrid</bpmn:incoming>
+      <bpmn:outgoing>Flow_0im4gsv</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_SendInvite" name="Send Invitation">
+      <bpmn:incoming>Flow_1tg6vm7</bpmn:incoming>
+      <bpmn:outgoing>Flow_3</bpmn:outgoing>
+      </bpmn:task>
+    <bpmn:endEvent id="EndEvent_1">
+      <bpmn:incoming>Flow_3</bpmn:incoming>
+      </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="StartEvent_1" targetRef="Activity_Request"/>
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="Activity_Request" targetRef="Gateway_Type"/>
+    <bpmn:sequenceFlow id="Flow_InPerson" sourceRef="Gateway_Type" targetRef="Activity_InPerson"/>
+    <bpmn:sequenceFlow id="Flow_Virtual" sourceRef="Gateway_Type" targetRef="Activity_Virtual"/>
+    <bpmn:sequenceFlow id="Flow_Hybrid" sourceRef="Gateway_Type" targetRef="Activity_Hybrid"/>
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="Activity_SendInvite" targetRef="EndEvent_1"/>
+    <bpmn:exclusiveGateway id="Gateway_18g3zzp" name="room/link/hybrid">
+      <bpmn:incoming>Flow_1hs7hco</bpmn:incoming>
+      <bpmn:incoming>Flow_1io9s5g</bpmn:incoming>
+      <bpmn:incoming>Flow_0im4gsv</bpmn:incoming>
+      <bpmn:outgoing>Flow_1tg6vm7</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_1hs7hco" sourceRef="Activity_InPerson" targetRef="Gateway_18g3zzp"/>
+    <bpmn:sequenceFlow id="Flow_1io9s5g" sourceRef="Activity_Virtual" targetRef="Gateway_18g3zzp"/>
+    <bpmn:sequenceFlow id="Flow_1tg6vm7" sourceRef="Gateway_18g3zzp" targetRef="Activity_SendInvite"/>
+    <bpmn:sequenceFlow id="Flow_0im4gsv" sourceRef="Activity_Hybrid" targetRef="Gateway_18g3zzp"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_MeetingSchedule">
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="160" y="212" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Request_di" bpmnElement="Activity_Request">
+        <dc:Bounds x="250" y="190" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Type_di" bpmnElement="Gateway_Type" isMarkerVisible="true">
+        <dc:Bounds x="400" y="205" width="50" height="50"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="389" y="181" width="72" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Hybrid_di" bpmnElement="Activity_Hybrid">
+        <dc:Bounds x="500" y="310" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1_di" bpmnElement="EndEvent_1">
+        <dc:Bounds x="962" y="212" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_SendInvite_di" bpmnElement="Activity_SendInvite">
+        <dc:Bounds x="790" y="190" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_InPerson_di" bpmnElement="Activity_InPerson">
+        <dc:Bounds x="500" y="80" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_Virtual_di" bpmnElement="Activity_Virtual">
+        <dc:Bounds x="500" y="190" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1taqz19" bpmnElement="Gateway_18g3zzp" isMarkerVisible="true">
+        <dc:Bounds x="665" y="205" width="50" height="50"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="651" y="265" width="78" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <di:waypoint x="890" y="230"/>
+        <di:waypoint x="962" y="230"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="196" y="230"/>
+        <di:waypoint x="250" y="230"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="350" y="230"/>
+        <di:waypoint x="400" y="230"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Hybrid_di" bpmnElement="Flow_Hybrid">
+        <di:waypoint x="425" y="255"/>
+        <di:waypoint x="425" y="350"/>
+        <di:waypoint x="500" y="350"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Virtual_di" bpmnElement="Flow_Virtual">
+        <di:waypoint x="450" y="230"/>
+        <di:waypoint x="500" y="230"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_InPerson_di" bpmnElement="Flow_InPerson">
+        <di:waypoint x="425" y="205"/>
+        <di:waypoint x="425" y="120"/>
+        <di:waypoint x="500" y="120"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1hs7hco_di" bpmnElement="Flow_1hs7hco">
+        <di:waypoint x="600" y="120"/>
+        <di:waypoint x="690" y="120"/>
+        <di:waypoint x="690" y="205"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1io9s5g_di" bpmnElement="Flow_1io9s5g">
+        <di:waypoint x="600" y="230"/>
+        <di:waypoint x="665" y="230"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1tg6vm7_di" bpmnElement="Flow_1tg6vm7">
+        <di:waypoint x="715" y="230"/>
+        <di:waypoint x="790" y="230"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0im4gsv_di" bpmnElement="Flow_0im4gsv">
+        <di:waypoint x="600" y="350"/>
+        <di:waypoint x="690" y="350"/>
+        <di:waypoint x="690" y="255"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

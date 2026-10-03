@@ -1,0 +1,46 @@
+{
+  "@context": [
+    "http://www.w3.org/ns/odrl.jsonld",
+    {
+      "ex":   "http://example.com/ns#",
+      "xsd":  "http://www.w3.org/2001/XMLSchema#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "output": {
+        "@id":   "http://example.com/ns#output",
+        "@type": "@id"
+      },
+      "consequence": {
+        "@id":        "http://www.w3.org/ns/odrl/2/consequence",
+        "@type":      "@id",
+        "@container": "@set"
+      }
+    }
+  ],
+  "@type": "Offer",
+  "@id":   "http://example.com/AP_piv/ActivatedAPi",
+  "profile": { "@id": "http://example.com/activityProfile:Pivot" },
+
+  "permission": [
+    {
+      "assigner": { "@id": "http://example.com/owners/Ai" },
+      "target":   { "@id": "http://example.com/activity/Ai/states/NotActivated" },
+      "action":   { "@id": "odrl:use" },
+      "output":   { "@id": "http://example.com/activity/Ai/states/Activated" }
+    }
+  ],
+
+  "obligation": [
+    {
+      "assigner": { "@id": "http://example.com/owners/Ai" },
+      "target":   { "@id": "http://example.com/activity/Ai/states/Activated" },
+      "action":   { "@id": "odrl:use" },
+      "output":   { "@id": "http://example.com/activity/Ai/states/Done" },
+      "consequence": [
+        {
+          "action": { "@id": "odrl:use" },
+          "output": { "@id": "http://example.com/activity/Ai/states/Failed" }
+        }
+      ]
+    }
+  ]
+}

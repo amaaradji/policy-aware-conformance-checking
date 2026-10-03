@@ -1,0 +1,38 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 1: Contains an unexpected activity before 'Request Support'.</li>
+    <li>Trace 3: Starts with 'Install Software', which is not the expected initial activity, and omits 'Fix Hardware' or 'Replace Hardware'.</li>
+    <li>Trace 4: Starts with 'Install Software' and skips 'Request Support'.</li>
+    <li>Trace 5: Includes an unexpected activity after 'Fix Hardware'.</li>
+    <li>Trace 8: Ends after 'Replace Hardware' without 'Close Ticket'.</li>
+    <li>Trace 9: Starts with 'Fix Hardware' instead of 'Request Support'.</li>
+    <li>Trace 10: Ends after 'Replace Hardware' without 'Close Ticket'.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 1: [RESOURCE POLICY] - Activity 'Close Ticket' used resource 'Worker E' (NonShareableUnlimited) without enforcing the resource policy.</li>
+    <li>Trace 3: [RESOURCE POLICY] - Activity 'Request Support' used resource 'Resource H' (ShareableLimitedBR) without enforcing the resource policy.</li>
+    <li>Trace 9: [RESOURCE POLICY] - Activity 'Close Ticket' used resource 'Worker E' (NonShareableUnlimited) without enforcing the resource policy.</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>No traces have conformance = 1.00 and compliance &lt; 1.00; all perfectly conforming traces are also fully compliant.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations are not strictly correlated with sequence deviations, as some traces with control-flow issues have no policy violations and vice versa.</li>
+    <li>All observed violations are of the [RESOURCE POLICY] type, indicating resource usage rules are the most common issue in this dataset.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Model Change: Update the process model to explicitly prohibit unexpected activities and enforce mandatory start and end activities ('Request Support' as start, 'Close Ticket' as end).</li>
+    <li>Activity Policy Fix: Implement strict lifecycle state checks for all activities to ensure transitions follow the allowed state machine.</li>
+    <li>Resource Policy Fix: Enforce exclusive access for NonShareable resources and validate resource state before assignment, especially for 'Worker E' and limited resources like 'Resource H'.</li>
+    <li>Binding Policy Fix: Restrict resource consumption to only those activities that are in the 'Activated' state at the time of assignment.</li>
+  </ul>
+</div>

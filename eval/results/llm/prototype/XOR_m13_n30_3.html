@@ -1,0 +1,37 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 1: Missing 'Close Ticket' activity compared to the model.</li>
+    <li>Trace 3: Contains 'Unexpected Activity' not present in the model.</li>
+    <li>Trace 4: Contains 'Unexpected Activity' not present in the model.</li>
+    <li>Trace 6: Activities are out of order; 'Replace Hardware' occurs before 'Request Support'.</li>
+    <li>Trace 9: Contains 'Unexpected Activity' not present in the model.</li>
+    <li>Trace 10: Ends with 'Unexpected Activity' not present in the model.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 9: [BINDING POLICY] - Activity 'Request Support' with resource 'Resource H': Resource was consumed while the activity was already in 'done' state.</li>
+    <li>Trace 9: [ACTIVITY POLICY] - Activity 'Request Support' with resource 'Resource H': Activity transitioned from 'done' back to 'activated', which is not allowed for Pivot activities.</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>No traces have conformance = 1.00 and compliance &lt; 1.00; all perfectly conformant traces are also fully compliant.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations are not strictly tied to sequence deviations, as Trace 9 has both a sequence deviation and policy violations, but other traces with sequence issues do not show policy violations.</li>
+    <li>Binding policy and activity policy violations are observed, both occurring in Trace 9, with no resource policy violations present in this dataset.</li>
+    <li>Binding policy violations are as frequent as activity policy violations in the observed violations, each appearing once in Trace 9.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Update the process model to explicitly handle or restrict 'Unexpected Activity' and enforce correct activity order, especially ensuring 'Request Support' precedes all other activities.</li>
+    <li>Implement stricter lifecycle state checks for Pivot activities to prevent unauthorized transitions such as 'done' to 'activated'.</li>
+    <li>Review resource management logic to ensure resources are not consumed by activities that have already reached a terminal state.</li>
+    <li>Enforce binding rules so that only activities in the 'activated' state can consume resources, rejecting any binding attempts from activities in 'done' or other invalid states.</li>
+  </ul>
+</div>

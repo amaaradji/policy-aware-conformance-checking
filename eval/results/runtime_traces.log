@@ -1,0 +1,27 @@
+# Intel64 Family 6 Model 165 Stepping 2, GenuineIntel | 12 logical CPUs | Python 3.11.7
+Comb_m5 1000
+Comb_m5 2000
+Comb_m5 5000
+Comb_m5 10000
+Comb_m5 20000
+Seq_10_0 1000
+Seq_10_0 2000
+Seq_10_0 5000
+Seq_10_0 10000
+Seq_10_0 20000
+XOR_10_0 1000
+XOR_10_0 2000
+XOR_10_0 5000
+XOR_10_0 10000
+XOR_10_0 20000
+AND_10_0 1000
+AND_10_0 2000
+AND_10_0 5000
+AND_10_0 10000
+AND_10_0 20000
+Comb_10_0 1000
+Comb_10_0 2000
+Comb_10_0 5000
+Comb_10_0 10000
+Comb_10_0 20000
+D:\GitHub\Zakaria\PolicyMining\BPIC\eval\results\runtime_traces.csv

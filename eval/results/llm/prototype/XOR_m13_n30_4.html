@@ -1,0 +1,37 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 1: Missing 'Close Ticket' activity at the end.</li>
+    <li>Trace 3: Contains 'Unexpected Activity' not present in the model.</li>
+    <li>Trace 4: Contains 'Unexpected Activity' not present in the model.</li>
+    <li>Trace 6: 'Replace Hardware' occurs before 'Request Support', which is out of order.</li>
+    <li>Trace 9: Contains 'Unexpected Activity' not present in the model.</li>
+    <li>Trace 10: Contains 'Unexpected Activity' after 'Close Ticket', which is extra and out of order.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 9: [BINDING POLICY] - Activity 'Request Support' with resource 'Resource H': Resource was consumed while the activity was already in 'done' state.</li>
+    <li>Trace 9: [ACTIVITY POLICY] - Activity 'Request Support' with resource 'Resource H': Activity transitioned from 'done' back to 'activated', which is not allowed for Pivot activities.</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>No traces have conformance = 1.00 and compliance &lt; 1.00; all perfectly conforming traces are also fully compliant.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations are not strictly dependent on sequence deviations, as Trace 9 shows both correct and incorrect control-flow with policy violations.</li>
+    <li>Binding and activity policy violations are observed together in Trace 9, indicating that lifecycle and resource assignment errors often co-occur.</li>
+    <li>Binding policy violations are the most common among the detected issues in this dataset.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Update the process model to explicitly prohibit 'Unexpected Activity' and enforce correct activity order, especially ensuring 'Close Ticket' is always the final step.</li>
+    <li>Implement strict lifecycle state checks to prevent Pivot activities like 'Request Support' from reactivating after reaching 'done'.</li>
+    <li>Configure resource management to block resource consumption if the associated activity is not in the 'activated' state, and ensure resources cannot be reused after reaching a terminal state.</li>
+    <li>Enforce binding rules so that only activities in the 'activated' state can consume resources, rejecting any binding attempts from activities in 'done' or other terminal states.</li>
+  </ul>
+</div>

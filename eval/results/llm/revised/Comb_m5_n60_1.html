@@ -1,0 +1,42 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 2: 'Approve Loan' occurred out of order.</li>
+    <li>Trace 6: 'Unexpected Activity' was executed.</li>
+    <li>Trace 7: 'Unexpected Activity' was executed.</li>
+    <li>Trace 9: 'Reject Loan' was missing.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 1: Activity policy violation in 'Verify Income' with 'Income Verification Service'—unauthorized lifecycle transition (activated-&gt;unknown).</li>
+    <li>Trace 2: Binding policy violations in 'Approve Loan' with 'Loan Approval System'—resource state changed (locked, consumed, unlocked) while activity was done.</li>
+    <li>Trace 3: Resource policy violation in 'Approve Loan' with 'Loan Approval System'—resource policy was absent.</li>
+    <li>Trace 6: Binding policy violation in 'Verify Income'—used resource 'Approval Board' instead of bound 'Income Verification Service'.</li>
+    <li>Trace 7: Resource policy violations in 'Reject Loan' with 'Rejection Letter Template'—unauthorized transitions (notconsumed-&gt;overused, overused-&gt;withdrawn).</li>
+    <li>Trace 8: Resource policy violation in 'Verify Income' with 'Income Verification Service'—resource policy was absent.</li>
+    <li>Trace 10: Activity policy violations in 'Verify Income' with 'Income Verification Service'—unauthorized transitions (activated-&gt;compensated, compensated-&gt;done).</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>Trace 1: The 'Verify Income' activity with 'Income Verification Service' performed an unauthorized lifecycle transition, violating its activity policy.</li>
+    <li>Trace 3: The 'Approve Loan' activity with 'Loan Approval System' lacked an enforced resource policy, breaching resource policy requirements.</li>
+    <li>Trace 8: The 'Verify Income' activity with 'Income Verification Service' lacked an enforced resource policy, breaching resource policy requirements.</li>
+    <li>Trace 10: The 'Verify Income' activity with 'Income Verification Service' performed unauthorized lifecycle transitions, violating its activity policy.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations occur both with and without control-flow deviations, indicating they are independent of sequence deviations.</li>
+    <li>Resource policy violations are the most common, affecting multiple traces and activities, especially regarding absent policies and unauthorized state transitions.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Model Change: Update the process model to explicitly handle and restrict the order of 'Approve Loan' and ensure 'Reject Loan' is included where required, and remove or properly integrate 'Unexpected Activity'.</li>
+    <li>Activity Policy Fix: Review and correct lifecycle transition handlers for 'Verify Income' to only allow authorized transitions (e.g., prevent 'activated-&gt;unknown' and 'activated-&gt;compensated').</li>
+    <li>Resource Policy Fix: Define and enforce resource policies for all resources, especially 'Loan Approval System' and 'Income Verification Service', to prevent absent policies and unauthorized state transitions.</li>
+    <li>Binding Policy Fix: Ensure activities always use their bound resources and prevent resource state changes (lock, consume, unlock) while the activity is not in the correct state (e.g., not 'done').</li>
+  </ul>
+</div>

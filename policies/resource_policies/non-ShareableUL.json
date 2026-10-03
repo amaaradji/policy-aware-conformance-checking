@@ -1,0 +1,62 @@
+{
+  "@context": [
+    "http://www.w3.org/ns/odrl.jsonld",
+    {
+      "ex":   "http://example.com/ns#",
+      "xsd":  "http://www.w3.org/2001/XMLSchema#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "output": {
+        "@id":   "http://example.com/ns#output",
+        "@type": "@id"
+      },
+      "consequence": {
+        "@id":        "http://www.w3.org/ns/odrl/2/consequence",
+        "@type":      "@id",
+        "@container": "@set"
+      }
+    }
+  ],
+  "@type": "Offer",
+  "@id":   "http://example.com/nsRP_uli/consumePolicy:002",
+  "profile": { "@id": "http://example.com/resourceProfile:NonShareableUnlimited" },
+  "permission": [
+    {
+      "target":   { "@id": "http://example.com/resources/nsR_uli/states/NotConsumed/" },
+      "assigner": { "@id": "http://example.com/resources/nsR_uliOwner" },
+      "action":   { "@id": "odrl:use" },
+      "output":   { "@id": "http://example.com/resources/nsR_uli/states/Locked/" }
+    },
+    {
+      "target":   { "@id": "http://example.com/resources/nsR_uli/states/Locked/" },
+      "assigner": { "@id": "http://example.com/resources/nsR_uliOwner" },
+      "action":   { "@id": "odrl:use" },
+      "output":   { "@id": "http://example.com/resources/nsR_uli/states/Consumed/" },
+      "duty": [
+        {
+          "target": { "@id": "http://example.com/resources/nsR_uli/states/Consumed/" },
+          "action": { "@id": "odrl:use" },
+          "output": { "@id": "http://example.com/resources/nsR_uli/states/Unlocked/" },
+          "constraint": [
+            {
+              "leftOperand":  { "@id": "odrl:event" },
+              "operator":     { "@id": "odrl:gt" },
+              "rightOperand": { "@id": "odrl:policyUsage" }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "target":   { "@id": "http://example.com/resources/nsR_uli/states/Unlocked/" },
+      "assigner": { "@id": "http://example.com/resources/nsR_uliOwner" },
+      "action":   { "@id": "odrl:use" },
+      "output":   { "@id": "http://example.com/resources/nsR_uli/states/Done/" }
+    },
+    {
+      "target":   { "@id": "http://example.com/resources/nsR_uli/states/Done/" },
+      "assigner": { "@id": "http://example.com/resources/nsR_uliOwner" },
+      "action":   { "@id": "odrl:use" },
+      "output":   { "@id": "http://example.com/resources/nsR_uli/states/Withdrawn/" }
+    }
+  ]
+}

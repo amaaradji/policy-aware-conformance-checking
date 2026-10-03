@@ -1,0 +1,32 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 3: Contains unexpected activity 'Unexpected Activity'.</li>
+    <li>Trace 5: Contains unexpected activity 'Unexpected Activity'.</li>
+    <li>Trace 7: Missing activity 'Assign Priority'.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 9: [BINDING POLICY] violation—activity 'Resolve Incident' used resource 'HR System' instead of the bound 'Person I'.</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>Trace 9: The activity sequence matches the model, but 'Resolve Incident' violated the binding policy by using 'HR System' instead of the assigned 'Person I'.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations are independent of sequence deviations, as Trace 9 shows a binding policy violation despite perfect control-flow conformance.</li>
+    <li>Binding policy violations are the most common in this dataset, as only one policy violation is reported and it is of this type.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Update the BPMN model to explicitly allow or restrict 'Unexpected Activity' and enforce mandatory execution of 'Assign Priority'.</li>
+    <li>Implement stricter lifecycle transition checks for activities, ensuring only authorized transitions are permitted and constraints are enforced.</li>
+    <li>Configure resource management to prevent unauthorized state transitions and enforce proper locking and usage caps for shareable resources.</li>
+    <li>Enforce activity-resource assignment rules so that 'Resolve Incident' can only use the resource bound to it, rejecting attempts to use unassigned resources.</li>
+  </ul>
+</div>

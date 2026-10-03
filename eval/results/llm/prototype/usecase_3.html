@@ -1,0 +1,32 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 2 has conformance &lt; 1.00 due to the missing 'Risk Assessment' activity in the sequence.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 1: Activity Policy violation—'Credit Check' with 'Credit Bureau API' exceeded allowed retry count (more than 3 retries).</li>
+    <li>Trace 1: Resource Policy violation—'Credit Check' with 'Credit Bureau API' exceeded allowed resource usage time (over 5 minutes).</li>
+    <li>Trace 1: Binding Policy violation—'Credit Check' and 'Risk Assessment' activities with their respective resources had invalid activity-resource state transitions (resource unlocked or done while activity was done, and elapsed time exceeded).</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>Trace 1 has perfect conformance but is not fully compliant because 'Credit Check' exceeded the allowed retry count and resource usage time, and there were invalid activity-resource state transitions.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations can occur independently of sequence deviations, as seen in Trace 1, which followed the correct activity order but still violated multiple policies.</li>
+    <li>Activity Policy violations are the most common, particularly related to exceeding retry limits for retriable activities.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Update the process model to explicitly require 'Risk Assessment' before 'Approve and Disburse' to prevent missing activities.</li>
+    <li>Enforce strict retry counters in the implementation of 'Credit Check' to prevent exceeding the allowed number of retries.</li>
+    <li>Configure the 'Credit Bureau API' resource to automatically lock or reject requests that exceed the allowed usage time or retry cap, and ensure it transitions to 'Withdrawn' after 'Done'.</li>
+    <li>Implement validation to ensure resources are only consumed by activities in the 'Activated' state and prevent state transitions when the activity is already 'Done'.</li>
+  </ul>
+</div>

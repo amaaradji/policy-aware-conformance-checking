@@ -1,0 +1,85 @@
+{
+  "traces": [
+    {
+      "case": "T1",
+      "events": 35,
+      "evaluations": 105,
+      "f": 1.0,
+      "v": 0.9428571428571428,
+      "pacc": 0.9828571428571429,
+      "v_nosync": 0.9714285714285714,
+      "v_reduced": 1.0
+    },
+    {
+      "case": "T2",
+      "events": 19,
+      "evaluations": 57,
+      "f": 0.8571428571428572,
+      "v": 1.0,
+      "pacc": 0.9,
+      "v_nosync": 1.0,
+      "v_reduced": 1.0
+    },
+    {
+      "case": "T3",
+      "events": 27,
+      "evaluations": 81,
+      "f": 1.0,
+      "v": 1.0,
+      "pacc": 1.0,
+      "v_nosync": 1.0,
+      "v_reduced": 1.0
+    }
+  ],
+  "failed_evaluations": [
+    {
+      "event": 13,
+      "activity": "Credit Check",
+      "a": "activated->failed violates count lteq 3 (observed 4)",
+      "r": "",
+      "b": "",
+      "case": "T1"
+    },
+    {
+      "event": 14,
+      "activity": "Credit Check",
+      "a": "failed->activated violates count lteq 3 (observed 4)",
+      "r": "",
+      "b": "",
+      "case": "T1"
+    },
+    {
+      "event": 17,
+      "activity": "Credit Check",
+      "a": "",
+      "r": "consumed->unlocked violates elapsedTime lteq 0:05:00 (observed 0:09:00)",
+      "b": "",
+      "case": "T1"
+    },
+    {
+      "event": 18,
+      "activity": "Credit Check",
+      "a": "",
+      "r": "",
+      "b": "consumption consumed->done violates elapsedTime lteq 0:05:00 (observed 0:10:00)",
+      "case": "T1"
+    },
+    {
+      "event": 26,
+      "activity": "Risk Assessment",
+      "a": "",
+      "r": "",
+      "b": "resource consumed->unlocked while activity done",
+      "case": "T1"
+    },
+    {
+      "event": 27,
+      "activity": "Risk Assessment",
+      "a": "",
+      "r": "",
+      "b": "resource unlocked->done while activity done",
+      "case": "T1"
+    }
+  ],
+  "log_pacc": 0.960952380952381
+}

@@ -1,0 +1,36 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 1: Missing 'Close Ticket' activity compared to the model.</li>
+    <li>Trace 3: Contains 'Unexpected Activity' and omits 'Fix Hardware', deviating from the model.</li>
+    <li>Trace 4: Contains 'Unexpected Activity' and omits 'Fix Hardware', deviating from the model.</li>
+    <li>Trace 6: 'Replace Hardware' occurs before 'Request Support', which is out of order.</li>
+    <li>Trace 9: Contains 'Unexpected Activity' after 'Update Software', not present in the model.</li>
+    <li>Trace 10: Contains 'Unexpected Activity' after 'Close Ticket', not present in the model.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 9: [BINDING POLICY] - Activity 'Request Support' with resource 'Resource H': Resource was consumed while the activity was already done.</li>
+    <li>Trace 9: [ACTIVITY POLICY] - Activity 'Request Support' with resource 'Resource H': Activity transitioned from 'done' back to 'activated', which is not allowed for Pivot activities.</li>
+  </ul>
+
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>No traces have conformance = 1.00 and compliance &lt; 1.00; all perfectly conforming traces are also fully compliant.</li>
+  </ul>
+
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations are not strictly tied to sequence deviations, as Trace 9 shows both a sequence deviation and policy violations, while other traces with sequence issues do not have policy violations.</li>
+    <li>Among the violation types, activity and binding policy violations are observed, with no resource policy violations present in this dataset.</li>
+  </ul>
+
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Update the process model to explicitly handle or restrict 'Unexpected Activity' occurrences and enforce correct activity order, especially before 'Close Ticket'.</li>
+    <li>Enforce strict lifecycle transitions for Pivot activities to prevent reactivation after reaching the 'done' state.</li>
+    <li>Review resource state management to ensure resources are not reused or consumed after their terminal state, even though no resource policy violations were detected in this report.</li>
+    <li>Implement validation to ensure resources are only consumed when the associated activity is in the 'Activated' state, preventing binding policy violations.</li>
+  </ul>
+</div>

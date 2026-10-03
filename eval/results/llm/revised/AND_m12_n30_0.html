@@ -1,0 +1,34 @@
+<div>
+  <h3>1. PROBLEMATIC TRACES - TWO CATEGORIES</h3>
+  <h4>A. Control-Flow Issues</h4>
+  <ul>
+    <li>Trace 2 contains an unexpected activity: 'Unexpected Activity', which is not part of the BPMN model sequence.</li>
+  </ul>
+  <h4>B. Policy Violations</h4>
+  <ul>
+    <li>Trace 5: Activity 'Notify Team' with resource 'System A' (NonShareableLimited) violated the activity policy by taking a failed->activated transition that is not authorized for Pivot activities.</li>
+    <li>Trace 6: Activity 'Assign Priority' with resource 'Database C' (NonShareableUnlimited) violated the binding policy due to absence of a binding policy during consumption.</li>
+    <li>Trace 10: Activity 'Assign Priority' with resource 'Database C' (NonShareableUnlimited) violated the binding policy due to absence of a binding policy during consumption.</li>
+  </ul>
+  
+  <h3>2. PERFECT-CONFORMANCE BUT NON-COMPLIANT TRACES</h3>
+  <ul>
+    <li>Trace 5: Although the activity sequence matches the model, the activity 'Notify Team' violated its lifecycle policy by attempting a failed->activated transition not allowed for Pivot activities.</li>
+    <li>Trace 6 and Trace 10: Both traces followed the correct activity sequence, but 'Assign Priority' used 'Database C' without an active binding policy, breaching the assignment rules.</li>
+  </ul>
+  
+  <h3>3. CORRELATION ANALYSIS</h3>
+  <ul>
+    <li>Policy violations are independent of sequence deviations; traces can have perfect conformance but still violate resource or binding policies.</li>
+    <li>Binding policy violations are the most common, occurring in Trace 6 and Trace 10 for the same activity-resource pair.</li>
+    <li>Control-flow deviations and policy violations do not necessarily overlap, as seen in Trace 2 (sequence issue) versus Traces 5, 6, and 10 (policy issues).</li>
+  </ul>
+  
+  <h3>4. RECOMMENDATIONS</h3>
+  <ul>
+    <li>Update the BPMN model to explicitly exclude or handle 'Unexpected Activity' to prevent sequence deviations.</li>
+    <li>Revise the lifecycle management for 'Notify Team' to prevent unauthorized failed->activated transitions for Pivot activities.</li>
+    <li>Enforce resource access controls for 'System A' and 'Database C', ensuring transitions and usage adhere to their policy constraints and state requirements.</li>
+    <li>Implement mandatory binding policies for all activity-resource assignments, especially for 'Assign Priority' with 'Database C', to ensure proper consumption and state tracking.</li>
+  </ul>
+</div>
