@@ -1,4 +1,4 @@
-"""Detection results (RQ1) from the synthetic experiments.
+"""Detection results from the synthetic experiments.
 
 Per-type design: for every violation type, the share of traces flagged (v < 1) by the full
 policy pathway, without synchronization, with the published prototype's reduced semantics, and

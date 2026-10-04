@@ -1,4 +1,4 @@
-"""Process models for the scalability analysis (RQ3).
+"""Process models for the scalability analysis.
 
 Process trees are drawn with the PTandLogGenerator (Jouck and Depaire) as implemented in pm4py,
 per structural category (operator probabilities below; no loops, OR, silent, or duplicate

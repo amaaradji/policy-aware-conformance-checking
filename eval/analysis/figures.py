@@ -1,8 +1,8 @@
 """Figures of the revised manuscript (vector PDF, grayscale, sized for the two-column layout).
 
-fig_detection.pdf  share of traces flagged per injected violation type (RQ1)
-fig_weights.pdf    Kendall tau versus alpha, and the distribution of crossing weights (RQ2)
-fig_runtime.pdf    execution time versus model size, versus number of traces, and speedup (RQ3)
+fig_detection.pdf  share of traces flagged per injected violation type
+fig_weights.pdf    Kendall tau versus alpha, and the distribution of crossing weights
+fig_runtime.pdf    execution time versus model size, versus number of traces, and speedup
 Output folder: eval/figures (copied to PolicyLog/Figure for the manuscript).
 """
 import sys

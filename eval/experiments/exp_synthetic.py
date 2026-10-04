@@ -1,4 +1,4 @@
-"""Detection on synthetic logs (RQ1) and scores for the weight analysis (RQ2).
+"""Detection on synthetic logs and scores for the weight analysis.
 
 Design "mixed": for every model, seed, and noise level, one observed log in which a fraction
 `noise` of the traces receives one policy violation (the six types and weights of

@@ -1,4 +1,4 @@
-"""LLM faithfulness (RQ4): errors, omissions, stability, and cost per prompt variant.
+"""LLM faithfulness: errors, omissions, stability, and cost per prompt variant.
 
 An error is a claim the checked log does not support: a trace placed in the wrong section, a
 non-existent or clean trace, an activity named in a control-flow claim that is not involved in

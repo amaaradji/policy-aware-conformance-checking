@@ -1,4 +1,4 @@
-"""Execution time (RQ3): medians and spread of the policy and control-flow pathways.
+"""Execution time: medians and spread of the policy and control-flow pathways.
 
 Reads eval/results/runtime_<part>.csv (whichever exist) and writes eval/results/tables/runtime_*.csv:
 per-measurement medians and interquartile ranges by part and grouping, the policy share of the

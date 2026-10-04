@@ -1,4 +1,4 @@
-"""Weight sensitivity (RQ2) on the mixed-design synthetic logs.
+"""Weight sensitivity on the mixed-design synthetic logs.
 
 Per log (model, seed, noise > 0), with PACC_alpha = alpha f + (1 - alpha) v:
 - Kendall tau-b between the trace rankings at alpha and at the default 0.7;

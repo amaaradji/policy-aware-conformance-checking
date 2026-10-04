@@ -47,14 +47,14 @@ Run from the repository root with the virtual environment's Python.
 |--------|---------|--------|
 | Equivalence of the evaluation code with the published scripts | `eval/experiments/validate_equivalence.py` | console |
 | Checker validation (no false alarms; published verdicts reproduced) | `eval/experiments/validate_checker.py` | console |
-| RQ1 and RQ2, mixed design | `eval/experiments/exp_synthetic.py --design mixed` | `results/synthetic_mixed_traces.csv` |
-| RQ1, per violation type | `eval/experiments/exp_synthetic.py --design types` | `results/synthetic_types_traces.csv` |
+| Detection and weight sensitivity (Sections 5.4 and 5.5), mixed design | `eval/experiments/exp_synthetic.py --design mixed` | `results/synthetic_mixed_traces.csv` |
+| Detection per violation type (Section 5.4) | `eval/experiments/exp_synthetic.py --design types` | `results/synthetic_types_traces.csv` |
 | Use case | `eval/experiments/exp_usecase.py` | `results/usecase_report.json`, `results/usecase_events.csv`, `models/usecase/usecase_log.xes` |
 | Generated models | `eval/experiments/gen_models.py` | `models/generated/` |
-| RQ3 | `eval/experiments/exp_scalability.py original|models|traces|parallel` | `results/runtime_*.csv` |
+| Scalability (Section 5.6) | `eval/experiments/exp_scalability.py original|models|traces|parallel` | `results/runtime_*.csv` |
 | BPI Challenge 2013 | `eval/experiments/exp_bpic2013.py` | `results/bpic2013_*` |
 | BPI Challenge 2019 | `eval/experiments/bpic2019_prepare.py`, then `eval/experiments/exp_bpic2019.py` | `results/bpic2019_*` |
-| RQ4 | `eval/experiments/exp_llm.py` (`--assess-only` re-scores saved explanations) | `results/llm/`, `results/llm_faithfulness.csv` |
+| Faithfulness of the explanations (Section 5.8) | `eval/experiments/exp_llm.py` (`--assess-only` re-scores saved explanations) | `results/llm/`, `results/llm_faithfulness.csv` |
 | Tables and figures | `eval/analysis/detection.py`, `weights.py`, `runtime.py`, `llm_faithfulness.py`, `figures.py` | `results/tables/`, `figures/` |
 
 All randomness is seeded; timings depend on the machine (the reported ones come from an Intel Core

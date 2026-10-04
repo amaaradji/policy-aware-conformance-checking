@@ -1,4 +1,4 @@
-"""Execution time of the two pathways (RQ3). Only checking is timed: logs are generated before
+"""Execution time of the two pathways. Only checking is timed: logs are generated before
 the clock starts. Each measurement is preceded by an untimed warm-up run and garbage collection;
 repetitions are reported individually (median and spread are computed in the analysis).
 

@@ -1,4 +1,4 @@
-"""Faithfulness of the LLM explanations (RQ4).
+"""Faithfulness of the LLM explanations.
 
 Scenarios: the use-case log, and for one model per structural category (the largest), logs of
 10 traces at three noise levels with violations of all seven types and control-flow deviations.
