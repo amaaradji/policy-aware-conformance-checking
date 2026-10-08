@@ -34,7 +34,7 @@ def detection():
     table = pd.read_csv(RESULTS / "tables" / "detection_per_type.csv", index_col="type")
     table = table.loc[list(TYPE_NAMES)]
     series = [("pacc", "PACC", "0.15", ""), ("no_sync", "No synchronization", "0.45", "///"),
-              ("prototype", "Prototype logic", "0.75", "..."), ("alignment", "Alignment only (0%)", "white", "")]
+              ("prototype", "Initial system", "0.75", "..."), ("alignment", "Alignment only (0%)", "white", "")]
     fig, ax = plt.subplots(figsize=(COLUMN, 3.3))
     y = np.arange(len(table))
     height = 0.2
