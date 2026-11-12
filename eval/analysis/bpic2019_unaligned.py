@@ -1,8 +1,9 @@
 """BPI Challenge 2019: held-out cases whose variant was not aligned within the time budgets (Section 5.7).
 
 Per item category: held-out cases and variants, unaligned cases and variants, the largest number of held-out cases of
-an unaligned variant, the mean number of events of unaligned and aligned cases, the mean fitness of the aligned cases,
-and the mean fitness over all held-out cases if every unaligned case had a fitness of 0 or of 1.
+an unaligned variant, the mean number of events of unaligned and aligned cases, the mean fitness and PACC score of the
+aligned cases, and their means over all held-out cases if every unaligned case had a fitness of 0 or of 1 (an
+unaligned case keeps its compliance rate v, so its PACC score would be ALPHA * f + (1 - ALPHA) * v).
 Variants are the activity sequences of the cases in the order of the event table, as in exp_bpic2019.py.
 Outputs eval/results/tables/bpic2019_unaligned.csv.
 """
@@ -13,6 +14,8 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from pacc_eval.paths import DATA, RESULTS  # noqa: E402
+
+ALPHA = 0.7  # weight of the fitness in the PACC score, as in exp_bpic2019.py
 
 
 def main():
@@ -25,12 +28,17 @@ def main():
         cases_of_variant = part.variant.map(part.variant.value_counts())
         aligned, unaligned = part[part.f.notna()], part[part.f.isna()]
         share = len(aligned) / len(part)
+        v_unaligned = unaligned.v.mean() if len(unaligned) else 0.0
         rows.append({"category": category, "held_out_cases": len(part), "variants": part.variant.nunique(),
                      "unaligned_cases": len(unaligned), "unaligned_variants": unaligned.variant.nunique(),
                      "max_cases_per_unaligned_variant": cases_of_variant[part.f.isna()].max() if len(unaligned) else 0,
                      "events_unaligned": unaligned.events.mean(), "events_aligned": aligned.events.mean(),
                      "f_aligned": aligned.f.mean(), "f_all_if_unaligned_0": aligned.f.mean() * share,
-                     "f_all_if_unaligned_1": aligned.f.mean() * share + 1 - share})
+                     "f_all_if_unaligned_1": aligned.f.mean() * share + 1 - share,
+                     "pacc_aligned": aligned.pacc.mean(),
+                     "pacc_all_if_unaligned_0": aligned.pacc.mean() * share + (1 - share) * (1 - ALPHA) * v_unaligned,
+                     "pacc_all_if_unaligned_1": aligned.pacc.mean() * share
+                     + (1 - share) * (ALPHA + (1 - ALPHA) * v_unaligned)})
     table = pd.DataFrame(rows).set_index("category").round(4)
     out = RESULTS / "tables"
     out.mkdir(parents=True, exist_ok=True)

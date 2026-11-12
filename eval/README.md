@@ -55,7 +55,7 @@ Run from the repository root with the virtual environment's Python.
 | BPI Challenge 2013 | `eval/experiments/exp_bpic2013.py` | `results/bpic2013_*` |
 | BPI Challenge 2019 | `eval/experiments/bpic2019_prepare.py`, then `eval/experiments/exp_bpic2019.py` | `results/bpic2019_*` |
 | Faithfulness of the explanations (Section 5.8) | `eval/experiments/exp_llm.py` (`--assess-only` re-scores saved explanations) | `results/llm/`, `results/llm_faithfulness.csv` |
-| Tables and figures | `eval/analysis/detection.py`, `weights.py`, `runtime.py`, `llm_faithfulness.py`, `bpic2019_unaligned.py`, `figures.py` | `results/tables/`, `figures/` |
+| Tables and figures | `eval/analysis/detection.py`, `weights.py`, `runtime.py`, `llm_faithfulness.py`, `bpic2019_unaligned.py`, `bpic2019_violations.py`, `figures.py` | `results/tables/`, `figures/` |
 
 All randomness is seeded; timings depend on the machine (the reported ones come from an Intel Core
 i7-10750H laptop with 32 GB of RAM).
