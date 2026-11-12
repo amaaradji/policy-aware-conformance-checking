@@ -67,14 +67,14 @@ def weights():
     ax1.set_xlabel(r"$\alpha$")
     ax1.set_ylabel(r"Kendall $\tau_b$ vs. ranking at $\alpha=0.7$")
     ax1.set_ylim(0.25, 1.02)
-    ax1.legend(frameon=True, framealpha=1, edgecolor="none", loc="lower center")
+    ax1.legend(frameon=False, loc="lower left", bbox_to_anchor=(0.16, 0))
     ax1.set_title("(a) Agreement of trace rankings")
     values = np.sort(crossings["alpha_star"].to_numpy())
     ax2.plot(values, np.arange(1, len(values) + 1) / len(values), color="black")
     for q, style in ((0.5, "--"), (0.95, ":")):
         x = np.quantile(values, q)
-        ax2.axvline(x, color="0.4", linestyle=style, linewidth=0.8)
-        ax2.text(x + 0.01, 0.1 if q == 0.5 else 0.3, f"{int(q * 100)}th pct: {x:.2f}", fontsize=7, color="0.3")
+        ax2.axvline(x, color="0.4", linestyle=style, linewidth=0.8, label=f"{int(q * 100)}th percentile: {x:.2f}")
+    ax2.legend(frameon=False, loc="lower right")
     ax2.set_xlim(0, 1)
     ax2.set_xlabel(r"Crossing weight $\alpha^{*}$ of discordant pairs")
     ax2.set_ylabel("Cumulative share of pairs")
@@ -105,7 +105,7 @@ def runtime():
     ax1.set_xlabel("Activities in the model (200 traces)")
     ax1.set_ylabel("Median time (s)")
     ax1.set_title("(a) Model size")
-    ax1.legend(frameon=False, loc="upper left")
+    ax1.legend(frameon=False, loc="upper left", ncol=2, handlelength=1.2, columnspacing=0.8)
     for name, part in tmed.groupby("model"):
         marker = "v" if name == "Comb_m5" else MARKERS[name.split("_")[0]]  # the original 6-activity model
         ax2.plot(part.traces, part.policy, color="black", linestyle="-", marker=marker, markersize=3,
