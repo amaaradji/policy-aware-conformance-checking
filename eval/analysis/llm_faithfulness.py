@@ -44,7 +44,13 @@ def main():
         explanations=("scenario", "size"), with_error=("error", "mean"), with_omission=("omission", "mean"),
         **{c: (c, "mean") for c in PRECISION + RECALL + COUNTS},
         latency_s=("latency_s", "mean"), latency_sd=("latency_s", "std"),
-        prompt_tokens=("prompt_tokens", "mean"), completion_tokens=("completion_tokens", "mean"))
+        latency_min=("latency_s", "min"), latency_max=("latency_s", "max"),
+        prompt_tokens=("prompt_tokens", "mean"), prompt_tokens_min=("prompt_tokens", "min"),
+        prompt_tokens_max=("prompt_tokens", "max"), completion_tokens=("completion_tokens", "mean"),
+        traces_min=("traces", "min"), traces_max=("traces", "max"))
+    for tokens in ("prompt_tokens", "completion_tokens"):
+        summary[f"latency_corr_{tokens}"] = pd.Series(
+            {variant: g.latency_s.corr(g[tokens]) for variant, g in d.groupby("variant")})
     summary["stability_jaccard"] = stability.groupby("variant").jaccard.mean()
     out = RESULTS / "tables"
     out.mkdir(parents=True, exist_ok=True)

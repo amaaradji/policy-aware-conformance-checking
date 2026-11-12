@@ -14,14 +14,17 @@ import pandas as pd
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
+from matplotlib.ticker import FuncFormatter  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from pacc_eval.paths import FIGURES, RESULTS  # noqa: E402
 
 plt.rcParams.update({"font.size": 8, "axes.titlesize": 8, "axes.labelsize": 8, "legend.fontsize": 7,
                      "xtick.labelsize": 7, "ytick.labelsize": 7, "font.family": "serif",
-                     "axes.spines.top": False, "axes.spines.right": False, "pdf.fonttype": 42})
-COLUMN, PAGE = 3.35, 7.0
+                     "mathtext.fontset": "dejavuserif", "axes.spines.top": False, "axes.spines.right": False,
+                     "pdf.fonttype": 42})
+PLAIN = FuncFormatter(lambda value, _: f"{value:,g}")  # log-axis ticks as 0.01, 1,000 instead of small powers of ten
+COLUMN, PAGE = 3.0, 6.14  # column and text widths of the manuscript (inches): figures are printed at 100%
 TYPE_NAMES = {"activity_state_violation": "Activity state", "resource_state_violation": "Resource state",
               "wrong_resource": "Wrong resource", "timestamp_shift": "Timestamp shift",
               "missing_policy": "Missing policy", "state_sequence_skip": "State-sequence skip",
@@ -34,7 +37,7 @@ def detection():
     table = pd.read_csv(RESULTS / "tables" / "detection_per_type.csv", index_col="type")
     table = table.loc[list(TYPE_NAMES)]
     series = [("pacc", "PACC", "0.15", ""), ("no_sync", "No synchronization", "0.45", "///"),
-              ("prototype", "Initial system", "0.75", "..."), ("alignment", "Alignment only (0%)", "white", "")]
+              ("prototype", "Initial system", "0.75", "..."), ("alignment", "Alignment CC (0%)", "white", "")]
     fig, ax = plt.subplots(figsize=(COLUMN, 3.3))
     y = np.arange(len(table))
     height = 0.2
@@ -47,9 +50,9 @@ def detection():
     ax.invert_yaxis()
     ax.set_xlim(0, 100)
     ax.set_xlabel("Traces flagged (%)")
-    ax.legend(loc="upper center", bbox_to_anchor=(0.35, -0.16), ncol=3, frameon=False, handlelength=1.2,
-              columnspacing=0.8)
-    fig.tight_layout()
+    ax.legend(loc="lower center", bbox_to_anchor=(0.5, 0), bbox_transform=fig.transFigure, ncol=2,
+              frameon=False, handlelength=1.2, columnspacing=0.8)
+    fig.tight_layout(rect=(0, 0.16, 1, 1))
     fig.savefig(FIGURES / "fig_detection.pdf", bbox_inches="tight")
 
 
@@ -60,11 +63,11 @@ def weights():
     ax1.plot(taus["alpha"], taus["mean"], color="black", marker="o", markersize=3, label="mean")
     ax1.fill_between(taus["alpha"], taus["min"], taus["mean"], color="0.8", label="minimum to mean")
     ax1.axvline(0.7, color="0.4", linestyle=":", linewidth=0.8)
-    ax1.text(0.71, 0.55, r"default $\alpha=0.7$", fontsize=7, color="0.3")
+    ax1.text(0.69, 0.62, r"default $\alpha=0.7$", fontsize=7, color="0.3", ha="right")
     ax1.set_xlabel(r"$\alpha$")
     ax1.set_ylabel(r"Kendall $\tau_b$ vs. ranking at $\alpha=0.7$")
     ax1.set_ylim(0.25, 1.02)
-    ax1.legend(frameon=False, loc="lower center")
+    ax1.legend(frameon=True, framealpha=1, edgecolor="none", loc="lower center")
     ax1.set_title("(a) Agreement of trace rankings")
     values = np.sort(crossings["alpha_star"].to_numpy())
     ax2.plot(values, np.arange(1, len(values) + 1) / len(values), color="black")
@@ -101,7 +104,7 @@ def runtime():
     ax1.set_yscale("log")
     ax1.set_xlabel("Activities in the model (200 traces)")
     ax1.set_ylabel("Median time (s)")
-    ax1.set_title("(a) Model size: policy (solid), alignment (dashed)")
+    ax1.set_title("(a) Model size")
     ax1.legend(frameon=False, loc="upper left")
     for name, part in tmed.groupby("model"):
         marker = "v" if name == "Comb_m5" else MARKERS[name.split("_")[0]]  # the original 6-activity model
@@ -112,8 +115,13 @@ def runtime():
     ax2.set_xscale("log")
     ax2.set_yscale("log")
     ax2.set_xlabel("Traces in the log")
+    ax2.set_ylabel("Median time (s)")
     ax2.set_title("(b) Log size")
-    ax2.legend(frameon=False, loc="upper left", fontsize=6)
+    for ax in (ax1, ax2):
+        ax.xaxis.set_major_formatter(PLAIN)
+        ax.yaxis.set_major_formatter(PLAIN)
+    handles, labels = ax2.get_legend_handles_labels()
+    fig.legend(handles, labels, loc="lower center", ncol=5, frameon=False, handlelength=1.6, columnspacing=1.0)
     workers = speedup.columns.to_numpy()
     for (name, pathway), row in speedup.iterrows():
         marker = "v" if name == "Comb_m5" else MARKERS[name.split("_")[0]]
@@ -121,10 +129,10 @@ def runtime():
                  marker=marker, markersize=3, linewidth=0.8,
                  markerfacecolor="black" if pathway == "policy" else "white")
     ax3.plot(workers, workers, color="0.6", linestyle=":", linewidth=0.8)
-    ax3.set_xlabel("Worker processes (20,000 traces)")
+    ax3.set_xlabel("Workers (20,000 traces)")
     ax3.set_ylabel("Speedup")
     ax3.set_title("(c) Parallel speedup")
-    fig.tight_layout()
+    fig.tight_layout(rect=(0, 0.08, 1, 1))
     fig.savefig(FIGURES / "fig_runtime.pdf", bbox_inches="tight")
 
 

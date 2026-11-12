@@ -1,0 +1,5 @@
+category,held_out_cases,variants,unaligned_cases,unaligned_variants,max_cases_per_unaligned_variant,events_unaligned,events_aligned,f_aligned,f_all_if_unaligned_0,f_all_if_unaligned_1
+2-way match,522,103,0,0,0,,5.659,0.9731,0.9731,0.9731
+"3-way match, invoice after GR",7591,2330,1507,1507,1,71.509,8.6085,0.9713,0.7785,0.977
+"3-way match, invoice before GR",110505,4843,3,3,1,44.0,5.5824,0.9688,0.9688,0.9688
+Consignment,7249,188,0,0,0,,2.4901,0.9796,0.9796,0.9796

@@ -18,6 +18,14 @@ entities_unsupported,0.0,0.0
 numbers_unsupported,0.0,0.0
 latency_s,5.3344,5.4572
 latency_sd,1.4981,2.5251
+latency_min,3.171,2.633
+latency_max,10.792,11.386
 prompt_tokens,1412.9231,1514.7692
+prompt_tokens_min,1267.0,1349.0
+prompt_tokens_max,1823.0,1939.0
 completion_tokens,550.5692,545.5385
+traces_min,3.0,3.0
+traces_max,10.0,10.0
+latency_corr_prompt_tokens,0.5869,0.5767
+latency_corr_completion_tokens,0.6138,0.6705
 stability_jaccard,1.0,0.9962
